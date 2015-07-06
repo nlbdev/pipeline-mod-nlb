@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+	<scr:component name="http://www.nlb.no/liblouis/" activate="activate" >
+		<scr:implementation class="org.daisy.pipeline.braille.liblouis.LiblouisTablePath"/>
+		<scr:service>
+			<scr:provide interface="org.daisy.pipeline.braille.liblouis.LiblouisTablePath"/>
+		</scr:service>
+		<scr:property name="identifier" type="String" value="http://www.nlb.no/liblouis/"/>
+		<scr:property name="path" type="String" value="/liblouis"/>
+	</scr:component>
+</scr:components>
