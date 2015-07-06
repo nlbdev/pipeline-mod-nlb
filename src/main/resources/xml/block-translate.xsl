@@ -17,11 +17,19 @@
 			<xsl:for-each select="$text">
 				<xsl:variable name="inline-style" as="element()*"
 				              select="css:computed-properties($inline-properties, true(), parent::*)"/>
-				<xsl:variable name="transform" as="xs:string?"
-				              select="if (ancestor::html:strong) then 'louis-bold' else
-				                      if (ancestor::html:em) then 'louis-ital' else ()"/>
+				<xsl:variable name="transform" as="xs:string*">
+					<xsl:if test="ancestor::html:strong">
+						<xsl:sequence select="'louis-bold'"/>
+					</xsl:if>
+					<xsl:if test="ancestor::html:em">
+						<xsl:sequence select="'louis-ital'"/>
+					</xsl:if>
+					<xsl:if test="ancestor::html:u">
+						<xsl:sequence select="'louis-under'"/>
+					</xsl:if>
+				</xsl:variable>
 				<xsl:variable name="inline-style" as="element()*"
-				              select="if ($transform) then ($inline-style,css:property('transform',$transform)) else $inline-style"/>
+				              select="if (exists($transform)) then ($inline-style,css:property('transform',string-join($transform,' '))) else $inline-style"/>
 				<xsl:sequence select="css:serialize-declaration-list($inline-style[not(@value=css:initial-value(@name))])"/>
 			</xsl:for-each>
 		</xsl:variable>
