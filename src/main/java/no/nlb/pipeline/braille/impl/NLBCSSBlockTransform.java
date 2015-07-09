@@ -24,6 +24,7 @@ import static org.daisy.pipeline.braille.common.Transform.Provider.util.dispatch
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.logCreate;
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.logSelect;
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.memoize;
+import static org.daisy.pipeline.braille.common.util.Locales.parseLocale;
 import org.daisy.pipeline.braille.common.WithSideEffect;
 import org.daisy.pipeline.braille.common.XProcTransform;
 import org.daisy.pipeline.braille.libhyphen.LibhyphenHyphenator;
@@ -60,6 +61,7 @@ public interface NLBCSSBlockTransform extends CSSBlockTransform, XProcTransform 
 		 * Recognized features:
 		 *
 		 * - translator: Will only match if the value is `nlb'.
+		 * - locale: Will only match if the language subtag is 'no'.
 		 * - grade: `0', `1', `2' or `3'.
 		 *
 		 */
@@ -92,6 +94,9 @@ public interface NLBCSSBlockTransform extends CSSBlockTransform, XProcTransform 
 			protected final Iterable<WithSideEffect<NLBCSSBlockTransform,Logger>> __get(String query) {
 				Map<String,Optional<String>> q = new HashMap<String,Optional<String>>(parseQuery(query));
 				Optional<String> o;
+				if ((o = q.remove("locale")) != null)
+					if (!"no".equals(parseLocale(o.get()).getLanguage()))
+						return empty;
 				if ((o = q.remove("translator")) != null)
 					if (o.get().equals("nlb"))
 						if ((o = q.remove("grade")) != null) {
