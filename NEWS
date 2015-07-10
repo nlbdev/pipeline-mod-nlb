@@ -1,0 +1,9 @@
+pipeline-mod-nlb v1.0.0
+=======================
+
+Includes
+--------
+- Improved Liblouis table for Norwegian grade 0 (https://github.com/snaekobbi/liblouis/issues/4,
+  https://github.com/snaekobbi/issues/issues/13)
+- Custom Liblouis based translator that handles `html:strong`, `html:em` and `html:u`
+  (https://github.com/snaekobbi/issues/issues/14, https://github.com/snaekobbi/pipeline-mod-braille/issues/41)
