@@ -3,16 +3,21 @@
                xmlns:p="http://www.w3.org/ns/xproc"
                xmlns:px="http://www.daisy.org/ns/pipeline/xproc"
                xmlns:html="http://www.w3.org/1999/xhtml"
-               xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal">
+               xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal"
+               xmlns:css="http://www.daisy.org/ns/pipeline/braille-css">
   
   <x:script>
     <p:declare-step type="pxi:transform" version="1.0">
       <p:input port="source"/>
       <p:output port="result"/>
       <p:option name="grade" required="true"/>
+      <p:option name="stylesheet" required="true"/>
       <p:import href="http://www.daisy.org/pipeline/modules/braille/common-utils/library.xpl"/>
+      <p:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/library.xpl"/>
+      <css:inline>
+        <p:with-option name="default-stylesheet" select="$stylesheet"/>
+      </css:inline>
       <p:add-attribute match="/*" attribute-name="style" attribute-value="hyphens:auto"/>
-      <p:add-attribute match="html:p" attribute-name="style" attribute-value="display:block"/>
       <px:transform type="css-block">
         <p:with-option name="query" select="concat('(translator:nlb)(locale:no)(grade:',$grade,')')"/>
       </px:transform>
@@ -29,6 +34,7 @@
           </div>
         </x:document>
       </x:input>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
     </x:call>
     
     <x:scenario label="grade 0">
@@ -96,6 +102,8 @@
     </x:scenario>
   </x:scenario>
   
+  
+  
   <x:scenario label="Marking of text-level semantics with braille indicators for Norwegian">
     <x:call step="pxi:transform">
       <x:input port="source">
@@ -153,6 +161,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
     </x:call>
     <x:context label="result">
       <x:document type="port" port="result"/>
