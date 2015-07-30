@@ -1,7 +1,27 @@
+@page { size: 32 28; }
+
 /*div {
     hyphens:auto;
 }*/
 
-p {
-    display:block;
+h4 {
+	display: block;
+	margin-top: 1;
+	margin-left: 2;
+	text-indent: 5;
 }
+
+h5 {
+	display: block;
+	margin-top: 1;
+	margin-left: 2;
+}
+
+p {
+	display: block;
+	margin-left: 2;
+	text-indent: 2;
+	hyphens: auto;
+}
+
+imggroup { display: none; }
