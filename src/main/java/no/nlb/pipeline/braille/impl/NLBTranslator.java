@@ -74,6 +74,7 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 		 * - translator: Will only match if the value is `nlb'.
 		 * - locale: Will only match if the language subtag is 'no'.
 		 * - grade: `0', `1', `2' or `3'.
+		 * - dots: `6', `8'. (default 6)
 		 *
 		 */
 		public Iterable<NLBTranslator> get(String query) {
@@ -92,6 +93,7 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 			private final static String grade1Table = "(liblouis-table:'http://www.nlb.no/liblouis/no-no-g1.ctb')";
 			private final static String grade2Table = "(liblouis-table:'http://www.nlb.no/liblouis/no-no-g2.ctb')";
 			private final static String grade3Table = "(liblouis-table:'http://www.nlb.no/liblouis/no-no-g3.ctb')";
+			private final static String grade0Table8dot = "(liblouis-table:'http://www.nlb.no/liblouis/no-no-g0.utb')";
 			private final static String hyphenationTable = "(libhyphen-table:'http://www.libreoffice.org/dictionaries/hyphen/hyph_nb_NO.dic')";
 			
 			private ProviderImpl(Logger context) {
@@ -111,7 +113,7 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 				if ((o = q.remove("translator")) != null)
 					if (o.get().equals("nlb"))
 						if ((o = q.remove("grade")) != null) {
-							final int grade;
+							final int grade, dots;
 							if (o.get().equals("0"))
 								grade = 0;
 							else if (o.get().equals("1"))
@@ -122,10 +124,18 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 								grade = 3;
 							else
 								return empty;
+							if ((o = q.remove("dots")) != null && o.get().equals("8"))
+								dots = 8;
+							else
+								dots = 6;
 							if (q.size() == 0) {
 								Iterable<WithSideEffect<LibhyphenHyphenator,Logger>> hyphenators
 									= logSelect(hyphenationTable, libhyphenHyphenatorProvider.get(hyphenationTable));
-								final String liblouisTable = grade == 0 ? grade0Table : grade == 1 ? grade1Table : grade == 2 ? grade2Table : grade3Table;
+								final String liblouisTable;
+								if (dots == 8)
+									liblouisTable = grade0Table8dot;
+								else
+									liblouisTable = grade == 3 ? grade3Table : grade == 2 ? grade2Table : grade == 1 ? grade1Table : grade0Table;
 								return transform(
 									hyphenators,
 									new WithSideEffect.Function<LibhyphenHyphenator,NLBTranslator,Logger>() {
@@ -145,7 +155,7 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 				return empty;
 			}
 		}
-	
+		
 		private final static Iterable<WithSideEffect<NLBTranslator,Logger>> empty
 		= Optional.<WithSideEffect<NLBTranslator,Logger>>absent().asSet();
 		
