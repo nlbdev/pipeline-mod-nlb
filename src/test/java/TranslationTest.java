@@ -2,9 +2,14 @@ import javax.inject.Inject;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
 
+import org.daisy.pipeline.braille.common.TextTransform;
+import org.daisy.pipeline.braille.common.Transform;
+import static org.daisy.pipeline.braille.common.Transform.Provider.util.dispatch;
 import static org.daisy.pipeline.pax.exam.Options.brailleModule;
 import static org.daisy.pipeline.pax.exam.Options.domTraversalPackage;
 import static org.daisy.pipeline.pax.exam.Options.felixDeclarativeServices;
@@ -14,6 +19,7 @@ import static org.daisy.pipeline.pax.exam.Options.logbackConfigFile;
 import static org.daisy.pipeline.pax.exam.Options.thisBundle;
 import static org.daisy.pipeline.pax.exam.Options.xprocspecBundles;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,9 +36,27 @@ import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.options;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
+
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
 public class TranslationTest {
+	
+	@Inject
+	private BundleContext context;
+	
+	@Test
+	public void testEmail() throws Exception {
+		List<Transform.Provider<TextTransform>> providers = new ArrayList<Transform.Provider<TextTransform>>();
+		for (ServiceReference<? extends TextTransform.Provider> ref : context.getServiceReferences(TextTransform.Provider.class, null))
+			providers.add(context.getService(ref));
+		TextTransform translator = dispatch(providers).get("(translator:nlb)(grade:0)").iterator().next();
+		assertEquals(
+			"⠋⠕⠕ ⠣⠥⠞⠇⠁⠁⠝⠈⠝⠇⠃⠄⠝⠕⠜ ⠃⠁⠗",
+			translator.transform("foo utlaan@nlb.no bar"));
+	}
 	
 	@Inject
 	private XProcSpecRunner xprocspecRunner;

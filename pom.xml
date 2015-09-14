@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.daisy.pipeline.modules.braille</groupId>
     <artifactId>braille-modules-parent</artifactId>
-    <version>1.9.2</version>
+    <version>1.9.3</version>
     <relativePath />
   </parent>
 
@@ -102,7 +102,7 @@
           <instructions>
             <Service-Component>OSGI-INF/tables.xml</Service-Component>
             <_dsannotations>
-              no.nlb.pipeline.braille.impl.NLBCSSBlockTransform$Provider
+              no.nlb.pipeline.braille.impl.NLBTranslator$Provider
             </_dsannotations>
           </instructions>
         </configuration>
