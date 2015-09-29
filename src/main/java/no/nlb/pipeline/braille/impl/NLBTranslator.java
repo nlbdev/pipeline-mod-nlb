@@ -81,9 +81,10 @@ public interface NLBTranslator {
 		private final static Query grade2Table = mutableQuery().add("liblouis-table", "http://www.nlb.no/liblouis/no-no-g2.ctb");
 		private final static Query grade3Table = mutableQuery().add("liblouis-table", "http://www.nlb.no/liblouis/no-no-g3.ctb");
 		private final static Query grade0Table8dot = mutableQuery().add("liblouis-table", "http://www.nlb.no/liblouis/no-no-g0.utb");
-		private final static Query hyphenTable = mutableQuery().add("libhyphen-table",
-		                                                            "http://www.libreoffice.org/dictionaries/hyphen/hyph_nb_NO.dic");
-		private final static Query fallbackHyphenationTable = mutableQuery().add("hyphenator", "tex").add("locale", "nb");
+		private final static Query hyphenationTable = mutableQuery().add("libhyphen-table", "http://www.nlb.no/hyphen/hyph_nb_NO.dic");
+		private final static Query fallbackHyphenationTable1 = mutableQuery().add("libhyphen-table",
+		                                                                          "http://www.libreoffice.org/dictionaries/hyphen/hyph_nb_NO.dic");
+		private final static Query fallbackHyphenationTable2 = mutableQuery().add("hyphenator", "tex").add("locale", "nb");
 		
 		private final static Iterable<BrailleTranslator> empty = Iterables.<BrailleTranslator>empty();
 		
@@ -135,8 +136,10 @@ public interface NLBTranslator {
 							dots = 6;
 						if (q.isEmpty()) {
 							Iterable<Hyphenator> hyphenators = concat(
-								logSelect(hyphenTable, hyphenatorProvider),
-								logSelect(fallbackHyphenationTable, hyphenatorProvider));
+								logSelect(hyphenationTable, hyphenatorProvider),
+								concat(
+									logSelect(fallbackHyphenationTable1, hyphenatorProvider),
+									logSelect(fallbackHyphenationTable2, hyphenatorProvider)));
 							final Query liblouisTable;
 							if (dots == 8)
 								liblouisTable = grade0Table8dot;
