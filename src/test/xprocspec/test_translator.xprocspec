@@ -10,7 +10,8 @@
     <p:declare-step type="pxi:transform" version="1.0">
       <p:input port="source"/>
       <p:output port="result"/>
-      <p:option name="grade" required="true"/>
+      <p:option name="grade" select="'0'"/>
+      <p:option name="dots" select="'6'"/>
       <p:option name="stylesheet" required="true"/>
       <p:import href="http://www.daisy.org/pipeline/modules/braille/common-utils/library.xpl"/>
       <p:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/library.xpl"/>
@@ -19,13 +20,13 @@
       </css:inline>
       <p:add-attribute match="/*" attribute-name="style" attribute-value="hyphens:auto"/>
       <px:transform type="css-block">
-        <p:with-option name="query" select="concat('(translator:nlb)(locale:no)(grade:',$grade,')')"/>
+        <p:with-option name="query" select="concat('(translator:nlb)(locale:no)(grade:',$grade,')(dots:',$dots,')')"/>
       </px:transform>
       <p:delete match="@style"/>
     </p:declare-step>
   </x:script>
   
-  <x:scenario label="Grade 0, 1, 2 and 3">
+  <x:scenario label="6-dot: Grade 0, 1, 2 and 3">
     <x:call step="pxi:transform">
       <x:input port="source">
         <x:document type="inline">
@@ -102,7 +103,35 @@
     </x:scenario>
   </x:scenario>
   
-  
+  <x:scenario label="8-dot: Grade 0">
+    <x:call step="pxi:transform">
+      <x:option name="dots" select="'8'"/>
+      <x:input port="source">
+        <x:document type="inline">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>foobar</p>
+          </div>
+        </x:document>
+      </x:input>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+    </x:call>
+    
+    <x:scenario label="grade 0">
+      <x:call>
+        <x:option name="grade" select="'0'"/>
+      </x:call>
+      <x:context label="result">
+        <x:document type="port" port="result"/>
+      </x:context>
+      <x:expect label="result" type="compare">
+        <x:document type="inline">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>⠋⠕⠕­⠃⠁⠗</p>
+          </div>
+        </x:document>
+      </x:expect>
+    </x:scenario>
+  </x:scenario>
   
   <x:scenario label="Marking of text-level semantics with braille indicators for Norwegian">
     <x:call step="pxi:transform">

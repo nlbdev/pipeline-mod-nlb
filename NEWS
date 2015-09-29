@@ -1,3 +1,11 @@
+pipeline-mod-nlb v1.2.0
+=======================
+
+Includes
+--------
+- Support for 8-dot braille
+- Improved handling of URLs and e-mail addresses (https://github.com/snaekobbi/pipeline-mod-nlb/issues/4)
+
 pipeline-mod-nlb v1.1.0
 =======================
 
