@@ -1,21 +1,24 @@
 package no.nlb.pipeline.braille.impl;
 
+import java.net.URI;
 import java.util.ArrayList;
+import static java.util.Arrays.copyOfRange;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
 
 import static com.google.common.base.Objects.toStringHelper;
+import com.google.common.base.Splitter;
 import static com.google.common.collect.Iterables.concat;
 import static com.google.common.collect.Iterables.transform;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
+import static com.google.common.collect.Lists.newArrayList;
 
 import static org.daisy.pipeline.braille.css.Query.parseQuery;
 import org.daisy.pipeline.braille.common.BrailleTranslator;
@@ -29,6 +32,7 @@ import static org.daisy.pipeline.braille.common.Transform.Provider.util.logCreat
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.logSelect;
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.memoize;
 import static org.daisy.pipeline.braille.common.util.Locales.parseLocale;
+import static org.daisy.pipeline.braille.common.util.Strings.join;
 import static org.daisy.pipeline.braille.common.util.Tuple3;
 import static org.daisy.pipeline.braille.common.util.URIs.asURI;
 import org.daisy.pipeline.braille.common.WithSideEffect;
@@ -96,6 +100,8 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 			private final static String grade0Table8dot = "(liblouis-table:'http://www.nlb.no/liblouis/no-no-g0.utb')";
 			private final static String hyphenationTable = "(libhyphen-table:'http://www.libreoffice.org/dictionaries/hyphen/hyph_nb_NO.dic')";
 			
+			private LiblouisTranslator grade0Translator;
+			
 			private ProviderImpl(Logger context) {
 				super(context);
 			}
@@ -142,16 +148,19 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 										public NLBTranslator _apply(LibhyphenHyphenator h) {
 											String translatorQuery = liblouisTable + "(hyphenator:" + h.getIdentifier() + ")";
 											LiblouisTranslator translator;
+											LiblouisTranslator grade0Translator;
 											try {
 												translator = applyWithSideEffect(
 													logSelect(
 														translatorQuery,
-														liblouisTranslatorProvider.get(translatorQuery)).iterator().next()); }
+														liblouisTranslatorProvider.get(translatorQuery)).iterator().next());
+												grade0Translator = liblouisTranslatorProvider.get(
+													grade0Table + "(hyphenator:" + h.getIdentifier() + ")").iterator().next(); }
 											catch (NoSuchElementException e) {
 												throw new NoSuchElementException(); }
 											return applyWithSideEffect(
 												logCreate(
-													(NLBTranslator)new TransformImpl(grade, translator, query))); }}); }}
+													(NLBTranslator)new TransformImpl(grade, translator, grade0Translator, query))); }}); }}
 				return empty;
 			}
 		}
@@ -170,16 +179,22 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 		private final static String OPEN_COMPUTER = "\u2823"; // dots 126 (<)
 		private final static String CLOSE_COMPUTER = "\u281C"; // dots 345 (>)
 		
+		private final static Splitter.MapSplitter CSS_PARSER
+		= Splitter.on(';').omitEmptyStrings().withKeyValueSeparator(Splitter.on(':').limit(2).trimResults());
+		private final static Splitter TEXT_TRANSFORM_PARSER = Splitter.on(' ').omitEmptyStrings().trimResults();
+		
 		private class TransformImpl extends AbstractTransform implements NLBTranslator {
 			
 			private final Tuple3<URI,QName,Map<String,String>> xproc;
 			private final LiblouisTranslator translator;
+			private final LiblouisTranslator grade0Translator;
 			private final int grade;
 			
-			private TransformImpl(int grade, LiblouisTranslator translator, String translatorQuery) {
+			private TransformImpl(int grade, LiblouisTranslator translator, LiblouisTranslator grade0Translator, String translatorQuery) {
 				Map<String,String> options = ImmutableMap.of("text-transform", translatorQuery); // "(id:" + this.getIdentifier() + ")"
 				xproc = new Tuple3<URI,QName,Map<String,String>>(href, null, options);
 				this.translator = translator;
+				this.grade0Translator = grade0Translator;
 				this.grade = grade;
 			}
 			
@@ -204,6 +219,61 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 			}
 			
 			public String[] transform(String[] text, String[] cssStyle) {
+				if (text.length == 0)
+					return new String[]{};
+				if (cssStyle == null)
+					return transformContracted(text, cssStyle);
+				String[] result = new String[text.length];
+				boolean uncont = false;
+				int j = 0;
+				List<String> uncontStyle = null;
+				for (int i = 0; i < text.length; i++) {
+					Map<String,String> style = new HashMap<String,String>(CSS_PARSER.split(cssStyle[i]));
+					List<String> textTransform = null; {
+						String t = style.remove("text-transform");
+						if (t != null)
+							textTransform = newArrayList(TEXT_TRANSFORM_PARSER.split(t)); }
+					if (textTransform != null && textTransform.remove("uncontracted")) {
+						if (i > 0 && !uncont)
+							for (String s : transformContracted(
+								     copyOfRange(text, j, i),
+								     copyOfRange(cssStyle, j, i)))
+								result[j++] = s;
+						String newStyle = "";
+						for (Map.Entry<String,String> kv : style.entrySet())
+							newStyle += (kv.getKey() + ": " + kv.getValue() + ";");
+						if (textTransform.size() > 0)
+							newStyle += ("text-transform: " + join(textTransform, " ") + ";");
+						if (uncontStyle == null)
+							uncontStyle = new ArrayList<String>();
+						uncontStyle.add(newStyle);
+						uncont = true; }
+					else {
+						if (i > 0 && uncont) {
+							for (String s : transformUncontracted(
+								     copyOfRange(text, j, i),
+								     uncontStyle.toArray(new String[i - j])))
+								result[j++] = s;
+							uncontStyle = null; }
+						uncont = false; }}
+				if (uncont)
+					for (String s : transformUncontracted(
+						     copyOfRange(text, j, text.length),
+						     uncontStyle.toArray(new String[text.length - j])))
+						result[j++] = s;
+				else
+					for (String s : transformContracted(
+						     copyOfRange(text, j, text.length),
+						     copyOfRange(cssStyle, j, text.length)))
+						result[j++] = s;
+				return result;
+			}
+			
+			private String[] transformUncontracted(String[] text, String[] cssStyle) {
+				return grade0Translator.transform(text, cssStyle);
+			}
+			
+			private String[] transformContracted(String[] text, String[] cssStyle) {
 				String[] segments;
 				// which segments are an url or e-mail address
 				boolean[] computer;

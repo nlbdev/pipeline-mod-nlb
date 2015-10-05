@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
 
+import org.daisy.pipeline.braille.common.CSSStyledTextTransform;
 import org.daisy.pipeline.braille.common.TextTransform;
 import org.daisy.pipeline.braille.common.Transform;
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.dispatch;
@@ -56,6 +57,17 @@ public class TranslationTest {
 		assertEquals(
 			"⠋⠕⠕ ⠣⠥⠞⠇⠁⠁⠝⠈⠝⠇⠃⠄⠝⠕⠜ ⠃⠁⠗",
 			translator.transform("foo utlaan@nlb.no bar"));
+	}
+	
+	@Test
+	public void testTextTransformUncontracted() throws Exception {
+		List<Transform.Provider<CSSStyledTextTransform>> providers = new ArrayList<Transform.Provider<CSSStyledTextTransform>>();
+		for (ServiceReference<? extends CSSStyledTextTransform.Provider> ref : context.getServiceReferences(CSSStyledTextTransform.Provider.class, null))
+			providers.add(context.getService(ref));
+		CSSStyledTextTransform translator = dispatch(providers).get("(translator:nlb)(grade:1)").iterator().next();
+		assertEquals(
+			new String[]{"⠋⠕⠕⠃⠼ ","⠋⠕⠕⠃⠁⠗"},
+			translator.transform(new String[]{"foobar ","foobar"}, new String[]{"","text-transform: uncontracted"}));
 	}
 	
 	@Inject

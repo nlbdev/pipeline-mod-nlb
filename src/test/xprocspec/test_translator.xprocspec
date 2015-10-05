@@ -18,7 +18,6 @@
       <css:inline>
         <p:with-option name="default-stylesheet" select="$stylesheet"/>
       </css:inline>
-      <p:add-attribute match="/*" attribute-name="style" attribute-value="hyphens:auto"/>
       <px:transform type="css-block">
         <p:with-option name="query" select="concat('(translator:nlb)(locale:no)(grade:',$grade,')(dots:',$dots,')')"/>
       </px:transform>
@@ -30,7 +29,7 @@
     <x:call step="pxi:transform">
       <x:input port="source">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="hyphens:auto">
             <p>foobar</p>
           </div>
         </x:document>
@@ -108,7 +107,7 @@
       <x:option name="dots" select="'8'"/>
       <x:input port="source">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="hyphens:auto">
             <p>foobar</p>
           </div>
         </x:document>
@@ -238,5 +237,35 @@
       </x:document>
     </x:expect>
   </x:scenario>
-    
+  
+  <x:scenario label="Section in uncontracted braille" focus="true">
+    <x:call step="pxi:transform">
+      <x:input port="source">
+        <x:document type="inline">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            foobar
+            <div style="text-transform:uncontracted">
+              foobar
+            </div>
+          </div>
+        </x:document>
+      </x:input>
+      <x:option name="grade" select="'1'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+    </x:call>
+    <x:context label="result">
+      <x:document type="port" port="result"/>
+    </x:context>
+    <x:expect label="result" type="compare">
+      <x:document type="inline">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          ⠋⠕⠕⠃⠼
+          <div>
+            ⠋⠕⠕⠃⠁⠗
+          </div>
+        </div>
+      </x:document>
+    </x:expect>
+  </x:scenario>
+  
 </x:description>
