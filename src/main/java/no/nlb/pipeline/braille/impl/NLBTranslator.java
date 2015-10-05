@@ -218,62 +218,60 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 				return transform(new String[]{text}, new String[]{cssStyle})[0];
 			}
 			
-			public String[] transform(String[] text, String[] cssStyle) {
+			private String[] transform(String[] text, String[] cssStyle, boolean[] uncontracted) {
 				if (text.length == 0)
 					return new String[]{};
-				if (cssStyle == null)
-					return transformContracted(text, cssStyle);
 				String[] result = new String[text.length];
 				boolean uncont = false;
 				int j = 0;
 				List<String> uncontStyle = null;
 				for (int i = 0; i < text.length; i++) {
-					Map<String,String> style = new HashMap<String,String>(CSS_PARSER.split(cssStyle[i]));
+					Map<String,String> style = cssStyle == null ? null :
+						new HashMap<String,String>(CSS_PARSER.split(cssStyle[i]));
 					List<String> textTransform = null; {
-						String t = style.remove("text-transform");
-						if (t != null)
-							textTransform = newArrayList(TEXT_TRANSFORM_PARSER.split(t)); }
-					if (textTransform != null && textTransform.remove("uncontracted")) {
+						if (style != null) {
+							String t = style.remove("text-transform");
+							if (t != null)
+								textTransform = newArrayList(TEXT_TRANSFORM_PARSER.split(t)); }}
+					if ((textTransform != null && textTransform.remove("uncontracted"))
+					    || uncontracted[i]) {
 						if (i > 0 && !uncont)
-							for (String s : transformContracted(
-								     copyOfRange(text, j, i),
-								     copyOfRange(cssStyle, j, i)))
+							for (String s : cssStyle == null ? translator.transform(copyOfRange(text, j, i))
+								                             : translator.transform(copyOfRange(text, j, i),
+								                                                    copyOfRange(cssStyle, j, i)))
 								result[j++] = s;
-						String newStyle = "";
-						for (Map.Entry<String,String> kv : style.entrySet())
-							newStyle += (kv.getKey() + ": " + kv.getValue() + ";");
-						if (textTransform.size() > 0)
-							newStyle += ("text-transform: " + join(textTransform, " ") + ";");
-						if (uncontStyle == null)
+						if (uncontStyle == null && cssStyle != null)
 							uncontStyle = new ArrayList<String>();
-						uncontStyle.add(newStyle);
+						if (uncontStyle != null) {
+							String newStyle = "";
+							for (Map.Entry<String,String> kv : style.entrySet())
+								newStyle += (kv.getKey() + ": " + kv.getValue() + ";");
+							if (textTransform != null && textTransform.size() > 0)
+								newStyle += ("text-transform: " + join(textTransform, " ") + ";");
+							uncontStyle.add(newStyle); }
 						uncont = true; }
 					else {
 						if (i > 0 && uncont) {
-							for (String s : transformUncontracted(
-								     copyOfRange(text, j, i),
-								     uncontStyle.toArray(new String[i - j])))
+							for (String s : uncontStyle == null ? grade0Translator.transform(copyOfRange(text, j, i))
+								                                : grade0Translator.transform(copyOfRange(text, j, i),
+								                                                             uncontStyle.toArray(new String[i - j])))
 								result[j++] = s;
 							uncontStyle = null; }
 						uncont = false; }}
 				if (uncont)
-					for (String s : transformUncontracted(
-						     copyOfRange(text, j, text.length),
-						     uncontStyle.toArray(new String[text.length - j])))
+					for (String s : uncontStyle == null ? grade0Translator.transform(copyOfRange(text, j, text.length))
+						                                : grade0Translator.transform(copyOfRange(text, j, text.length),
+						                                                             uncontStyle.toArray(new String[text.length - j])))
 						result[j++] = s;
 				else
-					for (String s : transformContracted(
-						     copyOfRange(text, j, text.length),
-						     copyOfRange(cssStyle, j, text.length)))
+					for (String s : cssStyle == null ? translator.transform(copyOfRange(text, j, text.length))
+						                             : translator.transform(copyOfRange(text, j, text.length),
+						                                                    copyOfRange(cssStyle, j, text.length)))
 						result[j++] = s;
 				return result;
 			}
 			
-			private String[] transformUncontracted(String[] text, String[] cssStyle) {
-				return grade0Translator.transform(text, cssStyle);
-			}
-			
-			private String[] transformContracted(String[] text, String[] cssStyle) {
+			public String[] transform(String[] text, String[] cssStyle) {
 				String[] segments;
 				// which segments are an url or e-mail address
 				boolean[] computer;
@@ -319,12 +317,12 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 						mapping[i] = l3.get(i); }}
 				String[] brailleSegments;
 				if (cssStyle == null)
-					brailleSegments = translator.transform(segments);
+					brailleSegments = transform(segments, null, computer);
 				else {
 					String[] segmentsStyle = new String[segments.length];
 					for (int i = 0; i < segments.length; i++)
 						segmentsStyle[i] = cssStyle[mapping[i]];
-					brailleSegments = translator.transform(segments, segmentsStyle); }
+					brailleSegments = transform(segments, segmentsStyle, computer); }
 				String braille[] = new String[text.length];
 				for (int i = 0; i < braille.length; i++)
 					braille[i] = "";

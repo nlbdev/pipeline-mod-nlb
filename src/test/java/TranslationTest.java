@@ -53,10 +53,10 @@ public class TranslationTest {
 		List<Transform.Provider<TextTransform>> providers = new ArrayList<Transform.Provider<TextTransform>>();
 		for (ServiceReference<? extends TextTransform.Provider> ref : context.getServiceReferences(TextTransform.Provider.class, null))
 			providers.add(context.getService(ref));
-		TextTransform translator = dispatch(providers).get("(translator:nlb)(grade:0)").iterator().next();
+		TextTransform translator = dispatch(providers).get("(translator:nlb)(grade:1)").iterator().next();
 		assertEquals(
-			"⠋⠕⠕ ⠣⠥⠞⠇⠁⠁⠝⠈⠝⠇⠃⠄⠝⠕⠜ ⠃⠁⠗",
-			translator.transform("foo utlaan@nlb.no bar"));
+			"⠋⠕⠕ ⠣⠋⠕⠕⠃⠁⠗⠈⠝⠇⠃⠄⠝⠕⠜ ⠃⠼",
+			translator.transform("foo foobar@nlb.no bar"));
 	}
 	
 	@Test
