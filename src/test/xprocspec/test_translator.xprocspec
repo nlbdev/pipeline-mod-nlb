@@ -238,7 +238,7 @@
     </x:expect>
   </x:scenario>
   
-  <x:scenario label="Section in uncontracted braille" focus="true">
+  <x:scenario label="Section in uncontracted braille">
     <x:call step="pxi:transform">
       <x:input port="source">
         <x:document type="inline">

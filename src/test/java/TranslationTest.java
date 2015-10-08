@@ -113,11 +113,13 @@ public class TranslationTest {
 			forThisPlatform(brailleModule("liblouis-native")),
 			brailleModule("libhyphen-core"),
 			brailleModule("libhyphen-libreoffice-tables"),
-			forThisPlatform(brailleModule("libhyphen-native")),
+			onWindows ? null : forThisPlatform(brailleModule("libhyphen-native")),
 			thisBundle(),
 			xprocspecBundles(),
 			junitBundles()
 		);
 	}
+	
+	private static boolean onWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
 	
 }

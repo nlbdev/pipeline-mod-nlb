@@ -14,19 +14,19 @@ import javax.xml.namespace.QName;
 
 import static com.google.common.base.Objects.toStringHelper;
 import com.google.common.base.Splitter;
-import static com.google.common.collect.Iterables.concat;
-import static com.google.common.collect.Iterables.transform;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
+import static com.google.common.collect.Iterables.concat;
 import static com.google.common.collect.Lists.newArrayList;
 
 import static org.daisy.pipeline.braille.css.Query.parseQuery;
 import org.daisy.pipeline.braille.common.BrailleTranslator;
 import org.daisy.pipeline.braille.common.CSSBlockTransform;
+import org.daisy.pipeline.braille.common.Hyphenator;
 import org.daisy.pipeline.braille.common.CSSStyledTextTransform;
 import org.daisy.pipeline.braille.common.TextTransform;
 import org.daisy.pipeline.braille.common.Transform;
-import org.daisy.pipeline.braille.common.Transform.AbstractTransform;
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.dispatch;
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.logCreate;
 import static org.daisy.pipeline.braille.common.Transform.Provider.util.logSelect;
@@ -37,7 +37,6 @@ import static org.daisy.pipeline.braille.common.util.Tuple3;
 import static org.daisy.pipeline.braille.common.util.URIs.asURI;
 import org.daisy.pipeline.braille.common.WithSideEffect;
 import org.daisy.pipeline.braille.common.XProcTransform;
-import org.daisy.pipeline.braille.libhyphen.LibhyphenHyphenator;
 import org.daisy.pipeline.braille.liblouis.LiblouisTranslator;
 
 import org.osgi.service.component.annotations.Activate;
@@ -99,8 +98,7 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 			private final static String grade3Table = "(liblouis-table:'http://www.nlb.no/liblouis/no-no-g3.ctb')";
 			private final static String grade0Table8dot = "(liblouis-table:'http://www.nlb.no/liblouis/no-no-g0.utb')";
 			private final static String hyphenationTable = "(libhyphen-table:'http://www.libreoffice.org/dictionaries/hyphen/hyph_nb_NO.dic')";
-			
-			private LiblouisTranslator grade0Translator;
+			private final static String fallbackHyphenationTable = "(hyphenator:tex)(locale:nb)";
 			
 			private ProviderImpl(Logger context) {
 				super(context);
@@ -135,18 +133,27 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 							else
 								dots = 6;
 							if (q.size() == 0) {
-								Iterable<WithSideEffect<LibhyphenHyphenator,Logger>> hyphenators
-									= logSelect(hyphenationTable, libhyphenHyphenatorProvider.get(hyphenationTable));
+								Iterable<WithSideEffect<Hyphenator,Logger>> hyphenators = concat(
+									logSelect(hyphenationTable, hyphenatorProvider.get(hyphenationTable)),
+									logSelect(fallbackHyphenationTable, hyphenatorProvider.get(fallbackHyphenationTable)));
 								final String liblouisTable;
 								if (dots == 8)
 									liblouisTable = grade0Table8dot;
 								else
 									liblouisTable = grade == 3 ? grade3Table : grade == 2 ? grade2Table : grade == 1 ? grade1Table : grade0Table;
-								return transform(
-									hyphenators,
-									new WithSideEffect.Function<LibhyphenHyphenator,NLBTranslator,Logger>() {
-										public NLBTranslator _apply(LibhyphenHyphenator h) {
-											String translatorQuery = liblouisTable + "(hyphenator:" + h.getIdentifier() + ")";
+								return Iterables.transform(
+									concat(
+										Iterables.transform(
+											hyphenators,
+											new WithSideEffect.Function<Hyphenator,String,Logger>() {
+												public String _apply(Hyphenator h) {
+													return h.getIdentifier(); }}),
+										newArrayList(
+											WithSideEffect.<String,Logger>of("liblouis"),
+											WithSideEffect.<String,Logger>of("none"))),
+									new WithSideEffect.Function<String,NLBTranslator,Logger>() {
+										public NLBTranslator _apply(String hyphenator) {
+											String translatorQuery = liblouisTable + "(hyphenator:" + hyphenator + ")";
 											LiblouisTranslator translator;
 											LiblouisTranslator grade0Translator;
 											try {
@@ -155,7 +162,7 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 														translatorQuery,
 														liblouisTranslatorProvider.get(translatorQuery)).iterator().next());
 												grade0Translator = liblouisTranslatorProvider.get(
-													grade0Table + "(hyphenator:" + h.getIdentifier() + ")").iterator().next(); }
+													grade0Table + "(hyphenator:" + hyphenator + ")").iterator().next(); }
 											catch (NoSuchElementException e) {
 												throw new NoSuchElementException(); }
 											return applyWithSideEffect(
@@ -364,25 +371,28 @@ public interface NLBTranslator extends BrailleTranslator, CSSStyledTextTransform
 		= memoize(dispatch(liblouisTranslatorProviders));
 		
 		@Reference(
-			name = "LibhyphenHyphenatorProvider",
-			unbind = "unbindLibhyphenHyphenatorProvider",
-			service = LibhyphenHyphenator.Provider.class,
+			name = "HyphenatorProvider",
+			unbind = "unbindHyphenatorProvider",
+			service = Hyphenator.Provider.class,
 			cardinality = ReferenceCardinality.MULTIPLE,
 			policy = ReferencePolicy.DYNAMIC
 		)
-		protected void bindLibhyphenHyphenatorProvider(LibhyphenHyphenator.Provider provider) {
-			libhyphenHyphenatorProviders.add(provider);
+		@SuppressWarnings(
+			"unchecked" // safe cast to Transform.Provider<Hyphenator>
+		)
+		protected void bindHyphenatorProvider(Hyphenator.Provider<?> provider) {
+			hyphenatorProviders.add((Transform.Provider<Hyphenator>)provider);
 		}
 	
-		protected void unbindLibhyphenHyphenatorProvider(LibhyphenHyphenator.Provider provider) {
-			libhyphenHyphenatorProviders.remove(provider);
-			libhyphenHyphenatorProvider.invalidateCache();
+		protected void unbindHyphenatorProvider(Hyphenator.Provider<?> provider) {
+			hyphenatorProviders.remove(provider);
+			hyphenatorProvider.invalidateCache();
 		}
-	
-		private List<Transform.Provider<LibhyphenHyphenator>> libhyphenHyphenatorProviders
-		= new ArrayList<Transform.Provider<LibhyphenHyphenator>>();
-		private Transform.Provider.MemoizingProvider<LibhyphenHyphenator> libhyphenHyphenatorProvider
-		= memoize(dispatch(libhyphenHyphenatorProviders));
+		
+		private List<Transform.Provider<Hyphenator>> hyphenatorProviders
+		= new ArrayList<Transform.Provider<Hyphenator>>();
+		private Transform.Provider.MemoizingProvider<Hyphenator> hyphenatorProvider
+		= memoize(dispatch(hyphenatorProviders));
 		
 	}
 }
