@@ -1,3 +1,14 @@
+pipeline-mod-nlb v1.3.0
+=======================
+
+Includes
+--------
+- Improved handling of URLs and e-mail addresses (https://github.com/snaekobbi/pipeline-mod-nlb/issues/9)
+- Support for `text-transform:uncontracted` (https://github.com/snaekobbi/pipeline-mod-nlb/issues/10,
+  https://github.com/snaekobbi/pipeline-mod-nlb/issues/11)
+- Question mark for unrecognized characters (https://github.com/snaekobbi/pipeline-mod-nlb/issues/6)
+- Fixes to grade 2 (https://github.com/snaekobbi/pipeline-mod-nlb/issues/15)
+
 pipeline-mod-nlb v1.2.0
 =======================
 
