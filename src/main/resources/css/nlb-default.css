@@ -4,6 +4,25 @@
     hyphens:auto;
 }*/
 
+.titlepage ,.uncontracted-letters ,h1  { text-transform:uncontracted; 
+
+}
+
+
+
+:not(
+    :lang(no)
+    :lang(nb)
+    :lang(nn)
+    :lang(nob)
+    :lang(non)
+    :lang(nb_NO)
+    :lang(nn_NO)
+    ) {
+       text-transform:uncontracted;
+}
+
+
 h4 {
 	display: block;
 	margin-top: 1;
