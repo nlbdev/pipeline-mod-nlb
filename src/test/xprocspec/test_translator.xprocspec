@@ -18,8 +18,8 @@
       <css:inline>
         <p:with-option name="default-stylesheet" select="$stylesheet"/>
       </css:inline>
-      <px:transform type="css-block">
-        <p:with-option name="query" select="concat('(translator:nlb)(locale:no)(grade:',$grade,')(dots:',$dots,')')"/>
+      <px:transform>
+        <p:with-option name="query" select="concat('(input:css)(input:html)(output:css)(translator:nlb)(locale:no)(grade:',$grade,')(dots:',$dots,')')"/>
       </px:transform>
       <p:delete match="@style"/>
     </p:declare-step>
