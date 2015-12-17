@@ -11,7 +11,7 @@
   </parent>
 
   <artifactId>mod-nlb</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>DP2 Braille Modules :: mod-nlb</name>
@@ -171,8 +171,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <scm>
-    <tag>v1.4.0</tag>
-  </scm>
 </project>
