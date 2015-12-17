@@ -1,16 +1,18 @@
 import javax.inject.Inject;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
 
-import org.daisy.pipeline.braille.common.CSSStyledTextTransform;
-import org.daisy.pipeline.braille.common.TextTransform;
-import org.daisy.pipeline.braille.common.Transform;
-import static org.daisy.pipeline.braille.common.Transform.Provider.util.dispatch;
+import org.daisy.pipeline.braille.common.BrailleTranslator;
+import org.daisy.pipeline.braille.common.BrailleTranslatorProvider;
+import org.daisy.pipeline.braille.common.BrailleTranslator.CSSStyledText;
+import static org.daisy.pipeline.braille.common.TransformProvider.util.dispatch;
+import static org.daisy.pipeline.braille.common.Query.util.query;
+
 import static org.daisy.pipeline.pax.exam.Options.brailleModule;
 import static org.daisy.pipeline.pax.exam.Options.domTraversalPackage;
 import static org.daisy.pipeline.pax.exam.Options.felixDeclarativeServices;
@@ -32,13 +34,11 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.ops4j.pax.exam.util.PathUtils;
 
-import static org.ops4j.pax.exam.CoreOptions.bundle;
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.options;
 
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 
 @RunWith(PaxExam.class)
@@ -50,24 +50,27 @@ public class TranslationTest {
 	
 	@Test
 	public void testEmail() throws Exception {
-		List<Transform.Provider<TextTransform>> providers = new ArrayList<Transform.Provider<TextTransform>>();
-		for (ServiceReference<? extends TextTransform.Provider> ref : context.getServiceReferences(TextTransform.Provider.class, null))
+		List<BrailleTranslatorProvider<BrailleTranslator>> providers = new ArrayList<BrailleTranslatorProvider<BrailleTranslator>>();
+		for (ServiceReference<? extends BrailleTranslatorProvider> ref : context.getServiceReferences(BrailleTranslatorProvider.class, null))
 			providers.add(context.getService(ref));
-		TextTransform translator = dispatch(providers).get("(translator:nlb)(grade:1)").iterator().next();
+		BrailleTranslator translator = dispatch(providers).get(query("(translator:nlb)(grade:1)")).iterator().next();
 		assertEquals(
-			"⠋⠕⠕ ⠣⠋⠕⠕⠃⠁⠗⠈⠝⠇⠃⠄⠝⠕⠜ ⠃⠼",
-			translator.transform("foo foobar@nlb.no bar"));
+			braille("⠋⠕⠕ ⠣⠋⠕⠕⠃⠁⠗⠈⠝⠇⠃⠄⠝⠕⠜ ⠃⠼"),
+			translator.fromStyledTextToBraille()
+			          .transform(styledText("foo foobar@nlb.no bar", "")));
 	}
 	
 	@Test
-	public void testTextTransformUncontracted() throws Exception {
-		List<Transform.Provider<CSSStyledTextTransform>> providers = new ArrayList<Transform.Provider<CSSStyledTextTransform>>();
-		for (ServiceReference<? extends CSSStyledTextTransform.Provider> ref : context.getServiceReferences(CSSStyledTextTransform.Provider.class, null))
+	public void testBrailleTranslatorUncontracted() throws Exception {
+		List<BrailleTranslatorProvider<BrailleTranslator>> providers = new ArrayList<BrailleTranslatorProvider<BrailleTranslator>>();
+		for (ServiceReference<? extends BrailleTranslatorProvider> ref : context.getServiceReferences(BrailleTranslatorProvider.class, null))
 			providers.add(context.getService(ref));
-		CSSStyledTextTransform translator = dispatch(providers).get("(translator:nlb)(grade:1)").iterator().next();
+		BrailleTranslator translator = dispatch(providers).get(query("(translator:nlb)(grade:1)")).iterator().next();
 		assertEquals(
-			new String[]{"⠋⠕⠕⠃⠼ ","⠋⠕⠕⠃⠁⠗"},
-			translator.transform(new String[]{"foobar ","foobar"}, new String[]{"","text-transform: uncontracted"}));
+			braille("⠋⠕⠕⠃⠼ ","⠋⠕⠕⠃⠁⠗"),
+			translator.fromStyledTextToBraille()
+			          .transform(styledText("foobar ", "",
+			                                "foobar",  "text-transform: uncontracted")));
 	}
 	
 	@Inject
@@ -100,6 +103,7 @@ public class TranslationTest {
 			mavenBundle().groupId("org.unbescape").artifactId("unbescape").versionAsInProject(),
 			mavenBundle().groupId("org.daisy.braille").artifactId("braille-css").versionAsInProject(),
 			mavenBundle().groupId("org.apache.servicemix.bundles").artifactId("org.apache.servicemix.bundles.antlr-runtime").versionAsInProject(),
+			mavenBundle().groupId("org.daisy.dotify").artifactId("dotify.api").versionAsInProject(),
 			brailleModule("common-utils"),
 			brailleModule("css-core"),
 			brailleModule("css-calabash"),
@@ -122,4 +126,22 @@ public class TranslationTest {
 	
 	private static boolean onWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
 	
+	private Iterable<CSSStyledText> styledText(String... textAndStyle) {
+		List<CSSStyledText> styledText = new ArrayList<CSSStyledText>();
+		String text = null;
+		boolean textSet = false;
+		for (String s : textAndStyle) {
+			if (textSet)
+				styledText.add(new CSSStyledText(text, s));
+			else
+				text = s;
+			textSet = !textSet; }
+		if (textSet)
+			throw new RuntimeException();
+		return styledText;
+	}
+	
+	private Iterable<String> braille(String... text) {
+		return Arrays.asList(text);
+	}
 }
