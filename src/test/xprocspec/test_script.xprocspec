@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.daisy.org/ns/xprocspec"
+               xmlns:px="http://www.daisy.org/ns/pipeline/xproc"
+               script="http://www.daisy.org/pipeline/modules/braille/dtbook-to-pef/library.xpl">
+  
+  <x:scenario label="generated-content" pending="verify result">
+    <x:call step="px:dtbook-to-pef.convert">
+      <x:input port="source">
+        <x:document type="inline">
+          <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no" version="2005-3">
+            <head>
+              <style type="text/css" media="embossed">
+                @volume:first {
+                  @begin {
+                    content: flow(volume-toc);
+                  }
+                }
+                @volume:first {
+                  @begin {
+                    content: flow(document-toc);
+                  }
+                }
+                #generated-toc li {
+                  display: block;
+                }
+                #generated-toc li a::after {
+                  content: ' ' target-counter(attr(href), page);
+                }
+              </style>
+              <meta name="dtb:uid" content="557901"/>
+              <meta name="dc:Title" content="ULVEGUTTEN TAL - BOK 1: Ulvegutten"/>
+              <meta name="dc:Identifier" content="557901"/>
+              <meta name="track:Guidelines" content="2015-1"/>
+              <meta name="track:Supplier" content="AEL Data"/>
+              <meta name="dc:Language" content="no"/>
+              <meta name="dc:Format" content="DTBook"/>
+              <meta name="dc:Creator" content="Bringsv&#xe6;rd, Tor &#xc5;ge"/>
+              <meta name="dc:Contributor" content="Gudmundsen, Per Kristian"/>
+              <meta name="dc:Date" content="2015-11-07"/>
+              <meta name="dc:Publisher" content="NLB"/>
+              <meta name="dc:Source" content="urn:isbn:9788202459543"/>
+              <meta name="dcterms:modified" content="2015-11-09T09:06:58+00:00"/>
+            </head>
+            <book>
+              <frontmatter>
+                <doctitle>AULVEG </doctitle>
+                <docauthor>Bringsv&#xe6;rd, Tor &#xc5;ge</docauthor>
+                <level1  class="titlepage">
+                  <pagenum id="page-1" page="normal">1</pagenum>
+                  <h1 id="h1_1" class="title fulltitle">ULVEGUTTEN TAL &#x2013; BOK 1: Ulvegutten</h1>
+                  <p class="docauthor author">Tor &#xc5;ge Bringsv&#xe6;rd</p>
+                  <p>Illustrert av Haakon Lie</p>
+                  <p>CAPPELEN DAMM</p>
+                </level1>
+                <level1  class="colophon">
+                  <pagenum id="page-2" page="normal">2</pagenum>
+                  <p>Originaltittel: <em>The Kill List</em></p>
+                  <p>Copyright © Frederick Forsyth 2013</p>
+                  <p>Norsk utgave © Gyldendal Norsk Forlag AS 2014</p>
+                </level1>
+              </frontmatter>
+              <bodymatter>
+                <level1 class="chapter">
+                  <pagenum id="page-3" page="normal">3</pagenum>
+                  <h1 id="h1_2">ULVESTAMMEN</h1>
+                  <p>Tal er &#xe5;tte vintere gammel.</p>
+                  <pagenum id="page-4" page="normal">4</pagenum>
+                </level1>
+              </bodymatter>
+            </book>
+          </dtbook>
+        </x:document>
+      </x:input>
+      <x:option name="toc-depth" select="1"/>
+      <x:option name="transform" select="'(formatter:dotify)(translator:nlb)(grade:0)'"/>
+      <x:option name="default-stylesheet" select="'http://www.daisy.org/pipeline/modules/braille/dtbook-to-pef/css/default.css'"/>
+      <x:option name="stylesheet" select="''"/>
+      <x:option name="temp-dir" select="$temp-dir"/>
+    </x:call>
+    <x:context label="pef">
+      <x:document type="port" port="result"/>
+    </x:context>
+    <x:expect label="result" type="custom" href="http://www.daisy.org/pipeline/modules/braille/pef-utils/library.xpl" step="x:pef-compare">
+      <x:document type="inline">
+        <pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+          <head>
+            <meta xmlns:dc="http://purl.org/dc/elements/1.1/">
+              <dc:format>application/x-pef+xml</dc:format>
+            </meta>
+          </head>
+          <body>
+            <volume cols="35" rows="20" rowgap="0" duplex="true">
+              <section>
+                <page>
+                  <row/>
+                </page>
+              </section>
+            </volume>
+          </body>
+        </pef>
+      </x:document>
+    </x:expect>
+  </x:scenario>
+  
+</x:description>
