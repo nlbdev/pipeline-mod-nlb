@@ -6,7 +6,15 @@
 	
 	<p:option name="text-transform" required="true"/>
 	
-	<p:xslt>
+	
+	
+		<p:xslt>
+                <p:input port="stylesheet">
+                        <p:document href="insert-boilerplate.xsl"/>
+                </p:input>
+        </p:xslt>
+        
+        <p:xslt>
 		<p:input port="stylesheet">
 			<p:document href="block-translate.xsl"/>
 		</p:input>
