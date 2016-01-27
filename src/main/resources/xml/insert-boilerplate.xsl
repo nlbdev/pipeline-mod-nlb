@@ -3,19 +3,27 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0"
     xpath-default-namespace="http://www.daisy.org/z3986/2005/dtbook/"
     xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+    
+    <xsl:output indent="yes"/>
+    
     <xsl:template match="frontmatter/docauthor">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
         </xsl:copy>
         <xsl:call-template name="add-information-based-from-metadata"/>
+        <xsl:call-template name="toc"/>         
     </xsl:template>
+    
+    
+    
     <xsl:template match="node()" mode="#all" priority="-5">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates mode="#current"/>
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template name="add-information-based-from-metadata">
         <level1 class="first-page">
             <p class="author">
@@ -53,4 +61,89 @@
             
         </level1>
     </xsl:template>
+    
+    
+    <xsl:template name="toc"> 
+        <level1 class="toc-page">
+            <h1>Innholdsfortegnelse</h1>
+            <list type="ol"> 
+            <xsl:for-each-group select="//h1|//h2|//h3|//h4|//h5|//h6" group-starting-with="h1"> 
+                <xsl:apply-templates select="." mode="toc"/>
+            </xsl:for-each-group>
+            </list>
+        </level1>
+    </xsl:template>
+    
+    <xsl:template match="h1" mode="toc">
+        <li>
+          <a href="#{@id}"><xsl:value-of select="."/></a>
+        <xsl:if test="following::h2[1][preceding::h1[1] = current-group()]"> 
+            <list type="ol">
+                <xsl:for-each-group select="current-group() except ." group-starting-with="h2">
+                    <xsl:apply-templates select="." mode="toc"/>
+                </xsl:for-each-group>
+            </list>
+        </xsl:if>
+        </li>
+    </xsl:template>
+    
+    <xsl:template match="h2" mode="toc"> 
+        <li>            
+            <a href="#{@id}"><xsl:value-of select="."/></a>
+            <xsl:if test="following::h3[1][preceding::h2[1] = current-group()]">
+                <list type="ol">
+                    <xsl:for-each-group select="current-group() except ." group-starting-with="h3">
+                        <xsl:apply-templates select="." mode="toc"/>
+                    </xsl:for-each-group>
+                </list>
+            </xsl:if>
+        </li>
+    </xsl:template>
+    
+    
+    <xsl:template match="h3" mode="toc">
+        <li>
+            <a href="#{@id}"><xsl:value-of select="."/></a>
+            <xsl:if test="following::h4[1][preceding::h3[1] = current-group()]">
+                <list type="ol">
+                    <xsl:for-each-group select="current-group() except ." group-starting-with="h4">
+                        <xsl:apply-templates select="." mode="toc"/>
+                    </xsl:for-each-group>
+                </list>
+            </xsl:if>
+        </li>
+    </xsl:template>
+    
+    <xsl:template match="h4" mode="toc">
+        <li>
+            <a href="#{@id}"><xsl:value-of select="."/></a>
+            <xsl:if test="following::h5[1][preceding::h4[1] = current-group()]">
+                <list>
+                    <xsl:for-each-group select="current-group() except ." group-starting-with="h5">
+                        <xsl:apply-templates select="." mode="toc"/>
+                    </xsl:for-each-group>
+                </list>
+            </xsl:if>
+        </li>
+    </xsl:template>
+    
+    <xsl:template match="h5" mode="toc">
+        <li>
+            <a href="#{@id}"><xsl:value-of select="."/></a>
+            <xsl:if test="following::h6[1][preceding::h5[1] = current-group()]">
+                <list>
+                    <xsl:for-each-group select="current-group() except ." group-starting-with="h6">
+                        <xsl:apply-templates select="." mode="toc"/>
+                    </xsl:for-each-group>
+                </list>
+            </xsl:if>
+        </li>
+    </xsl:template>
+    
+    <xsl:template match="h6" mode="toc">
+        <li>
+            <a href="#{@id}"><xsl:value-of select="."/></a>
+        </li>
+    </xsl:template>
+    
 </xsl:stylesheet>
