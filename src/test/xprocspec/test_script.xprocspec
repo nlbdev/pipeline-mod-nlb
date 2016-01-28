@@ -12,13 +12,27 @@
               <style type="text/css" media="embossed">
                 @volume:first {
                   @begin {
-                    content: flow(volume-toc);
+                    content: flow(titlepage) flow(volume-toc);
                   }
                 }
                 @volume:first {
                   @begin {
-                    content: flow(document-toc);
+                    content: flow(titlepage) flow(document-toc);
                   }
+                }
+                .titlepage, .colophon {
+                  display: block;
+                  page-break-after: right;
+                  flow: titlepage;
+                }
+                #generated-toc::before {
+                  display: block;
+                  content: 'TOC';
+                  border-bottom: ⠒;
+                  margin-bottom: 1;
+                  text-align: center;
+                  margin-left: 5;
+                  margin-right: 5;
                 }
                 #generated-toc li {
                   display: block;
