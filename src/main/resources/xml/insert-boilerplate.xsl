@@ -6,13 +6,14 @@
     
     <xsl:output indent="yes"/>
     
+    <xsl:param name="contraction-grade" select="'0'"/>
+    
     <xsl:template match="frontmatter/docauthor">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
         </xsl:copy>
-        <xsl:call-template name="add-information-based-from-metadata"/>
-        <xsl:call-template name="toc"/>         
+        <xsl:call-template name="add-information-based-from-metadata"/>                
     </xsl:template>
     
     
@@ -54,7 +55,20 @@
         </xsl:choose>
         <level1 class="third-page">
             <h1>Om boka</h1>
-            <p class="contraction">Fullskrift</p>
+            <p class="contraction">
+                <xsl:choose>
+                    <xsl:when test="$contraction-grade = '0'">Fullskrift</xsl:when>                   
+                </xsl:choose> 
+                <xsl:choose>
+                    <xsl:when test="$contraction-grade = '1'">Kortskrift nivå 1</xsl:when>                   
+                </xsl:choose> 
+                <xsl:choose>
+                    <xsl:when test="$contraction-grade = '2'">Kortskrift nivå 2</xsl:when>                   
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="$contraction-grade = '3'">Kortskrift nivå 3</xsl:when>                   
+                </xsl:choose>
+            </p>
             <p class="pages">Antall Sider:</p>
             <p class="return">Boka skal ikke returneres.</p>
             <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
@@ -62,88 +76,6 @@
         </level1>
     </xsl:template>
     
-    
-    <xsl:template name="toc"> 
-        <level1 class="toc-page">
-            <h1>Innholdsfortegnelse</h1>
-            <list type="ol"> 
-            <xsl:for-each-group select="//h1|//h2|//h3|//h4|//h5|//h6" group-starting-with="h1"> 
-                <xsl:apply-templates select="." mode="toc"/>
-            </xsl:for-each-group>
-            </list>
-        </level1>
-    </xsl:template>
-    
-    <xsl:template match="h1" mode="toc">
-        <li>
-          <a href="#{@id}"><xsl:value-of select="."/></a>
-        <xsl:if test="following::h2[1][preceding::h1[1] = current-group()]"> 
-            <list type="ol">
-                <xsl:for-each-group select="current-group() except ." group-starting-with="h2">
-                    <xsl:apply-templates select="." mode="toc"/>
-                </xsl:for-each-group>
-            </list>
-        </xsl:if>
-        </li>
-    </xsl:template>
-    
-    <xsl:template match="h2" mode="toc"> 
-        <li>            
-            <a href="#{@id}"><xsl:value-of select="."/></a>
-            <xsl:if test="following::h3[1][preceding::h2[1] = current-group()]">
-                <list type="ol">
-                    <xsl:for-each-group select="current-group() except ." group-starting-with="h3">
-                        <xsl:apply-templates select="." mode="toc"/>
-                    </xsl:for-each-group>
-                </list>
-            </xsl:if>
-        </li>
-    </xsl:template>
-    
-    
-    <xsl:template match="h3" mode="toc">
-        <li>
-            <a href="#{@id}"><xsl:value-of select="."/></a>
-            <xsl:if test="following::h4[1][preceding::h3[1] = current-group()]">
-                <list type="ol">
-                    <xsl:for-each-group select="current-group() except ." group-starting-with="h4">
-                        <xsl:apply-templates select="." mode="toc"/>
-                    </xsl:for-each-group>
-                </list>
-            </xsl:if>
-        </li>
-    </xsl:template>
-    
-    <xsl:template match="h4" mode="toc">
-        <li>
-            <a href="#{@id}"><xsl:value-of select="."/></a>
-            <xsl:if test="following::h5[1][preceding::h4[1] = current-group()]">
-                <list>
-                    <xsl:for-each-group select="current-group() except ." group-starting-with="h5">
-                        <xsl:apply-templates select="." mode="toc"/>
-                    </xsl:for-each-group>
-                </list>
-            </xsl:if>
-        </li>
-    </xsl:template>
-    
-    <xsl:template match="h5" mode="toc">
-        <li>
-            <a href="#{@id}"><xsl:value-of select="."/></a>
-            <xsl:if test="following::h6[1][preceding::h5[1] = current-group()]">
-                <list>
-                    <xsl:for-each-group select="current-group() except ." group-starting-with="h6">
-                        <xsl:apply-templates select="." mode="toc"/>
-                    </xsl:for-each-group>
-                </list>
-            </xsl:if>
-        </li>
-    </xsl:template>
-    
-    <xsl:template match="h6" mode="toc">
-        <li>
-            <a href="#{@id}"><xsl:value-of select="."/></a>
-        </li>
-    </xsl:template>
+   
     
 </xsl:stylesheet>

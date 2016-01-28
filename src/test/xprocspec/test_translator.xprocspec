@@ -669,7 +669,6 @@
             </head>
             <book>
               
-              
               <frontmatter>
                 <doctitle>⠠⠠⠁⠥⠇⠧⠑⠛ </doctitle>
                 <docauthor>⠠⠃⠗⠊⠝⠛⠎⠧⠜⠗⠙⠂ ⠠⠞⠕⠗ ⠠⠡⠛⠑</docauthor>
@@ -695,22 +694,6 @@
                   <p class="pages">⠠⠁⠝⠞⠁⠇⠇ ⠠⠎⠊⠙⠑⠗⠒</p>
                   <p class="return">⠠⠃⠕⠅⠁ ⠎⠅⠁⠇ ⠊⠅⠅⠑ ⠗⠑⠞⠥⠗⠝⠑⠗⠑⠎⠄</p>
                   <p class="contact">⠠⠋⠑⠊⠇ ⠑⠇⠇⠑⠗ ⠍⠁⠝⠛⠇⠑⠗ ⠅⠁⠝ ⠍⠑⠇⠙⠑⠎ ⠞⠊⠇ ⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</p>
-                </level1>
-                <level1 class="toc-page">
-                  <h1>⠠⠊⠝⠝⠓⠕⠇⠙⠎⠋⠕⠗⠞⠑⠛⠝⠑⠇⠎⠑</h1>
-                  <list type="ol">
-                    <li>
-                      <a href="#h1_1">⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝ ⠠⠠⠞⠁⠇ ⠤⠤ ⠠⠠⠃⠕⠅ ⠼⠁⠒ ⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝</a>
-                    </li>
-                    <li>
-                      <a href="#h1_2">⠠⠠⠥⠇⠧⠑⠎⠞⠁⠍⠍⠑⠝</a>
-                      <list type="ol">
-                        <li>
-                          <a href="#h2_1">⠰⠉⠓⠁⠏⠞⠑⠗⠼⠃</a>
-                        </li>
-                      </list>
-                    </li>
-                  </list>
                 </level1>
                 <level1 class="titlepage">
                   <pagenum id="page-1" page="normal">⠼⠁</pagenum>
@@ -740,6 +723,7 @@
                   <pagenum id="page-4" page="normal">⠼⠙</pagenum>
                 </level1>
               </bodymatter>
+              
             </book>
           </dtbook>
         </div>
