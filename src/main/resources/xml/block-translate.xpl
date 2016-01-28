@@ -5,6 +5,7 @@
             exclude-inline-prefixes="#all">
 	
 	<p:option name="text-transform" required="true"/>
+	<p:option name="contraction-grade" required="true"/>
 	
 	
 	
@@ -12,6 +13,7 @@
                 <p:input port="stylesheet">
                         <p:document href="insert-boilerplate.xsl"/>
                 </p:input>
+                <p:with-param name="contraction-grade" select="$contraction-grade"/>
         </p:xslt>
         
         <p:xslt>
