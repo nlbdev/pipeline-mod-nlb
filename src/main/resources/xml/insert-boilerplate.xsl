@@ -26,26 +26,26 @@
     </xsl:template>
     
     <xsl:template name="add-information-based-from-metadata">
-        <level1 class="first-page">
-            <p class="author">
+        <level1 class="first-page" style="text-align: center; page-break-inside:avoid ; " >
+            <p class="author" style="display: block;  margin-top: 3; ">
                 <xsl:value-of select="//meta[@name eq 'dc:Creator']/@content"/>
             </p>
-            <p class="title"> 
+            <p class="title" style="display: block; margin-top: 1;"> 
                 <xsl:value-of select="//meta[@name eq 'dc:Title']/@content"/>
             </p>
-            <p class="translater">
+            <p class="translater" style="display: block; margin-top: 2; ">
                 <xsl:value-of select="//meta[@name eq 'dc:Contributor']/@content"/> 
             </p>
-            <p class="nlb">NLB</p>
-            <p class="year">
+            <p class="nlb" style="display: block; margin-top: 4;">NLB</p>
+            <p class="year" style="display: block; margin-bottom: 2;" >
                 <xsl:value-of select="concat('Norge ',format-dateTime(current-dateTime(), '[Y]'))"/>
             </p>
-            <p class="bind">X av Y</p>
+            <p class="bind" style="display: block; page-break-after: always; @page margin-bottom: 1;  ">1 av 1</p>
         </level1>
         <xsl:choose>
             <xsl:when test="exists(//frontmatter/level1[@class eq 'colophon'])">
-                <level1 class="second-page">
-                    <h1>Colophon</h1>
+                <level1 class="second-page" style=" margin-top: 1; margin-bottom: 1; margin-left: 1; margin-right: 1;" >
+                    <h1 style="display: block;  page-break-before: always;  " >Colophon</h1>
                     <xsl:copy-of select="//frontmatter/level1[@class eq 'colophon']/descendant::p"/>
                 </level1>
             </xsl:when>
@@ -53,11 +53,11 @@
                 <xsl:comment>No colophon!</xsl:comment>
             </xsl:otherwise>
         </xsl:choose>
-        <level1 class="third-page">
-            <h1>Om boka</h1>
-            <p class="contraction">
+        <level1 class="third-page" style=" margin-top: 1; margin-bottom: 1; margin-left: 1; margin-right: 1;">
+            <h1 style="display: block;  page-break-before: always; ">Om boka</h1>
+            <p class="contraction" style="display: block; margin-top: 1;">
                 <xsl:choose>
-                    <xsl:when test="$contraction-grade = '0'">Fullskrift</xsl:when>                   
+                    <xsl:when test="$contraction-grade = '0'" >Fullskrift</xsl:when>                   
                 </xsl:choose> 
                 <xsl:choose>
                     <xsl:when test="$contraction-grade = '1'">Kortskrift nivå 1</xsl:when>                   
@@ -69,9 +69,9 @@
                     <xsl:when test="$contraction-grade = '3'">Kortskrift nivå 3</xsl:when>                   
                 </xsl:choose>
             </p>
-            <p class="pages">Antall Sider:</p>
-            <p class="return">Boka skal ikke returneres.</p>
-            <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
+            <p class="pages" style="display: block;">Antall Sider:  </p>
+            <p class="return" style="display: block;">Boka skal ikke returneres.</p>
+            <p class="contact" style="display: block; page-break-after: always;">Feil eller mangler kan meldes til punkt@nlb.no.</p>
             
         </level1>
     </xsl:template>
