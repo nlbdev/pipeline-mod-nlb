@@ -14,6 +14,7 @@ import static org.daisy.pipeline.braille.common.TransformProvider.util.dispatch;
 import static org.daisy.pipeline.braille.common.Query.util.query;
 
 import static org.daisy.pipeline.pax.exam.Options.brailleModule;
+import static org.daisy.pipeline.pax.exam.Options.calabashConfigFile;
 import static org.daisy.pipeline.pax.exam.Options.domTraversalPackage;
 import static org.daisy.pipeline.pax.exam.Options.felixDeclarativeServices;
 import static org.daisy.pipeline.pax.exam.Options.forThisPlatform;
@@ -93,6 +94,7 @@ public class NLBTest {
 		return options(
 			logbackConfigFile(),
 			logbackBundles(),
+			calabashConfigFile(),
 			domTraversalPackage(),
 			felixDeclarativeServices(),
 			mavenBundle().groupId("com.google.guava").artifactId("guava").versionAsInProject(),
@@ -136,8 +138,17 @@ public class NLBTest {
 			brailleModule("dotify-calabash"),
 			brailleModule("dotify-utils"),
 			brailleModule("dotify-formatter"),
+			brailleModule("dtbook-to-pef"),
 			pipelineModule("file-utils"),
 			pipelineModule("common-utils"),
+			pipelineModule("html-utils"),
+			pipelineModule("zip-utils"),
+			pipelineModule("mediatype-utils"),
+			pipelineModule("fileset-utils"),
+			pipelineModule("metadata-utils"),
+			pipelineModule("validation-utils"),
+			pipelineModule("dtbook-utils"),
+			pipelineModule("dtbook-validator"),
 			thisBundle(),
 			xprocspecBundles(),
 			junitBundles()

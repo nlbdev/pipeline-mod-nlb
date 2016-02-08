@@ -282,14 +282,14 @@
         <x:document type="inline">
           
           <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-            <frontmatter>
+           
               <doctitle>l</doctitle>
               <docauthor>a</docauthor>
               <level1 class="titlepage">
                 <h1>a ble at l</h1>
                 <p>a ble at l </p>
               </level1>              
-            </frontmatter>
+            
             <level1>
               <h1>a ble at ll</h1>
               <p>a ble at ll</p>
@@ -310,14 +310,14 @@
       <x:document type="inline">
        
         <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-          <frontmatter>
+          
             <doctitle>⠰⠇</doctitle>
             <docauthor>⠰⠁</docauthor>
             <level1 class="titlepage">
               <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
               <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
             </level1>            
-          </frontmatter>  
+            
           <level1>
             <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
             <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
@@ -341,14 +341,14 @@
         <x:document type="inline">
           
           <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-            <frontmatter>
+           
               <doctitle>l</doctitle>
               <docauthor>a</docauthor>
               <level1 class="titlepage">
                 <h1>a ble at l</h1>
                 <p>a ble at l </p>
               </level1>              
-            </frontmatter>
+            
             <level1>
               <h1>a ble at ll</h1>
               <p>a ble at ll</p>
@@ -371,14 +371,14 @@
       <x:document type="inline">
         
         <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-          <frontmatter>
+          
             <doctitle>⠰⠇</doctitle>
             <docauthor>⠰⠁</docauthor>
             <level1 class="titlepage">
               <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
               <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
             </level1>            
-          </frontmatter>  
+            
           <level1>
             <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
             <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
@@ -558,13 +558,4 @@
       </x:document>
     </x:expect>
   </x:scenario>
-  
-  
-  
-  
-  
-  
-  
-  
-  
 </x:description>

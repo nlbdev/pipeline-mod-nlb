@@ -10,6 +10,8 @@
 	
 	<xsl:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/transform/block-translator-template.xsl"/>
 	
+	<xsl:variable name="em-count" select="count(//html:em | //html:i | //dtbook:em | //dtbook:i)"/>
+	
 	<xsl:param name="text-transform" required="yes"/>
 	
 	<xsl:template match="css:block" mode="#default before after">
@@ -141,11 +143,25 @@
 				</xsl:variable>
 				<xsl:sequence select="css:style-attribute(css:serialize-stylesheet($translated-rules))"/>
 			</xsl:if>
-			<xsl:text>⠠⠄</xsl:text>
+			<xsl:choose>
+				<xsl:when test="$em-count = 0">
+					<xsl:text>⠆</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>⠠⠄</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
 			<xsl:apply-templates select="child::node()[1]" mode="#current">
 				<xsl:with-param name="new-text-nodes" select="$new-text-nodes[position()&lt;=$text-node-count]"/>
 			</xsl:apply-templates>
-			<xsl:text>⠠⠄</xsl:text>
+			<xsl:choose>
+				<xsl:when test="$em-count = 0">
+					<xsl:text>⠰</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>⠠⠄</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:copy>
 		<xsl:apply-templates select="following-sibling::node()[1]" mode="#current">
 			<xsl:with-param name="new-text-nodes" select="$new-text-nodes[position()&gt;$text-node-count]"/>

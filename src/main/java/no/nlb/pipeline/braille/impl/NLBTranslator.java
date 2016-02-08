@@ -182,7 +182,9 @@ public interface NLBTranslator {
 			private final int dots;
 			
 			private TransformImpl(int grade, int dots, LiblouisTranslator translator, LiblouisTranslator grade0Translator) {
-				Map<String,String> options = ImmutableMap.of("text-transform", mutableQuery().add("id", this.getIdentifier()).toString());
+				Map<String,String> options = ImmutableMap.<String,String>of(
+					"text-transform", mutableQuery().add("id", this.getIdentifier()).toString(),
+					"contraction-grade", ""+grade);
 				xproc = new XProc(href, null, options);
 				this.translator = translator.fromStyledTextToBraille();
 				this.grade0Translator = grade0Translator.fromStyledTextToBraille();

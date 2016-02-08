@@ -6,7 +6,10 @@
   <parent>
     <groupId>org.daisy.pipeline.modules.braille</groupId>
     <artifactId>braille-modules-parent</artifactId>
-    <version>1.9.8</version>
+    <!--
+        depends on current master
+    -->
+    <version>1.9.9-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -63,6 +66,11 @@
     <dependency>
       <groupId>org.daisy.pipeline.modules.braille</groupId>
       <artifactId>dotify-formatter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.daisy.pipeline.modules.braille</groupId>
+      <artifactId>dtbook-to-pef</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
