@@ -1,3 +1,14 @@
+pipeline-mod-nlb v1.5.0
+=======================
+
+Includes
+--------
+- Automatic generation of boilerplate text
+  (https://github.com/snaekobbi/pipeline-mod-nlb/issues/18)
+- Treat `strong` as `em` when no `em` present
+  (https://github.com/snaekobbi/pipeline-mod-nlb/issues/2)
+
+
 pipeline-mod-nlb v1.4.0
 =======================
 

@@ -6,15 +6,12 @@
   <parent>
     <groupId>org.daisy.pipeline.modules.braille</groupId>
     <artifactId>braille-modules-parent</artifactId>
-    <!--
-        depends on current master
-    -->
-    <version>1.9.9-SNAPSHOT</version>
+    <version>1.9.9</version>
     <relativePath />
   </parent>
 
   <artifactId>mod-nlb</artifactId>
-  <version>1.4.1-SNAPSHOT</version>
+  <version>1.5.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>DP2 Braille Modules :: mod-nlb</name>
