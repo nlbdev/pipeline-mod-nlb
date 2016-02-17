@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<x:description xmlns:x="http://www.daisy.org/ns/xprocspec"
-               xmlns:p="http://www.w3.org/ns/xproc"
-               xmlns:px="http://www.daisy.org/ns/pipeline/xproc"
-               xmlns:html="http://www.w3.org/1999/xhtml"
-               xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal"
-               xmlns:css="http://www.daisy.org/ns/pipeline/braille-css">
-  
+<x:description xmlns:x="http://www.daisy.org/ns/xprocspec" xmlns:p="http://www.w3.org/ns/xproc"
+  xmlns:px="http://www.daisy.org/ns/pipeline/xproc" xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal"
+  xmlns:css="http://www.daisy.org/ns/pipeline/braille-css">
+
   <x:script>
     <p:declare-step type="pxi:transform" version="1.0">
       <p:input port="source"/>
@@ -19,24 +17,27 @@
         <p:with-option name="default-stylesheet" select="$stylesheet"/>
       </css:inline>
       <px:transform>
-        <p:with-option name="query" select="concat('(input:css)(input:html)(output:css)(translator:nlb)(locale:no)(grade:',$grade,')(dots:',$dots,')')"/>
+        <p:with-option name="query"
+          select="concat('(input:css)(input:html)(output:css)(translator:nlb)(locale:no)(grade:',$grade,')(dots:',$dots,')')"
+        />
       </px:transform>
       <p:delete match="@style"/>
     </p:declare-step>
   </x:script>
-  
+
   <x:scenario label="6-dot: Grade 0, 1, 2 and 3">
     <x:call step="pxi:transform">
       <x:input port="source">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="hyphens:auto">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml" style="hyphens:auto">
             <p>foobar</p>
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
-    
+
     <x:scenario label="grade 0">
       <x:call>
         <x:option name="grade" select="'0'"/>
@@ -46,13 +47,13 @@
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
             <p>⠋⠕⠕­⠃⠁⠗</p>
           </div>
         </x:document>
       </x:expect>
     </x:scenario>
-    
+
     <x:scenario label="grade 1">
       <x:call>
         <x:option name="grade" select="'1'"/>
@@ -60,15 +61,16 @@
       <x:context label="result">
         <x:document type="port" port="result"/>
       </x:context>
+      <x:context label="pef">
+        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
+      </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
-            <p>⠋⠕⠕­⠃⠼</p>
-          </div>
+          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
         </x:document>
       </x:expect>
     </x:scenario>
-    
+
     <x:scenario label="grade 2">
       <x:call>
         <x:option name="grade" select="'2'"/>
@@ -76,15 +78,16 @@
       <x:context label="result">
         <x:document type="port" port="result"/>
       </x:context>
+      <x:context label="pef">
+        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
+      </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
-            <p>⠋⠕⠕­⠃⠼</p>
-          </div>
+          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
         </x:document>
       </x:expect>
     </x:scenario>
-    
+
     <x:scenario label="grade 3">
       <x:call>
         <x:option name="grade" select="'3'"/>
@@ -92,29 +95,30 @@
       <x:context label="result">
         <x:document type="port" port="result"/>
       </x:context>
+      <x:context label="pef">
+        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
+      </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
-            <p>⠋⠕⠕­⠃⠼</p>
-          </div>
+          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
         </x:document>
       </x:expect>
     </x:scenario>
   </x:scenario>
-  
+
   <x:scenario label="8-dot: Grade 0">
     <x:call step="pxi:transform">
       <x:option name="dots" select="'8'"/>
       <x:input port="source">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="hyphens:auto">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml" style="hyphens:auto">
             <p>foobar</p>
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
-    
     <x:scenario label="grade 0">
       <x:call>
         <x:option name="grade" select="'0'"/>
@@ -124,14 +128,14 @@
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
             <p>⠋⠕⠕­⠃⠁⠗</p>
           </div>
         </x:document>
       </x:expect>
     </x:scenario>
   </x:scenario>
-  
+
   <x:scenario label="Marking of text-level semantics with braille indicators for Norwegian">
     <x:call step="pxi:transform">
       <x:input port="source">
@@ -140,56 +144,40 @@
             <!--
                 Always use dots 23 (⠆) in front of bold and dots 56 (⠰) after bold.
             -->
-            <p>
-              hund hund<strong>en</strong> hund<strong>er</strong> hund<strong>ene</strong>
+            <p> hund hund<strong>en</strong> hund<strong>er</strong> hund<strong>ene</strong>
             </p>
             <!--
                 Opening/closing marks are never placed immediately before/after a white space character.
             -->
-            <p>
-              hund hund<strong>en </strong>hund<strong>er </strong>hund<strong>ene</strong>
+            <p> hund hund<strong>en </strong>hund<strong>er </strong>hund<strong>ene</strong>
             </p>
-            <p>
-              Det var bare det at hun også <strong>mis</strong>unte ham det
-            </p>
-            <p>
-              Jeg verken <strong>vil </strong>eller <strong>kan </strong>gjøre dette for deg!
-            </p>
-            <p>
-              Karin Fossum slo gjennom som krimforfatter med romanen <strong>Evas øye</strong>, som
-              kom ut i 1995.
-            </p>
+            <p> Det var bare det at hun også <strong>mis</strong>unte ham det </p>
+            <p> Jeg verken <strong>vil </strong>eller <strong>kan </strong>gjøre dette for deg! </p>
+            <p> Karin Fossum slo gjennom som krimforfatter med romanen <strong>Evas øye</strong>,
+              som kom ut i 1995. </p>
             <!--
                 Always use dots 456 (⠸) in front of and after underline.
             -->
-            <p>
-              "Hør her: <strong>du <u>må </u>gjøre det</strong>!"
-            </p>
+            <p> "Hør her: <strong>du <u>må </u>gjøre det</strong>!" </p>
             <!--
                 Always use dots 6-3 (⠆⠠) in front of and after italics.
             -->
-            <p>
-              Romanen <strong>Tusen strålende soler </strong>av den afghansk-amerikanske forfatteren
-              Khaled Hosseini tyder på å bli en like stor suksess som den forrige romanen,
-              <strong>Drageløperen</strong>. I bokanmeldelsen fra <strong>Dagbladet
+            <p> Romanen <strong>Tusen strålende soler </strong>av den afghansk-amerikanske
+              forfatteren Khaled Hosseini tyder på å bli en like stor suksess som den forrige
+              romanen, <strong>Drageløperen</strong>. I bokanmeldelsen fra <strong>Dagbladet
               </strong>06.06.07 forklares dette med: <em>Ikke fordi Hosseini er en spesielt god
-              forfatter. Men fordi tematikken til den USA-bosatte Hosseini, har en spesiell dragning
-              på et vestlig publikum.</em>
+                forfatter. Men fordi tematikken til den USA-bosatte Hosseini, har en spesiell
+                dragning på et vestlig publikum.</em>
             </p>
-            <p>
-              Vinje, Finn-Erik. 2004. <em>Skriveregler</em>. 8. utg. Oslo
-            </p>
-            <p>
-              Hellevik, Alf. 1970. <em>God nynorsk</em>.  Oslo
-            </p>
-            <p>
-              Ny afghansk bestselger. Bokanmeldelse <em>Dagbladet </em>06.06.07
-            </p>
+            <p> Vinje, Finn-Erik. 2004. <em>Skriveregler</em>. 8. utg. Oslo </p>
+            <p> Hellevik, Alf. 1970. <em>God nynorsk</em>. Oslo </p>
+            <p> Ny afghansk bestselger. Bokanmeldelse <em>Dagbladet </em>06.06.07 </p>
           </div>
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
     <x:context label="result">
       <x:document type="port" port="result"/>
@@ -197,188 +185,167 @@
     <x:expect label="result" type="compare" pending="no perfect translation">
       <x:document type="inline">
         <div xmlns="http://www.w3.org/1999/xhtml">
-          <p>
-            ⠓⠥⠝⠙ ⠓⠥⠝⠙<strong>⠆⠑⠝⠰</strong> ⠓⠥⠝⠙<strong>⠆⠑⠗⠰</strong> ⠓⠥⠝⠙<strong>⠆⠑⠝⠑⠰</strong>
+          <p> ⠓⠥⠝⠙ ⠓⠥⠝⠙<strong>⠆⠑⠝⠰</strong> ⠓⠥⠝⠙<strong>⠆⠑⠗⠰</strong> ⠓⠥⠝⠙<strong>⠆⠑⠝⠑⠰</strong>
           </p>
-          <p>
-            ⠓⠥⠝⠙ ⠓⠥⠝⠙<strong>⠆⠑⠝⠰ </strong>⠓⠥⠝⠙<strong>⠆⠑⠗⠰ </strong>⠓⠥⠝⠙<strong>⠆⠑⠝⠑⠰</strong>
+          <p> ⠓⠥⠝⠙ ⠓⠥⠝⠙<strong>⠆⠑⠝⠰ </strong>⠓⠥⠝⠙<strong>⠆⠑⠗⠰ </strong>⠓⠥⠝⠙<strong>⠆⠑⠝⠑⠰</strong>
           </p>
-          <p>
-            ⠠⠙⠑⠞ ⠧⠁⠗ ⠃⠁⠗⠑ ⠙⠑⠞ ⠁⠞ ⠓⠥⠝ ⠕⠛⠎⠡ <strong>⠆⠍⠊⠎⠰</strong>⠥⠝⠞⠑ ⠓⠁⠍ ⠙⠑⠞⠄
-          </p>
-          <p>
-            ⠠⠚⠑⠛ ⠧⠑⠗⠅⠑⠝ <strong>⠆⠧⠊⠇⠰ </strong>⠑⠇⠇⠑⠗ <strong>⠆⠅⠁⠝⠰ </strong>⠛⠚⠪⠗⠑ ⠙⠑⠞⠞⠑ ⠋⠕⠗ ⠙⠑⠛⠖
-          </p>
-          <p>
-            ⠠⠅⠁⠗⠊⠝ ⠠⠋⠕⠎⠎⠥⠍ ⠎⠇⠕ ⠛⠚⠑⠝⠝⠕⠍ ⠎⠕⠍ ⠅⠗⠊⠍⠋⠕⠗⠋⠁⠞⠞⠑⠗ ⠍⠑⠙ ⠗⠕⠍⠁⠝⠑⠝ <strong>⠆⠑⠧⠁⠎ ⠪⠽⠑⠰</strong>⠂
-            ⠎⠕⠍ ⠅⠕⠍ ⠥⠞ ⠊ ⠼⠁⠊⠊⠑⠄
-          </p>
-          <p>
-            ⠲⠠⠓⠪⠗ ⠓⠑⠗⠒ <strong>⠆⠙⠥ <u>⠸⠍⠡⠸ </u>⠛⠚⠪⠗⠑ ⠙⠑⠞⠰</strong>⠖⠲
-          </p>
-          <p>
-            ⠠⠗⠕⠍⠁⠝⠑⠝ <strong>⠆⠠⠞⠥⠎⠑⠝ ⠎⠞⠗⠡⠇⠑⠝⠙⠑ ⠎⠕⠇⠑⠗⠰ </strong>⠁⠧ ⠙⠑⠝ ⠁⠋⠛⠓⠁⠝⠎⠅⠁⠍⠑⠗⠊⠅⠁⠝⠎⠅⠑
+          <p> ⠠⠙⠑⠞ ⠧⠁⠗ ⠃⠁⠗⠑ ⠙⠑⠞ ⠁⠞ ⠓⠥⠝ ⠕⠛⠎⠡ <strong>⠆⠍⠊⠎⠰</strong>⠥⠝⠞⠑ ⠓⠁⠍ ⠙⠑⠞⠄ </p>
+          <p> ⠠⠚⠑⠛ ⠧⠑⠗⠅⠑⠝ <strong>⠆⠧⠊⠇⠰ </strong>⠑⠇⠇⠑⠗ <strong>⠆⠅⠁⠝⠰ </strong>⠛⠚⠪⠗⠑ ⠙⠑⠞⠞⠑ ⠋⠕⠗ ⠙⠑⠛⠖ </p>
+          <p> ⠠⠅⠁⠗⠊⠝ ⠠⠋⠕⠎⠎⠥⠍ ⠎⠇⠕ ⠛⠚⠑⠝⠝⠕⠍ ⠎⠕⠍ ⠅⠗⠊⠍⠋⠕⠗⠋⠁⠞⠞⠑⠗ ⠍⠑⠙ ⠗⠕⠍⠁⠝⠑⠝ <strong>⠆⠑⠧⠁⠎ ⠪⠽⠑⠰</strong>⠂
+            ⠎⠕⠍ ⠅⠕⠍ ⠥⠞ ⠊ ⠼⠁⠊⠊⠑⠄ </p>
+          <p> ⠲⠠⠓⠪⠗ ⠓⠑⠗⠒ <strong>⠆⠙⠥ <u>⠸⠍⠡⠸ </u>⠛⠚⠪⠗⠑ ⠙⠑⠞⠰</strong>⠖⠲ </p>
+          <p> ⠠⠗⠕⠍⠁⠝⠑⠝ <strong>⠆⠠⠞⠥⠎⠑⠝ ⠎⠞⠗⠡⠇⠑⠝⠙⠑ ⠎⠕⠇⠑⠗⠰ </strong>⠁⠧ ⠙⠑⠝ ⠁⠋⠛⠓⠁⠝⠎⠅⠁⠍⠑⠗⠊⠅⠁⠝⠎⠅⠑
             ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠑⠝ ⠠⠅⠓⠁⠇⠑⠙ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠞⠽⠙⠑⠗ ⠏⠡ ⠡ ⠃⠇⠊ ⠑⠝ ⠇⠊⠅⠑ ⠎⠞⠕⠗ ⠎⠥⠅⠎⠑⠎⠎ ⠎⠕⠍ ⠙⠑⠝ ⠋⠕⠗⠗⠊⠛⠑
             ⠗⠕⠍⠁⠝⠑⠝⠂ <strong>⠆⠠⠙⠗⠁⠛⠑⠇⠪⠏⠑⠗⠑⠝⠰</strong>⠄ ⠠⠊ ⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑⠝ ⠋⠗⠁ <strong>⠆⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞⠰
             </strong>⠼⠚⠋⠄⠚⠋⠄⠚⠛ ⠋⠕⠗⠅⠇⠁⠗⠑⠎ ⠙⠑⠞⠞⠑ ⠍⠑⠙⠒ <em>⠠⠄⠊⠅⠅⠑ ⠋⠕⠗⠙⠊ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠑⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠞ ⠛⠕⠙
-            ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠄ ⠠⠍⠑⠝ ⠋⠕⠗⠙⠊ ⠞⠑⠍⠁⠞⠊⠅⠅⠑⠝ ⠞⠊⠇ ⠙⠑⠝ ⠠⠠⠥⠎⠁⠃⠕⠎⠁⠞⠞⠑ ⠠⠓⠕⠎⠎⠑⠊⠝⠊⠂ ⠓⠁⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠇
-            ⠙⠗⠁⠛⠝⠊⠝⠛ ⠏⠡ ⠑⠞ ⠧⠑⠎⠞⠇⠊⠛ ⠏⠥⠃⠇⠊⠅⠥⠍⠄⠠⠄</em>
+              ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠄ ⠠⠍⠑⠝ ⠋⠕⠗⠙⠊ ⠞⠑⠍⠁⠞⠊⠅⠅⠑⠝ ⠞⠊⠇ ⠙⠑⠝ ⠠⠠⠥⠎⠁⠃⠕⠎⠁⠞⠞⠑ ⠠⠓⠕⠎⠎⠑⠊⠝⠊⠂ ⠓⠁⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠇
+              ⠙⠗⠁⠛⠝⠊⠝⠛ ⠏⠡ ⠑⠞ ⠧⠑⠎⠞⠇⠊⠛ ⠏⠥⠃⠇⠊⠅⠥⠍⠄⠠⠄</em>
           </p>
-          <p>
-            ⠠⠧⠊⠝⠚⠑⠂ ⠠⠋⠊⠝⠝⠤⠠⠑⠗⠊⠅⠄ ⠼⠃⠚⠚⠙⠄ <em>⠠⠄⠠⠎⠅⠗⠊⠧⠑⠗⠑⠛⠇⠑⠗⠠⠄</em>⠄ ⠼⠓⠄ ⠥⠞⠛⠄⠠⠕⠎⠇⠕
-          </p>
-          <p>
-            ⠠⠓⠑⠇⠇⠑⠧⠊⠅⠂ ⠠⠁⠇⠋⠄ ⠼⠁⠊⠛⠚⠄ <em>⠠⠄⠛⠕⠙ ⠝⠽⠝⠕⠗⠎⠅⠠⠄</em>⠄ ⠠⠕⠎⠇⠕
-          </p>
-          <p>
-            ⠠⠝⠽ ⠁⠋⠛⠓⠁⠝⠎⠅ ⠃⠑⠎⠞⠎⠑⠇⠛⠑⠗⠄⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑ <em>⠠⠄⠙⠁⠛⠃⠇⠁⠙⠑⠞⠠⠄</em>⠼⠚⠋⠄⠚⠋⠄⠚⠛
-          </p>
+          <p> ⠠⠧⠊⠝⠚⠑⠂ ⠠⠋⠊⠝⠝⠤⠠⠑⠗⠊⠅⠄ ⠼⠃⠚⠚⠙⠄ <em>⠠⠄⠠⠎⠅⠗⠊⠧⠑⠗⠑⠛⠇⠑⠗⠠⠄</em>⠄ ⠼⠓⠄ ⠥⠞⠛⠄⠠⠕⠎⠇⠕ </p>
+          <p> ⠠⠓⠑⠇⠇⠑⠧⠊⠅⠂ ⠠⠁⠇⠋⠄ ⠼⠁⠊⠛⠚⠄ <em>⠠⠄⠛⠕⠙ ⠝⠽⠝⠕⠗⠎⠅⠠⠄</em>⠄ ⠠⠕⠎⠇⠕ </p>
+          <p> ⠠⠝⠽ ⠁⠋⠛⠓⠁⠝⠎⠅ ⠃⠑⠎⠞⠎⠑⠇⠛⠑⠗⠄⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑ <em>⠠⠄⠙⠁⠛⠃⠇⠁⠙⠑⠞⠠⠄</em>⠼⠚⠋⠄⠚⠋⠄⠚⠛ </p>
         </div>
       </x:document>
     </x:expect>
   </x:scenario>
-  
+
   <x:scenario label="Section in uncontracted braille">
     <x:call step="pxi:transform">
       <x:input port="source">
         <x:document type="inline">
-          <div xmlns="http://www.w3.org/1999/xhtml">
-            foobar
-            <div style="text-transform:uncontracted">
-              foobar
-            </div>
+          <div xmlns="http://www.w3.org/1999/xhtml"> foobar <div style="text-transform:uncontracted"
+              > foobar </div>
           </div>
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        <div xmlns="http://www.w3.org/1999/xhtml">
-          ⠋⠕⠕⠃⠼
-          <div>
-            ⠋⠕⠕⠃⠁⠗
-          </div>
+        <div xmlns="http://www.w3.org/1999/xhtml"> ⠋⠕⠕⠃⠼ <div> ⠋⠕⠕⠃⠁⠗ </div>
         </div>
       </x:document>
     </x:expect>
   </x:scenario>
-  
-  
-  
+
+
+
   <!--   **** test for text-transform:uncontracted   ***  -->
-  
-  
-  
-  
+
+
+
+
   <x:scenario label="test for text-transform:uncontracted">
     <x:call step="pxi:transform">
-      
+
       <x:input port="source">
         <x:document type="inline">
-          
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-           
-              <doctitle>l</doctitle>
-              <docauthor>a</docauthor>
-              <level1 class="titlepage">
-                <h1>a ble at l</h1>
-                <p>a ble at l </p>
-              </level1>              
-            
+
+          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+
+            <doctitle>l</doctitle>
+            <docauthor>a</docauthor>
+            <level1 class="titlepage">
+              <h1>a ble at l</h1>
+              <p>a ble at l </p>
+            </level1>
+
             <level1>
               <h1>a ble at ll</h1>
               <p>a ble at ll</p>
             </level1>
           </div>
-          
+
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
-    
-    
+
+
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-       
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-          
-            <doctitle>⠰⠇</doctitle>
-            <docauthor>⠰⠁</docauthor>
-            <level1 class="titlepage">
-              <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
-              <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
-            </level1>            
-            
+
+        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+
+          <doctitle>⠰⠇</doctitle>
+          <docauthor>⠰⠁</docauthor>
+          <level1 class="titlepage">
+            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
+            <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
+          </level1>
+
           <level1>
             <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
             <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
           </level1>
         </div>
-        
+
       </x:document>
     </x:expect>
   </x:scenario>
-  
-  
-  
+
+
+
   <!--   *** test for Blocks of consecutive letters*** -->
-  
-  
-  
+
+
+
   <x:scenario label="test for Blocks of consecutive letters should not be contracted">
     <x:call step="pxi:transform">
-      
+
       <x:input port="source">
         <x:document type="inline">
-          
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-           
-              <doctitle>l</doctitle>
-              <docauthor>a</docauthor>
-              <level1 class="titlepage">
-                <h1>a ble at l</h1>
-                <p>a ble at l </p>
-              </level1>              
-            
+
+          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+
+            <doctitle>l</doctitle>
+            <docauthor>a</docauthor>
+            <level1 class="titlepage">
+              <h1>a ble at l</h1>
+              <p>a ble at l </p>
+            </level1>
+
             <level1>
               <h1>a ble at ll</h1>
               <p>a ble at ll</p>
               <p>a BLE AT forat ll</p>
-              <p>	a ble at ll <span class="uncontracted-letters">a BLE AT  ll</span> a ble at  ll</p>
+              <p> a ble at ll <span class="uncontracted-letters">a BLE AT ll</span> a ble at ll</p>
             </level1>
           </div>
-          
+
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
-    
-    
+
+
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-          
-            <doctitle>⠰⠇</doctitle>
-            <docauthor>⠰⠁</docauthor>
-            <level1 class="titlepage">
-              <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
-              <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
-            </level1>            
-            
+
+        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+
+          <doctitle>⠰⠇</doctitle>
+          <docauthor>⠰⠁</docauthor>
+          <level1 class="titlepage">
+            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
+            <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
+          </level1>
+
           <level1>
             <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
             <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
@@ -386,62 +353,60 @@
             <p>⠰⠁ ⠃ ⠁ ⠇⠇<span class="uncontracted-letters"> ⠁ ⠠⠠⠃⠇⠑ ⠠⠠⠁⠞ ⠇⠇ </span> ⠰⠁ ⠃ ⠁ ⠇⠇ </p>
           </level1>
         </div>
-        
+
       </x:document>
     </x:expect>
   </x:scenario>
-  
-  
+
+
   <!--  *** test for URLs and e-mail addresses***  -->
-  
-  
-  
+
+
+
   <x:scenario label="test for URLs and e-mail addresses should not be contracted">
     <x:call step="pxi:transform">
-      
+
       <x:input port="source">
         <x:document type="inline">
-          
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+
+          <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
             <level1>
               <h1>a ble at er der</h1>
               <p>a ble at er der</p>
               <p>aa@ll.bb</p>
               <p>bleer@at.er er</p>
               <p> ll <span class="uncontracted-letters">bleer@at.er er</span> er</p>
-              <p> ll <span>www.bleerat.er  er </span> er</p>
+              <p> ll <span>www.bleerat.er er </span> er</p>
             </level1>
           </div>
-          
+
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
-    
-    
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
+    <x:context label="pef">
+      <x:document type="port" port="result" select="/*/*[local-name()='level1']"/>
+    </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">           
-          <level1>
-            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠑⠗ ⠙⠑⠗</h1>
-            <p>⠰⠁ ⠃ ⠁ ⠱ ⠙⠱</p>
-            <p>⠁⠁⠈⠇⠇⠄⠃⠃</p>
-            <p>⠃⠇⠑⠑⠗⠈⠁⠞⠄⠱ ⠱</p>
-            <p>⠇⠇<span class="uncontracted-letters">⠃⠇⠑⠑⠗⠈⠁⠞⠄⠑⠗ ⠑⠗</span> ⠱ </p>
-            <p>⠇⠇<span>⠣⠺⠺⠺⠄⠃⠇⠑⠑⠗⠁⠞⠄⠑⠗⠜ ⠱ </span>⠱</p>
-          </level1>
-        </div>
-        
+        <level1 xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+          <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠑⠗ ⠙⠑⠗</h1>
+          <p>⠰⠁ ⠃ ⠁ ⠱ ⠙⠱</p>
+          <p>⠁⠁⠈⠇⠇⠄⠃⠃</p>
+          <p>⠃⠇⠑⠑⠗⠈⠁⠞⠄⠱ ⠱</p>
+          <p>⠇⠇<span class="uncontracted-letters">⠃⠇⠑⠑⠗⠈⠁⠞⠄⠑⠗ ⠑⠗</span> ⠱ </p>
+          <p>⠇⠇<span>⠣⠺⠺⠺⠄⠃⠇⠑⠑⠗⠁⠞⠄⠑⠗⠜ ⠱ </span>⠱</p>
+        </level1>
       </x:document>
     </x:expect>
   </x:scenario>
-  
-  
+
+
   <!--   ***test for bold, italic, strike through  and strong for html*** -->
   <!--      
     
@@ -454,84 +419,229 @@
    Always use dots 6-3 (⠠⠄) in front of bold and dots 6-3 (⠠⠄) after bold. 
    
    -->
-  
+
   <x:scenario label="test for bold, italic, strike through  and strong for html">
     <x:call step="pxi:transform">
-      
+
       <x:input port="source">
-        <x:document type="inline">          
-          <div xmlns="http://www.w3.org/1999/xhtml">  <!--   <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">       -->
+        <x:document type="inline">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
+            <!--   <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">       -->
             <level1>
-              <h1>aa ll bb cc</h1>              
-              <p>aa <em>bb</em> cc </p> 
+              <h1>aa ll bb cc</h1>
+              <p>aa <em>bb</em> cc </p>
               <p>aa <i>bb</i> cc </p>
-              <p>aa <u>bb</u> cc </p> 
+              <p>aa <u>bb</u> cc </p>
               <p>aa <strike>bb</strike> cc </p>
               <p>aa <s>bb</s> cc </p>
-              <p>aa <strong>bb</strong> cc </p> 
-              <p>aa <b>bb</b> cc </p> 
+              <p>aa <strong>bb</strong> cc </p>
+              <p>aa <b>bb</b> cc </p>
             </level1>
           </div>
-          
+
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
-    
-    
+
+
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        
-        <div xmlns="http://www.w3.org/1999/xhtml">           
+
+        <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
           <level1>
-            <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>            
-            <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p> 
-            <p>⠁⠁  <i>⠆⠃⠃⠰</i> ⠉⠉</p>
+            <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
+            <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p>
+            <p>⠁⠁ <i>⠆⠃⠃⠰</i> ⠉⠉</p>
             <p>⠁⠁ <u>⠸⠃⠃⠸</u> ⠉⠉</p>
             <p>⠁⠁ <strike>⠐⠂⠃⠃⠐⠂</strike> ⠉⠉ </p>
-            <p>⠁⠁ <s>⠐⠂⠃⠃⠐⠂</s> ⠉⠉ </p>           
-            <p>⠁⠁ <strong>⠠⠄⠃⠃⠠⠄</strong> ⠉⠉ </p> 
+            <p>⠁⠁ <s>⠐⠂⠃⠃⠐⠂</s> ⠉⠉ </p>
+            <p>⠁⠁ <strong>⠠⠄⠃⠃⠠⠄</strong> ⠉⠉ </p>
             <p>⠁⠁ <b>⠠⠄⠃⠃⠠⠄</b> ⠉⠉ </p>
-            
+
           </level1>
         </div>
-        
+
       </x:document>
     </x:expect>
   </x:scenario>
-  
+
   <!--   ############################  -->
-  
-  
- 
+
   <!--   ***test for bold, italic, strike through  and strong for DTbook*** -->
-  
+
   <x:scenario label="test for bold, italic, strike through  and strong for DTbook">
+    <x:call step="pxi:transform">
+
+      <x:input port="source">
+        <x:document type="inline">
+          <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+            <level1>
+              <h1>aa ll bb cc</h1>
+              <p>aa <em>bb</em> cc </p>
+              <p>aa <i>bb</i> cc </p>
+              <p>aa <u>bb</u> cc </p>
+              <p>aa <strike>bb</strike> cc </p>
+              <p>aa <s>bb</s> cc </p>
+              <p>aa <strong>bb</strong> cc </p>
+              <p>aa <b>bb</b> cc </p>
+            </level1>
+          </div>
+
+        </x:document>
+      </x:input>
+      <x:option name="grade" select="'0'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
+    </x:call>
+
+
+    <x:context label="result">
+      <x:document type="port" port="result"/>
+    </x:context>
+    <x:expect label="result" type="compare">
+      <x:document type="inline">
+
+        <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+          <level1>
+            <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
+            <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p>
+            <p>⠁⠁ <i>⠆⠃⠃⠰</i> ⠉⠉</p>
+            <p>⠁⠁ <u>⠸⠃⠃⠸</u> ⠉⠉</p>
+            <p>⠁⠁ <strike>⠐⠂⠃⠃⠐⠂</strike> ⠉⠉ </p>
+            <p>⠁⠁ <s>⠐⠂⠃⠃⠐⠂</s> ⠉⠉ </p>
+            <p>⠁⠁ <strong>⠠⠄⠃⠃⠠⠄</strong> ⠉⠉ </p>
+            <p>⠁⠁ <b>⠠⠄⠃⠃⠠⠄</b> ⠉⠉ </p>
+
+          </level1>
+        </div>
+
+      </x:document>
+    </x:expect>
+  </x:scenario>
+
+
+  <!--   ############################  -->
+
+  <!--   ***test for other language*** -->
+
+  <x:scenario label="test for bold, italic, strike through  and strong for DTbook">
+    <x:call step="pxi:transform">
+
+      <x:input port="source">
+        <x:document type="inline">
+          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+            <level1 xml:lang="no">
+              <h1>aa ll bb cc</h1>
+              <p xml:lang="no">aaa bb cc</p>
+              <p xml:lang="en">aaa bb cc</p>
+              <p xml:lang="no">aaa bb cc</p>
+              <p xml:lang="fr">aaa bb cc</p>
+
+              <level2 xml:lang="en">
+                <h1>aa ll bb cc</h1>
+                <p xml:lang="no">aaa bb cc</p>
+                <p xml:lang="en">aaa bb cc</p>
+                <p xml:lang="no">aaa bb cc</p>
+                <p xml:lang="fr">aaa bb cc</p>
+                <level3 xml:lang="no">
+                  <h1>aa ll bb cc</h1>
+                  <p xml:lang="no">aaa bb cc</p>
+                  <p xml:lang="en">aaa bb cc</p>
+                  <p xml:lang="no">aaa bb cc</p>
+                  <p xml:lang="fr">aaa bb cc</p>
+                </level3>
+              </level2>
+            </level1>
+          </div>
+
+        </x:document>
+      </x:input>
+      <x:option name="grade" select="'0'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
+    </x:call>
+
+
+    <x:context label="result">
+      <x:document type="port" port="result"/>
+    </x:context>
+    <x:expect label="result" type="compare">
+      <x:document type="inline">
+
+        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+          <level1 xml:lang="no">
+            <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
+            <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
+            <p xml:lang="en">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
+            <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
+            <p xml:lang="fr">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
+            <level2 xml:lang="en">
+              <h1>⠐⠂ ⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉ ⠐⠂</h1>
+              <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
+              <p xml:lang="en">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
+              <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
+              <p xml:lang="fr">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
+              <level3 xml:lang="no">
+                <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
+                <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
+                <p xml:lang="en">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
+                <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
+                <p xml:lang="fr">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
+              </level3>
+            </level2>
+          </level1>
+        </div>
+
+
+      </x:document>
+    </x:expect>
+  </x:scenario>
+
+
+
+  <!--   **** test for text-transform:uncontracted for other languages  ***  -->
+  
+  
+  
+  
+  <x:scenario label="test for text-transform:uncontracted other languages">
     <x:call step="pxi:transform">
       
       <x:input port="source">
-        <x:document type="inline">          
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">  
+        <x:document type="inline">
+          
+          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+            
+            <doctitle>l</doctitle>
+            <docauthor>a</docauthor>
+            <level1 class="titlepage">
+              <h1>a ble at l</h1>
+              <p>a ble at l </p>
+            </level1>
+            
             <level1>
-              <h1>aa ll bb cc</h1>              
-              <p>aa <em>bb</em> cc </p> 
-              <p>aa <i>bb</i> cc </p>
-              <p>aa <u>bb</u> cc </p> 
-              <p>aa <strike>bb</strike> cc </p>
-              <p>aa <s>bb</s> cc </p>
-              <p>aa <strong>bb</strong> cc </p> 
-              <p>aa <b>bb</b> cc </p> 
+              <h1>a ble at ll</h1>
+              <p>a ble at ll</p>
+              <p xml:lang="en">a ble at ll</p>
+                <level2 xml:lang="en">
+                <h1>a ble at ll</h1>
+                <p>a ble at ll</p>
+                <p xml:lang="no">a ble at ll</p>
+                </level2>
             </level1>
           </div>
           
         </x:document>
       </x:input>
-      <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+      <x:option name="grade" select="'1'"/>
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      />
     </x:call>
     
     
@@ -541,21 +651,45 @@
     <x:expect label="result" type="compare">
       <x:document type="inline">
         
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">           
+        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+          
+          <doctitle>⠰⠇</doctitle>
+          <docauthor>⠰⠁</docauthor>
+          <level1 class="titlepage">
+            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
+            <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
+          </level1>
+          
           <level1>
-            <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>            
-            <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p> 
-            <p>⠁⠁  <i>⠆⠃⠃⠰</i> ⠉⠉</p>
-            <p>⠁⠁ <u>⠸⠃⠃⠸</u> ⠉⠉</p>
-            <p>⠁⠁ <strike>⠐⠂⠃⠃⠐⠂</strike> ⠉⠉ </p>
-            <p>⠁⠁ <s>⠐⠂⠃⠃⠐⠂</s> ⠉⠉ </p>           
-            <p>⠁⠁ <strong>⠠⠄⠃⠃⠠⠄</strong> ⠉⠉ </p> 
-            <p>⠁⠁ <b>⠠⠄⠃⠃⠠⠄</b> ⠉⠉ </p>
-            
+            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
+            <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
+            <p xml:lang="en">⠐⠂ ⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇ ⠐⠂</p>
+            <level2 xml:lang="en">
+              <h1>⠐⠂ ⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇ ⠐⠂</h1>
+              <p>⠐⠂ ⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇ ⠐⠂</p>
+              <p xml:lang="no">⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</p>
+            </level2>
           </level1>
         </div>
         
       </x:document>
     </x:expect>
   </x:scenario>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </x:description>
