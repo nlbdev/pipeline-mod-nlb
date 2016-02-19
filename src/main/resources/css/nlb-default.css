@@ -1,46 +1,256 @@
-@page { size: 32 28; }
-
-/*div {
-    hyphens:auto;
-}*/
-
-.titlepage ,.uncontracted-letters ,h1  { text-transform:uncontracted; 
-
-}
+/*
+last updated 17.02.2016
+*/
 
 
-
-:not(
-    :lang(no)
-    :lang(nb)
-    :lang(nn)
-    :lang(nob)
-    :lang(non)
-    :lang(nb_NO)
-    :lang(nn_NO)
-    ) {
-       text-transform:uncontracted;
-}
-
-
-h4 {
-	display: block;
+@page 
+	{ size: 30 28;
 	margin-top: 1;
+	margin-bottom: 1;
 	margin-left: 2;
-	text-indent: 5;
+	margin-right: 2;
+	
+	@bottom-right 
+		{
+			content:  string(print-page , last);
+		}	
+	@bottom-center 
+		{
+			content: counter(page);
+		}			
+  	}	
+
+pagenum 
+	{
+	display: none;		 
+	string-set: print-page '⠿'content();  
+	}
+
+/* -------------------------------------------------------------------------- */
+/*               for volume breaking, toc, titlepage 						  */
+/* -------------------------------------------------------------------------- */
+
+
+ @volume  {
+    max-length: 75;
+    @begin {
+        content: flow(volume-toc);
+    }
 }
 
-h5 {
-	display: block;
+                .titlepage, .colophon {
+                  display: block;
+                  page-break-after: right;
+                  flow: titlepage;
+                }
+#generated-toc li {
+  display: block;
+  margin-left: 2;
+  text-indent: -2;
+}
+#generated-toc li a::after {
+  content: ' ' leader('⠄') ' ' target-counter(attr(href), page); }
+
+
+/* -------------------------------------------------------------------------- */
+/*                                  general                                   */
+/* -------------------------------------------------------------------------- */
+
+
+
+level,
+level1,
+level2,
+level3,
+level4,
+level5,
+level6,
+frontmatter,
+bodymatter,
+rearmatter ,
+blockquote,
+sidebar,
+epigraph,
+note,
+noteref,
+.Rammetekst
+	{
+    display: block;
+	}
+
+	
+/* -------------------------------------------------------------------------- */
+/*                Frontmatter                        						  */
+/* -------------------------------------------------------------------------- */
+
+frontmatter 
+	{
+	margin-left: 3;
+	margin-right: 3;
+	text-align: center;
+	}
+	
+frontmatter doctitle
+	{
+	margin-left: 1;	
+	}
+	
+frontmatter docauthor
+	{
 	margin-top: 1;
-	margin-left: 2;
-}
+	margin-left: 1;
+	text-align: center;
+	}
 
-p {
-	display: block;
-	margin-left: 2;
-	text-indent: 2;
-	hyphens: auto;
+doctitle
+	{
+	string-set: title content();
+    }
+    
+.titlepage  ,h1 
+	{ 
+	text-transform:uncontracted; 
+	}
+	
+.titlepage  
+{ 
+	margin-left: 1;
+	margin-top: 1;
+	page-break-after: always; 
 }
+/* -------------------------------------------------------------------------- */
+/*                class                        					        	  */
+/* -------------------------------------------------------------------------- */	
+.titlepage  
+	{ 
+		text-transform:uncontracted; 
+		margin-left: 1;
+		margin-top: 1;
+		page-break-after: always; 
+	}
+	
+.part 
+	{  
+		margin-left: 1;
+		margin-top: 1;	
+		border: ⠉ ⠸ ⠤ ⠇;		 
+	}
+.precedingemptyline 
+	{  
+		margin-top: 1;				 
+	}
+.Rammetekst
+	{  
+	margin-top: 1;
+	margin-bottom: 1;
+	text-indent: 2;	
+	text-align: left;
+		
+		
+	}
+.Rammetekst ::before
+	{
+		content: "Rammetekst:";
+	}
+/* -------------------------------------------------------------------------- */
+/*                element                    					        	  */
+/* -------------------------------------------------------------------------- */
 
+h1
+	{
+	page-break-before: always;
+	margin-top: 2;
+	margin-left: 1;
+	margin-bottom: 1;
+	text-align: center;
+	}
+	
+h2
+	{	
+	margin-top: 2;
+	margin-left: 1;
+	margin-bottom: 1;
+	text-align: center;
+	}
+	
+h3
+	{	
+	margin-top: 1;
+	margin-left: 1;	
+	text-align: center;
+	}
+
+
+h4
+	{	
+	margin-top: 1;
+	margin-left: 1;	
+	text-align: left;
+	}
+
+	
+h5
+	{	
+	margin-top: 1;
+	margin-left: 1;	
+	text-align: left;
+	}
+
+	
+h6
+	{	
+	margin-top: 1;
+	margin-left: 1;	
+	text-align: left;
+	}
+
+p 
+	{	    
+	text-indent: 2;	
+	text-align: left;
+	}
+	
+
+blockquote
+	{	
+	margin-top: 1;
+	margin-bottom: 1;
+	text-indent: 2;	
+	text-align: left;
+	}
+sidebar
+	{	
+	margin-top: 1;
+	margin-bottom: 1;
+	text-indent: 2;	
+	text-align: left;
+	}
+
+
+sidebar ::before
+	{
+	content: "Margtekst:";
+	}
+epigraph
+	{
+	margin-top: 1;
+	margin-bottom: 1;
+	text-indent: 2;	
+	text-align: left;
+	}
+prodnote::before
+	{
+		content: "⠷";
+	}
+prodnote::after
+	{
+		content: "⠾";
+	}
+note , noteref
+	{
+	text-indent: 2;	
+	text-align: left;
+	}
+	
+	
 imggroup { display: none; }
