@@ -1,126 +1,118 @@
 /*
-last updated 17.02.2016
+last updated 25.2.2016
 */
 
-
+/* -------------------------------------------------------------------------- */
+/*                displaying Original and Braille Page                        */
+/* -------------------------------------------------------------------------- */
 @page 
-	{ size: 30 28;
-	margin-top: 1;
-	margin-bottom: 1;
-	margin-left: 2;
-	margin-right: 2;
+	{ 
+		size: 35 20;
+		margin-top: 0;
+		margin-bottom: 1;
+		margin-left: 2;
+		margin-right: 2;
+		
+		@bottom-right 
+			{
+				content:  string(print-page , last);
+			}
+		
+		@left 
+			{
+				content: -obfl-marker-indicator(pagenum, '⠿');
+			}
+			
+		@bottom-center 
+			{
+				content: counter(page);
+			}
+	}
 	
-	@bottom-right 
-		{
-			content:  string(print-page , last);
-		}	
-	@bottom-center 
-		{
-			content: counter(page);
-		}			
-  	}	
-
 pagenum 
 	{
-	display: none;		 
-	string-set: print-page '⠿'content();  
+		display: none;
+	}
+	
+bodymatter	pagenum  
+	{
+		display: none;
+		-obfl-marker: pagenum;
+		string-set: print-page '⠿'content();
 	}
 
 /* -------------------------------------------------------------------------- */
 /*               for volume breaking, toc, titlepage 						  */
 /* -------------------------------------------------------------------------- */
+@volume  
+	{
+		max-length: 75;
+		@begin 	
+		{
+			content: flow(volume-toc);
+		}
+	}
 
-
- @volume  {
-    max-length: 75;
-    @begin {
-        content: flow(volume-toc);
-    }
-}
-
-                .titlepage, .colophon {
-                  display: block;
-                  page-break-after: right;
-                  flow: titlepage;
-                }
-#generated-toc li {
-  display: block;
-  margin-left: 2;
-  text-indent: -2;
-}
-#generated-toc li a::after {
-  content: ' ' leader('⠄') ' ' target-counter(attr(href), page); }
-
+.titlepage, .colophon 
+	{
+	  display: block;
+	  page-break-after: right;
+	  flow: titlepage;
+	}
+#generated-toc li 
+	{
+	  display: block;
+	  margin-left: 2;
+	  text-indent: -2;
+	}
+#generated-toc li a::after 
+	{
+		content: ' ' leader('⠄') ' ' target-counter(attr(href), page); 
+	}
 
 /* -------------------------------------------------------------------------- */
 /*                                  general                                   */
 /* -------------------------------------------------------------------------- */
-
-
-
-level,
-level1,
-level2,
-level3,
-level4,
-level5,
-level6,
-frontmatter,
-bodymatter,
-rearmatter ,
-blockquote,
-sidebar,
-epigraph,
-note,
-noteref,
-.Rammetekst
+head { display: none; }
+book 
 	{
-    display: block;
+		hyphens: auto;
 	}
 
+level, level1, level2, level3, level4, level5, level6,
+	frontmatter, bodymatter, rearmatter 
+	{
+		display: block;
+		page-break-before: always;
+		page-break-after: always;
+	}
+
+blockquote, sidebar, epigraph, note, noteref,
+	.Rammetekst, imggroup , caption , poem , linegroup , line
+	{
+		display: block;
+	}
+
+doctitle, docauthor 
+	{
+		display: block;
+	}
 	
 /* -------------------------------------------------------------------------- */
 /*                Frontmatter                        						  */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */	
 
 frontmatter 
 	{
-	margin-left: 3;
-	margin-right: 3;
-	text-align: center;
+		margin-left: 3
+		margin-right: 3;
+		text-align: left;
 	}
-	
-frontmatter doctitle
-	{
-	margin-left: 1;	
-	}
-	
-frontmatter docauthor
-	{
-	margin-top: 1;
-	margin-left: 1;
-	text-align: center;
-	}
-
-doctitle
-	{
-	string-set: title content();
-    }
-    
-.titlepage  ,h1 
+.titlepage ,.uncontracted-letters ,h1 
 	{ 
-	text-transform:uncontracted; 
+		text-transform:uncontracted; 
 	}
 	
-.titlepage  
-{ 
-	margin-left: 1;
-	margin-top: 1;
-	page-break-after: always; 
-}
-/* -------------------------------------------------------------------------- */
-/*                class                        					        	  */
-/* -------------------------------------------------------------------------- */	
 .titlepage  
 	{ 
 		text-transform:uncontracted; 
@@ -129,128 +121,191 @@ doctitle
 		page-break-after: always; 
 	}
 	
-.part 
+
+/* -------------------------------------------------------------------------- */
+/*                class                        					        	  */
+/* -------------------------------------------------------------------------- */
+.part h1, h1.part
 	{  
 		margin-left: 1;
-		margin-top: 1;	
+		margin-top: 2;
+		text-align: center;
+		page-break-before: always;
+		page-break-after: right;
 		border: ⠉ ⠸ ⠤ ⠇;		 
 	}
+	
 .precedingemptyline 
 	{  
 		margin-top: 1;				 
 	}
+	
 .Rammetekst
 	{  
-	margin-top: 1;
-	margin-bottom: 1;
-	text-indent: 2;	
-	text-align: left;
-		
-		
+		margin-top: 1;
+		margin-bottom: 1;
+		text-indent: 2;	
+		text-align: left;
 	}
-.Rammetekst ::before
+.Rammetekst::before
 	{
 		content: "Rammetekst:";
 	}
 /* -------------------------------------------------------------------------- */
 /*                element                    					        	  */
 /* -------------------------------------------------------------------------- */
-
-h1
+h1 , .part h2
 	{
-	page-break-before: always;
-	margin-top: 2;
-	margin-left: 1;
-	margin-bottom: 1;
-	text-align: center;
+		page-break-before: always;
+		margin-top: 2;
+		margin-left: 5;
+		margin-right: 5;
+		margin-bottom: 1;
+		text-align: center;
+		border: ⠉;
 	}
 	
-h2
+h2 , .part h3
 	{	
-	margin-top: 2;
-	margin-left: 1;
-	margin-bottom: 1;
-	text-align: center;
+		margin-top: 2;
+		margin-left: 5;
+		margin-right: 5;
+		margin-bottom: 1;
+		text-align: center;
 	}
 	
-h3
+h3 , .part h4
 	{	
-	margin-top: 1;
-	margin-left: 1;	
-	text-align: center;
+		margin-top: 1;
+		margin-left: 5;
+		margin-right: 5;	
+		text-align: center;
 	}
 
-
-h4
+h4 , .part h5
 	{	
-	margin-top: 1;
-	margin-left: 1;	
-	text-align: left;
+		margin-top: 1;
+		margin-left: 1;
+		margin-right: 5;	
+		text-align: left;
+		text-indent: 0;
 	}
-
 	
-h5
+h5 , .part h6
 	{	
-	margin-top: 1;
-	margin-left: 1;	
-	text-align: left;
+		margin-top: 1;
+		margin-left: 1;
+		margin-right: 5;	
+		text-align: left;
+		text-indent: 0;
 	}
-
+h5::after , .part h6::after	
+	{
+		content: ":";
+	}
 	
 h6
 	{	
-	margin-top: 1;
-	margin-left: 1;	
-	text-align: left;
+		margin-top: 1;
+		margin-left: 1;
+		margin-right: 5;	
+		text-align: left;
+		text-indent: 0;
+		border: ⠉;
 	}
-
 p 
 	{	    
-	text-indent: 2;	
-	text-align: left;
+		text-indent: 2;	
+		text-align: left;
+		widows: 2;
+		orphans: 2;		
 	}
-	
 
 blockquote
 	{	
-	margin-top: 1;
-	margin-bottom: 1;
-	text-indent: 2;	
-	text-align: left;
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;	
+		text-align: left;
 	}
+	
 sidebar
 	{	
-	margin-top: 1;
-	margin-bottom: 1;
-	text-indent: 2;	
-	text-align: left;
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;	
+		text-align: left;
 	}
 
-
-sidebar ::before
+sidebar::before
 	{
-	content: "Margtekst:";
+		content: "Margtekst:";
 	}
+	
 epigraph
 	{
-	margin-top: 1;
-	margin-bottom: 1;
-	text-indent: 2;	
-	text-align: left;
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;	
+		text-align: left;
 	}
+	
 prodnote::before
 	{
 		content: "⠷";
 	}
+	
 prodnote::after
 	{
 		content: "⠾";
 	}
 note , noteref
 	{
+		text-indent: 2;	
+		text-align: left;
+	}
+
+imggroup 
+	{ 
+		display: none; 
+	}
+	
+caption::before
+	{
+		content: "Bildetekst:";
+	}
+caption
+	{
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;	
+		text-align: left;
+	}
+	
+poem
+	{
 	text-indent: 2;	
 	text-align: left;
 	}
 	
-	
-imggroup { display: none; }
+linegroup
+	{
+		margin-bottom: 1;
+		text-indent: -2;
+	}
+line
+	{
+		text-indent: -2;
+	}
+list
+	{
+		margin-left: 2;
+		text-indent: -2;
+		margin-bottom: 1;
+	}
+
+

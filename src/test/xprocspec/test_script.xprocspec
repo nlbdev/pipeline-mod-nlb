@@ -48,8 +48,15 @@
               <meta name="track:Supplier" content="AEL Data"/>
               <meta name="dc:Language" content="no"/>
               <meta name="dc:Format" content="DTBook"/>
-              <meta name="dc:Creator" content="Bringsv6;rd, Tor "/>
-              <meta name="dc:Contributor" content="Gudmundsen, Per Kristian"/>
+              <meta name="dc:Creator" content="aa ll"/>
+              <meta name="dc:Creator" content="bb"/> 
+              <meta name="dc:Creator" content="ll"/> 
+              <meta name="dc:Creator" content="rr"/> 
+              <meta name="dc:Creator" content="zz"/>
+              <meta name="dc:Contributor" content="ll"/>
+              <meta name="dc:Contributor" content="cc"/>
+              <meta name="dc:Contributor" content="gg"/>
+              <meta name="dc:Contributor" content="xx"/>
               <meta name="dc:Date" content="2015-11-07"/>
               <meta name="dc:Publisher" content="NLB"/>
               <meta name="dc:Source" content="urn:isbn:9788202459543"/>
@@ -107,14 +114,17 @@
                   <row/>
                   <row/>
                   <row/>
-                  <row>⠀⠀⠀⠀⠀⠠⠃⠗⠊⠝⠛⠎⠧⠼⠋⠆⠗⠙⠂⠀⠠⠞⠕⠗</row>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠁⠀⠇⠇</row>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠃</row>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
                   <row/>
                   <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠤⠀</row>
                   <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
                   <row/>
                   <row/>
-                  <row>⠀⠀⠀⠀⠀⠀⠠⠛⠥⠙⠍⠥⠝⠙⠎⠑⠝⠂⠀⠠⠏⠑⠗⠀</row>
-                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠅⠗⠊⠎⠞⠊⠁⠝</row>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠇⠇</row>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉</row>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠋⠇⠑⠗⠑</row>
                   <row/>
                   <row/>
                   <row/>
@@ -124,9 +134,6 @@
                   <row/>
                   <row/>
                   <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠁⠧⠀⠼⠁</row>
-                  <row/>
-                  <row/>
-                  <row/>
                   <row/>
                   <row/>
                   <row/>
