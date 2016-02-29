@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE catalog
-  PUBLIC "-//OASIS/DTD Entity Resolution XML Catalog V1.0//EN" "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" xmlns:px="http://www.daisy.org/ns/pipeline">
+  
+  <!-- abstract script (common options and documentations) -->
+  <uri name="http://www.nlb.no/pipeline/modules/braille/xml-to-pef.xpl" uri="../xml/xml-to-pef.xpl"  px:extends-script="http://www.daisy.org/pipeline/modules/braille/xml-to-pef/xml-to-pef.xpl"/>
+  
+  <!-- scripts -->
+  <uri name="http://www.nlb.no/pipeline/modules/braille/dtbook-to-pef.xpl" uri="../xml/dtbook-to-pef.xpl" px:script="true" px:extends-script="http://www.nlb.no/pipeline/modules/braille/xml-to-pef.xpl"/>
+  <uri name="http://www.nlb.no/pipeline/modules/braille/epub3-to-pef.xpl" uri="../xml/epub3-to-pef.xpl" px:script="true" px:extends-script="http://www.nlb.no/pipeline/modules/braille/xml-to-pef.xpl"/>
+  <uri name="http://www.nlb.no/pipeline/modules/braille/html-to-pef.xpl" uri="../xml/html-to-pef.xpl" px:script="true" px:extends-script="http://www.nlb.no/pipeline/modules/braille/xml-to-pef.xpl"/>
+  
+  <!-- xproc library -->
+  <uri name="http://www.nlb.no/pipeline/modules/braille/library.xpl" uri="../xml/library.xpl"/>
+  
+  <!-- data types -->
+  <uri name="http://www.nlb.no/pipeline/modules/braille/data-types/braille-standard.xml" uri="../xml/data-types/braille-standard.xml" px:data-type="true"/>
+  
+  <!-- css -->
   <uri name="http://www.nlb.no/pipeline/modules/braille/default.css" uri="../css/nlb-default.css"/>
+  
+  <!-- dependencies -->
   <nextCatalog catalog="org:daisy:pipeline:modules:braille:css-utils"/>
   <nextCatalog catalog="org:daisy:pipeline:modules:braille:liblouis-utils"/>
   <nextCatalog catalog="org:daisy:pipeline:modules:braille:liblouis-tables"/>
   <nextCatalog catalog="org:daisy:pipeline:modules:braille:libhyphen-libreoffice-tables"/>
+  
 </catalog>
