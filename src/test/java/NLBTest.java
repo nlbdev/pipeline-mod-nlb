@@ -12,6 +12,7 @@ import org.daisy.pipeline.braille.common.BrailleTranslatorProvider;
 import org.daisy.pipeline.braille.common.BrailleTranslator.CSSStyledText;
 import static org.daisy.pipeline.braille.common.TransformProvider.util.dispatch;
 import static org.daisy.pipeline.braille.common.Query.util.query;
+import org.daisy.pipeline.datatypes.DatatypeRegistry;
 
 import static org.daisy.pipeline.pax.exam.Options.brailleModule;
 import static org.daisy.pipeline.pax.exam.Options.calabashConfigFile;
@@ -77,6 +78,15 @@ public class NLBTest {
 	}
 	
 	@Inject
+	private DatatypeRegistry datatypeRegistry;
+	
+	@Test
+	@org.junit.Ignore
+	public void testDatatypes() {
+		assertTrue(datatypeRegistry.getDatatype("{http://www.nlb.no/pipeline/modules/braille/xml-to-pef.xpl}braille-standard").isPresent());
+	}
+	
+	@Inject
 	private XProcSpecRunner xprocspecRunner;
 	
 	@Test
@@ -103,10 +113,11 @@ public class NLBTest {
 			junitBundles(),
 			// systemPackage("javax.xml.stream;version=\"1.0.1\""),
 			mavenBundlesWithDependencies(
+				mavenBundle("org.daisy.pipeline:framework-core:?"),
 				brailleModule("css-utils"),
-                brailleModule("pef-utils"),
+				brailleModule("pef-utils"),
 				brailleModule("liblouis-core"),
-                brailleModule("liblouis-utils"),
+				brailleModule("liblouis-utils"),
 				brailleModule("liblouis-tables"),
 				brailleModule("liblouis-native").forThisPlatform(),
 				brailleModule("libhyphen-core"),

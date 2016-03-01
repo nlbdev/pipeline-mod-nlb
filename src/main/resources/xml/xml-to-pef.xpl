@@ -12,7 +12,25 @@
     <!-- ============= -->
     <!-- Punktstandard -->
     <!-- ============= -->
-    <p:option name="braille-standard" select="'(dots:6)(grade:0)'" px:data-type="nlb:braille-standard">
+    <p:option name="braille-standard" select="'(dots:6)(grade:0)'">
+        <p:pipeinfo>
+            <px:data-type>
+                <choice>
+                    <documentation xmlns="http://relaxng.org/ns/compatibility/annotations/1.0" xml:lang="no">
+                        <value>6-punkt, uforkortet</value>
+                        <value>6-punkt, kortskrift nivå 1</value>
+                        <value>6-punkt, kortskrift nivå 2</value>
+                        <value>6-punkt, kortskrift nivå 3</value>
+                        <value>8-punkt</value>
+                    </documentation>
+                    <value>(dots:6)(grade:0)</value>
+                    <value>(dots:6)(grade:1)</value>
+                    <value>(dots:6)(grade:2)</value>
+                    <value>(dots:6)(grade:3)</value>
+                    <value>(dots:8)(grade:0)</value>
+                </choice>
+            </px:data-type>
+        </p:pipeinfo>
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Punktstandard</h2>
         </p:documentation>
