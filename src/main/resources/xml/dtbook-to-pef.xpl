@@ -41,7 +41,6 @@
     <p:option name="page-height"/>
     <p:option name="left-margin"/>
     <p:option name="duplex"/>
-    <p:option name="levels-in-footer"/>
     <p:option name="hyphenation"/>
     <p:option name="line-spacing"/>
     <p:option name="capital-letters"/>
@@ -63,12 +62,13 @@
     <p:option name="number-of-pages"/>
     <p:option name="maximum-number-of-pages"/>
     <p:option name="minimum-number-of-pages"/>
-    <p:option name="output-dir"/>
-    <p:option name="html-output-dir"/>
+    <p:option name="pef-output-dir"/>
+    <p:option name="preview-output-dir"/>
     <p:option name="temp-dir"/>
     
     <p:import href="http://www.nlb.no/pipeline/modules/braille/library.xpl"/>
     <p:import href="http://www.daisy.org/pipeline/modules/common-utils/library.xpl"/>
+    <p:import href="http://www.daisy.org/pipeline/modules/braille/dtbook-to-pef/dtbook-to-pef.xpl"/>
     
     <px:message message="Running NLB-specific pre-processing steps"/>
     <!-- nothing here yet -->
@@ -78,11 +78,11 @@
         <p:with-option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
         <p:with-option name="transform" select="concat('(formatter:dotify)(translator:nlb)',$braille-standard)"/>
         <p:with-option name="main-document-language" select="'no'"/>
+        <p:with-option name="include-symbols-list" select="'false'"/>
         <p:with-option name="page-width" select="$page-width"/>
         <p:with-option name="page-height" select="$page-height"/>
         <p:with-option name="left-margin" select="$left-margin"/>
         <p:with-option name="duplex" select="$duplex"/>
-        <p:with-option name="levels-in-footer" select="$levels-in-footer"/>
         <p:with-option name="hyphenation" select="$hyphenation"/>
         <p:with-option name="line-spacing" select="$line-spacing"/>
         <p:with-option name="capital-letters" select="$capital-letters"/>
@@ -104,8 +104,8 @@
         <p:with-option name="number-of-pages" select="$number-of-pages"/>
         <p:with-option name="maximum-number-of-pages" select="$maximum-number-of-pages"/>
         <p:with-option name="minimum-number-of-pages" select="$minimum-number-of-pages"/>
-        <p:with-option name="output-dir" select="$output-dir"/>
-        <p:with-option name="html-output-dir" select="$html-output-dir"/>
+        <p:with-option name="pef-output-dir" select="$pef-output-dir"/>
+        <p:with-option name="preview-output-dir" select="$preview-output-dir"/>
         <p:with-option name="temp-dir" select="$temp-dir"/>
     </px:dtbook-to-pef>
     

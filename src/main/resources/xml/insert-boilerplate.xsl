@@ -103,13 +103,13 @@
                     <xsl:when test="$contraction-grade = '0'">Fullskrift</xsl:when>
                 </xsl:choose>
                 <xsl:choose>
-                    <xsl:when test="$contraction-grade = '1'">Kortskrift niv報</xsl:when>
+                    <xsl:when test="$contraction-grade = '1'">Kortskrift nivå 1</xsl:when>
                 </xsl:choose>
                 <xsl:choose>
-                    <xsl:when test="$contraction-grade = '2'">Kortskrift niv堲</xsl:when>
+                    <xsl:when test="$contraction-grade = '2'">Kortskrift nivå 2</xsl:when>
                 </xsl:choose>
                 <xsl:choose>
-                    <xsl:when test="$contraction-grade = '3'">Kortskrift niv堳</xsl:when>
+                    <xsl:when test="$contraction-grade = '3'">Kortskrift nivå 3</xsl:when>
                 </xsl:choose>
             </p>
             <p class="pages" style="display: block;">Antall Sider: </p>

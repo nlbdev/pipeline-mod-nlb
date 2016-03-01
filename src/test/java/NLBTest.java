@@ -39,6 +39,7 @@ import org.ops4j.pax.exam.util.PathUtils;
 
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.options;
+import static org.ops4j.pax.exam.CoreOptions.systemPackage;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -100,26 +101,33 @@ public class NLBTest {
 			felixDeclarativeServices(),
 			thisBundle(),
 			junitBundles(),
+			// systemPackage("javax.xml.stream;version=\"1.0.1\""),
 			mavenBundlesWithDependencies(
-     			brailleModule("liblouis-utils"),
-     			brailleModule("liblouis-tables"),
-     			brailleModule("liblouis-native").forThisPlatform(),
-     			brailleModule("libhyphen-core"),
-     			brailleModule("dotify-formatter"),
-     			brailleModule("dtbook-to-pef"),
-     			brailleModule("epub3-to-pef"),
-     			brailleModule("html-to-pef"),
-     			pipelineModule("file-utils"),
-     			pipelineModule("common-utils"),
-     			pipelineModule("html-utils"),
-     			pipelineModule("zip-utils"),
-     			pipelineModule("mediatype-utils"),
-     			pipelineModule("file-utils"),
-     			pipelineModule("fileset-utils"),
-     			logbackClassic(),
-     			xprocspec(),
-     			mavenBundle("org.daisy.maven:xproc-engine-daisy-pipeline:?")
-     		)
+				brailleModule("css-utils"),
+                brailleModule("pef-utils"),
+				brailleModule("liblouis-core"),
+                brailleModule("liblouis-utils"),
+				brailleModule("liblouis-tables"),
+				brailleModule("liblouis-native").forThisPlatform(),
+				brailleModule("libhyphen-core"),
+				// brailleModule("libhyphen-libreoffice-tables"),
+				// onWindows ? null : brailleModule("libhyphen-native").forThisPlatform(),
+				brailleModule("dotify-formatter"),
+				brailleModule("dtbook-to-pef"),
+				brailleModule("epub3-to-pef"),
+				brailleModule("html-to-pef"),
+				brailleModule("xml-to-pef"),
+				pipelineModule("file-utils"),
+				pipelineModule("common-utils"),
+				pipelineModule("html-utils"),
+				pipelineModule("zip-utils"),
+				pipelineModule("mediatype-utils"),
+				pipelineModule("file-utils"),
+				pipelineModule("fileset-utils"),
+				logbackClassic(),
+				xprocspec(),
+				mavenBundle("org.daisy.maven:xproc-engine-daisy-pipeline:?")
+			)
 		);
 	}
 	

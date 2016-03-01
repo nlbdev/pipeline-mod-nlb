@@ -42,6 +42,10 @@
       <groupId>org.daisy.pipeline.modules.braille</groupId>
       <artifactId>html-to-pef</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.daisy.pipeline.modules.braille</groupId>
+      <artifactId>xml-to-pef</artifactId>
+    </dependency>
     <!--
         runtime dependencies
     -->
@@ -155,9 +159,9 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <configuration>
           <instructions>
-            <Service-Component>OSGI-INF/tables.xml</Service-Component>
             <_dsannotations>
-              no.nlb.pipeline.braille.impl.NLBTranslator$Provider
+              no.nlb.pipeline.braille.impl.NLBTranslator$Provider,
+              no.nlb.pipeline.braille.impl.TablePath
             </_dsannotations>
           </instructions>
         </configuration>
