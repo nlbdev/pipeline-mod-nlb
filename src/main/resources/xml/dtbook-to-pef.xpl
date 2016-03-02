@@ -10,7 +10,7 @@
     name="main">
     
     <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-        <h1 px:role="name">NLB: DTBook til PEF</h1>
+        <h1 px:role="name">DTBook til PEF (NLB)</h1>
         <p px:role="desc">Konverterer en DTBook til PEF.</p>
         <dl px:role="author">
             <dt>Name:</dt>
@@ -79,6 +79,7 @@
         <p:with-option name="transform" select="concat('(formatter:dotify)(translator:nlb)',$braille-standard)"/>
         <p:with-option name="main-document-language" select="'no'"/>
         <p:with-option name="include-symbols-list" select="'false'"/>
+        <p:with-option name="include-preview" select="'true'"/>
         <p:with-option name="page-width" select="$page-width"/>
         <p:with-option name="page-height" select="$page-height"/>
         <p:with-option name="left-margin" select="$left-margin"/>

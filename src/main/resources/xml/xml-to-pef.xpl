@@ -8,10 +8,6 @@
     exclude-inline-prefixes="#all"
     name="main">
     
-    
-    <!-- ============= -->
-    <!-- Punktstandard -->
-    <!-- ============= -->
     <p:option name="braille-standard" select="'(dots:6)(grade:0)'">
         <p:pipeinfo>
             <px:data-type>
@@ -32,7 +28,39 @@
             </px:data-type>
         </p:pipeinfo>
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Punktstandard</h2>
+            <h2 px:role="name">Tekstformatering: Punktstandard</h2>
+        </p:documentation>
+    </p:option>
+    <p:option name="hyphenation" select="'true'">
+        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+            <h2 px:role="name">Tekstformatering: Orddeling</h2>
+        </p:documentation>
+    </p:option>
+    <p:option name="line-spacing" select="'single'">
+        <p:pipeinfo>
+            <px:data-type>
+                <choice>
+                    <documentation xmlns="http://relaxng.org/ns/compatibility/annotations/1.0" xml:lang="no">
+                        <value>Enkel</value>
+                        <value>Dobbel</value>
+                    </documentation>
+                    <value>single</value>
+                    <value>double</value>
+                </choice>
+            </px:data-type>
+        </p:pipeinfo>
+        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+            <h2 px:role="name">Tekstformatering: Linjeavstand</h2>
+        </p:documentation>
+    </p:option>
+    <p:option name="capital-letters" select="'true'">
+        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+            <h2 px:role="name">Tekstformatering: Store bokstaver</h2>
+        </p:documentation>
+    </p:option>
+    <p:option name="downshift-ordinal-numbers" select="'false'">
+        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+            <h2 px:role="name">Tekstformatering: Skift ordenstall ned</h2>
         </p:documentation>
     </p:option>
     
@@ -60,30 +88,6 @@
         </p:documentation>
     </p:option>
     
-    <!-- ================ -->
-    <!-- Tekstformatering -->
-    <!-- ================ -->
-    <p:option name="hyphenation" select="'true'">
-        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Tekstformatering: Orddeling</h2>
-        </p:documentation>
-    </p:option>
-    <p:option name="line-spacing" select="'single'">
-        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Tekstformatering: Linjeavstand</h2>
-        </p:documentation>
-    </p:option>
-    <p:option name="capital-letters" select="'true'">
-        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Tekstformatering: Store bokstaver</h2>
-        </p:documentation>
-    </p:option>
-    <p:option name="downshift-ordinal-numbers" select="'false'">
-        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Tekstformatering: Skift ordenstall ned</h2>
-        </p:documentation>
-    </p:option>
-    
     <!-- =============== -->
     <!-- Blokk-elementer -->
     <!-- =============== -->
@@ -104,7 +108,8 @@
     </p:option>
     <p:option name="include-line-groups" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Blokkelementer: Inkluder vers (linjegrupper)</h2>
+            <h2 px:role="name">Blokkelementer: Vis linjer i linjegrupper som avsnitt</h2>
+            <p px:role="desc" inherit="append">Linjegrupper er typisk et vers i et dikt.</p>
         </p:documentation>
     </p:option>
     
@@ -199,17 +204,17 @@
     <!-- ====== -->
     <p:option name="pef-output-dir">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Mappe for PEF</h2>
+            <h2 px:role="name">PEF</h2>
         </p:documentation>
     </p:option>
     <p:option name="preview-output-dir">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Mappe for HTML-forhåndsvisning</h2>
+            <h2 px:role="name">Forhåndsvisning</h2>
         </p:documentation>
     </p:option>
     <p:option name="temp-dir">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Mappe for midlertidige filer</h2>
+            <h2 px:role="name">Midlertidige filer</h2>
         </p:documentation>
     </p:option>
     
