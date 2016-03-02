@@ -20,5 +20,6 @@
   <nextCatalog catalog="org:daisy:pipeline:modules:braille:liblouis-utils"/>
   <nextCatalog catalog="org:daisy:pipeline:modules:braille:liblouis-tables"/>
   <nextCatalog catalog="org:daisy:pipeline:modules:braille:libhyphen-libreoffice-tables"/>
+  <nextCatalog catalog="org:daisy:pipeline:modules:braille:dtbook-to-pef"/>
   
 </catalog>
