@@ -20,6 +20,108 @@
     </p:declare-step>
   </x:script>
   
+  <x:scenario label="table_caption" focus="true">
+    <x:call step="pxi:transform">
+      <x:input port="source">
+        <x:document type="inline">
+          <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no" version="2005-3">
+            <head>
+              <style type="text/css">
+                head {
+                  display: none;
+                }
+                h1 {
+                  display: block;
+                  page-break-before: always;
+                }
+                table {
+                  display: table;
+                }
+                table caption::after {
+                  display: block;
+                  content: 'Tabell starter';
+                }
+                table:not(:has(caption))::before {
+                  display: block;
+                  content: 'Tabell starter';
+                }
+                table::after {
+                  display: block;
+                  content: 'Tabell slutter';
+                }
+              </style>
+              </head>
+              <book>
+                <bodymatter>
+                  <level1>
+                    <h1>Table with caption</h1>
+                    <table>
+                      <caption>caption</caption>
+                      <tr>
+                        <td>a</td>
+                        <td>b</td>
+                      </tr>
+                      <tr>
+                        <td>c</td>
+                        <td>d</td>
+                      </tr>
+                    </table>
+                    <h1>Table without caption</h1>
+                    <table>
+                      <tr>
+                        <td>a</td>
+                        <td>b</td>
+                      </tr>
+                      <tr>
+                        <td>c</td>
+                        <td>d</td>
+                      </tr>
+                    </table>
+                  </level1>
+                </bodymatter>
+              </book>
+          </dtbook>
+        </x:document>
+      </x:input>
+      <x:option name="temp-dir" select="$temp-dir"/>
+    </x:call>
+    <x:context label="pef">
+      <x:document type="port" port="result"/>
+    </x:context>
+    <x:expect label="result" type="custom" href="http://www.daisy.org/pipeline/modules/braille/pef-utils/library.xpl" step="x:pef-compare">
+      <x:document type="inline">
+        <pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+          <head>
+            <meta xmlns:dc="http://purl.org/dc/elements/1.1/">
+              <dc:format>application/x-pef+xml</dc:format>
+            </meta>
+          </head>
+          <body>
+            <volume cols="40" rows="25" rowgap="0" duplex="true">
+              <section>
+                <page>
+                  <row>⠠⠞⠁⠃⠇⠑⠀⠺⠊⠞⠓⠀⠉⠁⠏⠞⠊⠕⠝</row>
+                  <row>⠉⠁⠏⠞⠊⠕⠝</row>
+                  <row>⠠⠞⠁⠃⠑⠇⠇⠀⠎⠞⠁⠗⠞⠑⠗</row>
+                  <row>⠁⠀⠀⠃</row>
+                  <row>⠉⠀⠀⠙</row>
+                  <row>⠠⠞⠁⠃⠑⠇⠇⠀⠎⠇⠥⠞⠞⠑⠗</row>
+                </page>
+                <page>
+                  <row>⠠⠞⠁⠃⠇⠑⠀⠺⠊⠞⠓⠕⠥⠞⠀⠉⠁⠏⠞⠊⠕⠝</row>
+                  <row>⠠⠞⠁⠃⠑⠇⠇⠀⠎⠞⠁⠗⠞⠑⠗</row>
+                  <row>⠁⠀⠀⠃</row>
+                  <row>⠉⠀⠀⠙</row>
+                  <row>⠠⠞⠁⠃⠑⠇⠇⠀⠎⠇⠥⠞⠞⠑⠗</row>
+                </page>
+              </section>
+            </volume>
+          </body>
+        </pef>
+      </x:document>
+    </x:expect>
+  </x:scenario>
+  
   <x:scenario label="marks_in_left_margin">
     <x:call step="pxi:transform">
       <x:input port="source">

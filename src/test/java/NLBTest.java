@@ -111,7 +111,7 @@ public class NLBTest {
 			felixDeclarativeServices(),
 			thisBundle(),
 			junitBundles(),
-			// systemPackage("javax.xml.stream;version=\"1.0.1\""),
+			systemPackage("javax.xml.stream;version=\"1.0.1\""),
 			mavenBundlesWithDependencies(
 				mavenBundle("org.daisy.pipeline:framework-core:?"),
 				brailleModule("css-utils"),
