@@ -21,4 +21,21 @@
             test="count(/*/*[ends-with(@name,'.pef')])" equals="1"/>
     </x:scenario>
     
+    <x:scenario label="hyphenation tests">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="file" href="../resources/DTBook/hyph.xml"/>
+            </x:input>
+            <x:option name="page-width" select="'6'"/>
+            <x:option name="pef-output-dir" select="resolve-uri('2/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('2/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('2/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="the output directory contents">
+            <x:document type="directory" base-uri="temp-dir" href="2/pef-output-dir/"/>
+        </x:context>
+        <x:expect label="Exactly one PEF file should be present in the output directory" type="xpath"
+            test="count(/*/*[ends-with(@name,'.pef')])" equals="1"/>
+    </x:scenario>
+    
 </x:description>

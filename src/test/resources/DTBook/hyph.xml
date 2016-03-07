@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dtbook PUBLIC "-//NISO//DTD dtbook 2005-3//EN" "http://www.daisy.org/z3986/2005/dtbook-2005-3.dtd">
+<dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+    <head>
+        <meta name="dtb:uid" content="123457"/>
+        <meta name="dc:Title" content="Testbok"/>
+        <meta name="dc:Creator" content="Norsk lyd- og blindeskriftbibliotek"/>
+        <meta name="dc:Date" content="2016-03-07"/>
+        <meta name="dc:Publisher" content="NLB"/>
+        <meta name="dc:Language" content="no"/>
+        <style type="text/css">
+            @page {
+                size: 14 10;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            head {
+                display: none;
+            }
+            p {
+                display: block;
+                hyphens: auto;
+            }
+        </style>
+    </head>
+    <book>
+        <frontmatter>
+            <doctitle>Testbok</doctitle>
+            <docauthor>Norsk lyd- og blindeskriftbibliotek</docauthor>
+        </frontmatter>
+        <bodymatter>
+            <level1>
+                <h1>Test</h1>
+                <p>busstopp busstopp ikke busstopp a busstopp aa busstopp aaa busstopp aaaa busstopp aaaaa busstopp aaaaaa busstopp aaaaaaa busstopp aaaaaaaa busstopp aaaaaaaaa busstopp aaaaaaaaaa busstopp.</p>
+                <p>orddeling orddeling ikke orddeling orddeling.</p>
+                <p>returneres returneres ikke returneres returneres.</p>
+            </level1>
+        </bodymatter>
+    </book>
+</dtbook>
