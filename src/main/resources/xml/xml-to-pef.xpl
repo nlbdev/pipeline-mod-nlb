@@ -13,7 +13,7 @@
             <px:data-type>
                 <choice>
                     <documentation xmlns="http://relaxng.org/ns/compatibility/annotations/1.0" xml:lang="no">
-                        <value>6-punkt, uforkortet</value>
+                        <value>6-punkt, fullskrift</value>
                         <value>6-punkt, kortskrift nivå 1</value>
                         <value>6-punkt, kortskrift nivå 2</value>
                         <value>6-punkt, kortskrift nivå 3</value>
@@ -55,26 +55,21 @@
     </p:option>
     <p:option name="capital-letters" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Tekstformatering: Store bokstaver</h2>
-        </p:documentation>
-    </p:option>
-    <p:option name="downshift-ordinal-numbers" select="'false'">
-        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Tekstformatering: Skift ordenstall ned</h2>
+            <h2 px:role="name">Tekstformatering: Stor bokstav-tegn</h2>
         </p:documentation>
     </p:option>
     
     <!-- ====== -->
     <!-- Layout -->
     <!-- ====== -->
-    <p:option name="page-width" select="'40'">
+    <p:option name="page-width" select="'30'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Layout: Sidebredde</h2>
         </p:documentation>
     </p:option>
-    <p:option name="page-height" select="'25'">
+    <p:option name="page-height" select="'28'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Layout: Arkhøyde</h2>
+            <h2 px:role="name">Layout: Sidehøyde</h2>
         </p:documentation>
     </p:option>
     <p:option name="left-margin" select="'0'">
