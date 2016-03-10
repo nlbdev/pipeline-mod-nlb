@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" stylesheet="../../src/main/resources/xml/pre-processing.xsl">
+
+    <x:scenario label="test for other language">
+        <x:context>
+            <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+                <level1 xml:lang="no">
+                    <h1>aa ll bb cc</h1>
+                    <p xml:lang="no">aaa bb cc</p>
+                    <p xml:lang="en">aaa bb cc</p>
+                    <p xml:lang="no">aaa bb cc</p>
+                    <p xml:lang="fr">aaa bb cc</p>
+                    <level2 xml:lang="en">
+                        <h1>aa ll bb cc</h1>
+                        <p xml:lang="no">aaa bb cc</p>
+                        <p xml:lang="en">aaa bb cc</p>
+                        <p xml:lang="no">aaa bb cc</p>
+                        <p xml:lang="fr">aaa bb cc</p>
+                        <level3 xml:lang="no">
+                            <h1>aa ll bb cc</h1>
+                            <p xml:lang="no">aaa bb cc</p>
+                            <p xml:lang="en">aaa bb cc</p>
+                            <p xml:lang="no">aaa bb cc</p>
+                            <p xml:lang="fr">aaa bb cc</p>
+                        </level3>
+                    </level2>
+                </level1>
+            </div>
+        </x:context>
+        <x:expect label="result">
+            <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+                <level1 xml:lang="no">
+                    <h1>aa ll bb cc</h1>
+                    <p xml:lang="no">aaa bb cc</p>
+                    <p xml:lang="en">⠐⠂ aaa bb cc ⠐⠂</p>
+                    <p xml:lang="no">aaa bb cc</p>
+                    <p xml:lang="fr">⠐⠂ aaa bb cc ⠐⠂</p>
+                    <level2 xml:lang="en">
+                        <h1>⠐⠂ aa ll bb cc ⠐⠂</h1>
+                        <p xml:lang="no">aaa bb cc</p>
+                        <p xml:lang="en">⠐⠂ aaa bb cc ⠐⠂</p>
+                        <p xml:lang="no">aaa bb cc</p>
+                        <p xml:lang="fr">⠐⠂ aaa bb cc ⠐⠂</p>
+                        <level3 xml:lang="no">
+                            <h1>aa ll bb cc</h1>
+                            <p xml:lang="no">aaa bb cc</p>
+                            <p xml:lang="en">⠐⠂ aaa bb cc ⠐⠂</p>
+                            <p xml:lang="no">aaa bb cc</p>
+                            <p xml:lang="fr">⠐⠂ aaa bb cc ⠐⠂</p>
+                        </level3>
+                    </level2>
+                </level1>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="test for text-transform:uncontracted other languages">
+        <x:context>
+            <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+                <doctitle>l</doctitle>
+                <docauthor>a</docauthor>
+                <level1 class="titlepage">
+                    <h1>a ble at l</h1>
+                    <p>a ble at l </p>
+                </level1>
+                <level1>
+                    <h1>a ble at ll</h1>
+                    <p>a ble at ll</p>
+                    <p xml:lang="en">a ble at ll</p>
+                    <level2 xml:lang="en">
+                        <h1>a ble at ll</h1>
+                        <p>a ble at ll</p>
+                        <p xml:lang="no">a ble at ll</p>
+                    </level2>
+                </level1>
+            </div>
+        </x:context>
+        <x:expect label="result">
+            <x:document type="inline">
+                <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+                    <doctitle>l</doctitle>
+                    <docauthor>a</docauthor>
+                    <level1 class="titlepage">
+                        <h1>a ble at l</h1>
+                        <p> a ble at l</p>
+                    </level1>
+                    <level1>
+                        <h1>a ble at ll</h1>
+                        <p>a ble at l</p>
+                        <p xml:lang="en">⠐⠂ a ble at ll ⠐⠂</p>
+                        <level2 xml:lang="en">
+                            <h1>⠐⠂ a ble at ll ⠐⠂</h1>
+                            <p>⠐⠂ a ble at ll ⠐⠂</p>
+                            <p xml:lang="no">a ble at ll</p>
+                        </level2>
+                    </level1>
+                </div>
+            </x:document>
+        </x:expect>
+    </x:scenario>
+
+</x:description>

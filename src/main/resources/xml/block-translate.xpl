@@ -3,24 +3,6 @@
         xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal" exclude-inline-prefixes="#all">
 
         <p:option name="text-transform" required="true"/>
-        <p:option name="contraction-grade" required="true"/>
-
-
-        <p:xslt>
-                <p:input port="stylesheet">
-                        <p:document href="pre-processing.xsl"/>
-                </p:input>
-                <p:input port="parameters">
-                        <p:empty/>
-                </p:input>
-        </p:xslt>
-
-        <p:xslt>
-                <p:input port="stylesheet">
-                        <p:document href="insert-boilerplate.xsl"/>
-                </p:input>
-                <p:with-param name="contraction-grade" select="$contraction-grade"/>
-        </p:xslt>
 
         <p:xslt>
                 <p:input port="stylesheet">

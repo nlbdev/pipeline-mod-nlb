@@ -37,6 +37,7 @@
     </p:input>
     
     <p:option name="braille-standard"/>
+    <p:option name="stylesheet"/>
     <p:option name="page-width"/>
     <p:option name="page-height"/>
     <p:option name="left-margin"/>
@@ -70,12 +71,18 @@
     <p:import href="http://www.daisy.org/pipeline/modules/common-utils/library.xpl"/>
     <p:import href="http://www.daisy.org/pipeline/modules/braille/dtbook-to-pef/dtbook-to-pef.xpl"/>
     
-    <px:message message="Running NLB-specific pre-processing steps"/>
-    <!-- nothing here yet -->
-    <px:message message="Finished running NLB-specific pre-processing steps" severity="DEBUG"/>
+    <p:in-scope-names name="parameters"/>
+    <nlb:pre-processing>
+        <p:input port="parameters">
+            <p:pipe port="result" step="parameters"/>
+        </p:input>
+        <p:input port="source">
+            <p:pipe port="source" step="main"/>
+        </p:input>
+    </nlb:pre-processing>
     
     <px:dtbook-to-pef>
-        <p:with-option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"/>
+        <p:with-option name="stylesheet" select="concat('http://www.nlb.no/pipeline/modules/braille/default.css', if ($stylesheet) then concat(' ',$stylesheet) else '')"/>
         <p:with-option name="transform" select="concat('(formatter:dotify)(translator:nlb)',$braille-standard)"/>
         <p:with-option name="main-document-language" select="'no'"/>
         <p:with-option name="include-symbols-list" select="'false'"/>
@@ -87,7 +94,6 @@
         <p:with-option name="hyphenation" select="$hyphenation"/>
         <p:with-option name="line-spacing" select="$line-spacing"/>
         <p:with-option name="capital-letters" select="$capital-letters"/>
-        <p:with-option name="downshift-ordinal-numbers" select="$downshift-ordinal-numbers"/>
         <p:with-option name="include-captions" select="$include-captions"/>
         <p:with-option name="include-images" select="$include-images"/>
         <p:with-option name="include-image-groups" select="$include-image-groups"/>

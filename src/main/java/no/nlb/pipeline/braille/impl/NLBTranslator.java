@@ -96,9 +96,12 @@ public interface NLBTranslator {
 			for (Feature f : q.removeAll("output"))
 				if (!supportedOutput.contains(f.getValue().get()))
 					return empty;
-			if (q.containsKey("locale"))
-				if (!"no".equals(parseLocale(q.removeOnly("locale").getValue().get()).getLanguage()))
-					return empty;
+			if (q.containsKey("locale")) {
+				String locale = parseLocale(q.removeOnly("locale").getValue().get()).getLanguage();
+				// If we want to use other tables for other languages in the future; it can be done here.
+				// For now, we allow all languages as input.
+				// The default CSS disables contraction for other languages.
+			}
 			if (q.containsKey("translator"))
 				if ("nlb".equals(q.removeOnly("translator").getValue().get()))
 					if (q.containsKey("grade")) {
@@ -183,8 +186,7 @@ public interface NLBTranslator {
 			
 			private TransformImpl(int grade, int dots, LiblouisTranslator translator, LiblouisTranslator grade0Translator) {
 				Map<String,String> options = ImmutableMap.<String,String>of(
-					"text-transform", mutableQuery().add("id", this.getIdentifier()).toString(),
-					"contraction-grade", ""+grade);
+					"text-transform", mutableQuery().add("id", this.getIdentifier()).toString());
 				xproc = new XProc(href, null, options);
 				this.translator = translator.fromStyledTextToBraille();
 				this.grade0Translator = grade0Translator.fromStyledTextToBraille();

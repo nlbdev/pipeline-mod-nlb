@@ -6,7 +6,8 @@
 
     <xsl:output indent="yes"/>
 
-    <xsl:param name="contraction-grade" select="'0'"/>
+    <xsl:param name="braille-standard" select="'(dots:6)(grade:0)'"/>
+    <xsl:variable name="contraction-grade" select="replace($braille-standard,'.*\(grade:(.*)\).*','$1')"/>
 
     <xsl:template match="frontmatter/docauthor">
         <xsl:copy>
