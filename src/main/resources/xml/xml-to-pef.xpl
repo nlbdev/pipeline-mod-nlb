@@ -31,12 +31,6 @@
             <h2 px:role="name">Tekstformatering: Punktstandard</h2>
         </p:documentation>
     </p:option>
-    <p:option name="stylesheet" px:type="anyFileURI" px:sequence="false" px:media-type="text/css text/scss" select="''">
-        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">CSS-stilark</h2>
-            <p px:role="desc">Valgfritt stilark som kan brukes for å legge til CSS-regler. NLBs standard-stilark brukes alltid, dette stilarket kommer i tillegg.</p>
-        </p:documentation>
-    </p:option>
     <p:option name="hyphenation" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Tekstformatering: Orddeling</h2>
@@ -68,6 +62,12 @@
     <!-- ====== -->
     <!-- Layout -->
     <!-- ====== -->
+    <p:option name="stylesheet" px:type="anyFileURI" px:sequence="false" px:media-type="text/css text/scss" select="''">
+        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+            <h2 px:role="name">Layout: CSS-stilark</h2>
+            <p px:role="desc">Valgfritt stilark som kan brukes for å legge til CSS-regler. NLBs standard-stilark brukes alltid, dette stilarket kommer i tillegg.</p>
+        </p:documentation>
+    </p:option>
     <p:option name="page-width" select="'30'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Layout: Sidebredde</h2>

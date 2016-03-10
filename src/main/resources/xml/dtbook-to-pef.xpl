@@ -37,15 +37,14 @@
     </p:input>
     
     <p:option name="braille-standard"/>
+    <p:option name="hyphenation"/>
+    <p:option name="line-spacing"/>
+    <p:option name="capital-letters"/>
     <p:option name="stylesheet"/>
     <p:option name="page-width"/>
     <p:option name="page-height"/>
     <p:option name="left-margin"/>
     <p:option name="duplex"/>
-    <p:option name="hyphenation"/>
-    <p:option name="line-spacing"/>
-    <p:option name="capital-letters"/>
-    <p:option name="downshift-ordinal-numbers"/>
     <p:option name="include-captions"/>
     <p:option name="include-images"/>
     <p:option name="include-image-groups"/>
