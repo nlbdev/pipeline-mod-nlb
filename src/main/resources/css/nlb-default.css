@@ -1,5 +1,5 @@
 /*
-last updated 25.2.2016
+last updated 09.03.2016 KL: 14:03
 */
 
 /* -------------------------------------------------------------------------- */
@@ -7,7 +7,7 @@ last updated 25.2.2016
 /* -------------------------------------------------------------------------- */
 @page 
 	{ 
-		size: 35 20;
+		size: 34 28;
 		margin-top: 0;
 		margin-bottom: 1;
 		margin-left: 2;
@@ -26,7 +26,7 @@ last updated 25.2.2016
 		@bottom-center 
 			{
 				content: counter(page);
-			}
+			}			
 	}
 	
 pagenum 
@@ -55,19 +55,23 @@ bodymatter	pagenum
 
 .titlepage, .colophon 
 	{
-	  display: block;
-	  page-break-after: right;
-	  flow: titlepage;
+		display: block;
+		page-break-after: right;
+		flow: titlepage;
 	}
-#generated-toc li 
+#generated-volume-toc li 
 	{
-	  display: block;
-	  margin-left: 2;
-	  text-indent: -2;
+		display: block;
+		margin-left: 2;
+		margin-top: 2;
+		text-indent: -2;
 	}
-#generated-toc li a::after 
+#generated-volume-toc li a::after 
 	{
 		content: ' ' leader('⠄') ' ' target-counter(attr(href), page); 
+		margin-left: 2;
+		margin-top: 2;
+		text-indent: -2;
 	}
 
 /* -------------------------------------------------------------------------- */
@@ -79,7 +83,7 @@ book
 		hyphens: auto;
 	}
 
-level, level1, level2, level3, level4, level5, level6,
+level1,
 	frontmatter, bodymatter, rearmatter 
 	{
 		display: block;
@@ -95,7 +99,7 @@ blockquote, sidebar, epigraph, note, noteref,
 
 doctitle, docauthor 
 	{
-		display: block;
+		display: none;
 	}
 	
 /* -------------------------------------------------------------------------- */
@@ -146,6 +150,7 @@ frontmatter
 		margin-bottom: 1;
 		text-indent: 2;	
 		text-align: left;
+		margin-left: 2;
 	}
 .Rammetekst::before
 	{
@@ -270,7 +275,7 @@ note , noteref
 
 imggroup 
 	{ 
-		display: none; 
+		display:  block; 
 	}
 	
 caption::before
@@ -284,6 +289,7 @@ caption
 		margin-left: 2;
 		text-indent: 2;	
 		text-align: left;
+		display: block; 
 	}
 	
 poem
@@ -299,7 +305,8 @@ linegroup
 	}
 line
 	{
-		text-indent: -2;
+		margin-left: 2;
+	   text-indent: -2;
 	}
 list
 	{
@@ -307,5 +314,49 @@ list
 		text-indent: -2;
 		margin-bottom: 1;
 	}
+li
+	{
+	text-indent: 2;	
+	text-align: left;
+	}
 
+	}
+/* -------------------------------------------------------------------------- */
+/*                Note and endnote                    					      */
+/* -------------------------------------------------------------------------- */	
+@volume 
+	{
+	  @end 
+		{
+			content: flow(endnotes, volume);
+		}
+	}
+
+noteref::before 
+	{
+		content: '⠠';
+	}
+
+noteref::alternate 
+	{
+		flow: endnotes;
+		display: block;
+		content: target-content(attr(idref));
+	}
+
+level1.footnotes 
+	{
+		display: none; 
+	}
+
+note p::before 
+	{
+		content: '⠠';
+	}
+	
+note p 
+	{
+		margin-left: 4;
+		text-indent: -2;
+	}
 

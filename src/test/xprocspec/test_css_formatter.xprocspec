@@ -13,7 +13,9 @@
       <p:option name="temp-dir" required="true"/>
       <p:import href="http://www.daisy.org/pipeline/modules/braille/common-utils/library.xpl"/>
       <p:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/library.xpl"/>
-      <css:inline/>
+      <css:inline  >
+        <p:log port="result" href="file:/tmp/tmp.xml"/>
+      </css:inline>
       <px:transform query="(input:css)(output:pef)(formatter:dotify)(translator:nlb)(locale:no)(grade:0)">
         <p:with-option name="temp-dir" select="$temp-dir"/>
       </px:transform>
@@ -122,7 +124,7 @@
     </x:expect>
   </x:scenario>
   
-  <x:scenario label="marks_in_left_margin">
+  <x:scenario label="marks_in_left_margin" focus="true">
     <x:call step="pxi:transform">
       <x:input port="source">
         <x:document type="inline">
@@ -169,9 +171,6 @@
     <x:context label="pef">
       <x:document type="port" port="result"/>
     </x:context>
-    <!--
-        TODO: verify this
-    -->
     <x:expect label="result" type="custom" href="http://www.daisy.org/pipeline/modules/braille/pef-utils/library.xpl" step="x:pef-compare">
       <x:document type="inline">
         <pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
@@ -203,4 +202,142 @@
     </x:expect>
   </x:scenario>
   
+  <!-- pending -->
+  
+  <x:scenario label="Generated toc And page break" >
+    <x:call step="pxi:transform">
+      <x:input port="source">
+        <x:document type="inline">
+          <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no" version="2005-3">
+            <head>
+              <style type="text/css">
+                @page {
+                size: 35 20;
+                margin-left: 2;
+                @left {
+                content: -obfl-marker-indicator(pagenum, '⠿');
+                }
+                }
+                head , meta { display: none }
+                p { display: block }
+                pagenum {
+                display: none;
+                -obfl-marker: pagenum;
+                }
+                
+                #generated-volume-toc li 
+                {
+                display: block;
+                margin-left: 2;
+                margin-top: 2;
+                text-indent: -2;
+                }
+                #generated-volume-toc li a::after 
+                {
+                content: ' ' leader('⠄') ' ' target-counter(attr(href), page); 
+                margin-left: 2;
+                margin-top: 2;
+                text-indent: -2;
+                display: block;
+                }
+                
+                h1
+                {
+                display: block;
+                page-break-before: right;
+               
+                margin-top: 2;
+                margin-left: 0;
+                margin-bottom: 1;
+                text-align: center;
+                border-bottom:  ⠤ ;
+                }
+                .precedingemptyline 
+                {  
+                margin-top: 1;
+                }
+                
+              </style>
+            </head>
+            <book>
+              <bodymatter>
+               
+                <level1 id="level1_3" class="chapter">                   
+                  <h1 id="01" class="part">ULVESTAMMEN</h1> 
+                  <p>Tal er &#xe5;tte vintere gammel.</p> 
+                  <pagenum id="page-3" page="normal">3</pagenum>                 
+                  <p class="precedingemptyline">En dag ber </p>                   
+                </level1>
+                <level1 id="level1_4" class="chapter"> 
+                  <h1>GRU OG REDSEL</h1> 
+                  <p>S&#xe5; mange b&#xe6;r det er!</p> 
+                  <p>&#xab;Husj!&#xbb; roper han.</p> 
+                </level1>
+                <level1 id="level1_5" class="chapter"> 
+                  <h1 id="h1_4">SOM EN VIND</h1> 
+                  <p>Da er det plutselig noen som kommer i full fart.</p>                   
+                  <p>For jeg er fra mammut-stammen!</p> 
+                  <p>Det har alltid v&#xe6;rt krig mellom oss og dere!&#xbb;</p>  
+                </level1>
+              </bodymatter>
+            </book>
+          </dtbook>
+        </x:document>
+      </x:input>
+      <x:option name="temp-dir" select="$temp-dir"/>
+    </x:call>
+    <x:context label="pef">
+      <x:document type="port" port="result"/>
+    </x:context>
+    
+    <x:expect label="result" type="custom" href="http://www.daisy.org/pipeline/modules/braille/pef-utils/library.xpl" step="x:pef-compare">
+      <x:document type="inline">
+        <pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1">
+          <head>            
+          </head>
+          <body>
+            <volume cols="35" rows="20" rowgap="0" duplex="true">
+              <section>
+                <page>
+                  <row/>
+                  <row/>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠎⠞⠁⠍⠍⠑⠝</row>
+                  <row>⠀⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤</row>
+                  <row/>
+                  <row>⠀⠀⠠⠞⠁⠇⠀⠑⠗⠀⠡⠞⠞⠑⠀⠧⠊⠝⠞⠑⠗⠑⠀⠛⠁⠍⠍⠑⠇⠄</row>
+                  <row/>
+                  <row>⠿⠀⠠⠑⠝⠀⠙⠁⠛⠀⠃⠑⠗</row>
+                </page>
+              </section>
+              <section>
+                <page>
+                  <row/>
+                  <row/>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠠⠛⠗⠥⠀⠠⠠⠕⠛⠀⠠⠠⠗⠑⠙⠎⠑⠇</row>
+                  <row>⠀⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤</row>
+                  <row/>
+                  <row>⠀⠀⠠⠎⠡⠀⠍⠁⠝⠛⠑⠀⠃⠜⠗⠀⠙⠑⠞⠀⠑⠗⠖</row>
+                  <row>⠀⠀⠲⠠⠓⠥⠎⠚⠖⠲⠀⠗⠕⠏⠑⠗⠀⠓⠁⠝⠄</row>
+                </page>
+              </section>
+              <section>
+                <page>
+                  <row/>
+                  <row/>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠠⠎⠕⠍⠀⠠⠠⠑⠝⠀⠠⠠⠧⠊⠝⠙</row>
+                  <row>⠀⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤</row>
+                  <row/>
+                  <row>⠀⠀⠠⠙⠁⠀⠑⠗⠀⠙⠑⠞⠀⠏⠇⠥⠞⠎⠑⠇⠊⠛⠀⠝⠕⠑⠝⠀⠎⠕⠍⠀</row>
+                  <row>⠀⠀⠅⠕⠍⠍⠑⠗⠀⠊⠀⠋⠥⠇⠇⠀⠋⠁⠗⠞⠄</row>
+                  <row>⠀⠀⠠⠋⠕⠗⠀⠚⠑⠛⠀⠑⠗⠀⠋⠗⠁⠀⠍⠁⠍⠍⠥⠞⠤⠎⠞⠁⠍⠍⠑⠝⠖</row>
+                  <row>⠀⠀⠠⠙⠑⠞⠀⠓⠁⠗⠀⠁⠇⠇⠞⠊⠙⠀⠧⠜⠗⠞⠀⠅⠗⠊⠛⠀⠍⠑⠇⠇⠕⠍⠀</row>
+                  <row>⠀⠀⠕⠎⠎⠀⠕⠛⠀⠙⠑⠗⠑⠖⠲</row>
+                </page>
+              </section>
+            </volume>
+          </body>
+        </pef>
+      </x:document>
+    </x:expect>
+  </x:scenario>
 </x:description>
