@@ -14,9 +14,9 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="matches(local-name(), '^(h[1-6]|p|li|td|th|bh|caption)$')">
-                    <xsl:value-of select="$uncontracted-pre"/>
+                    <!-- <xsl:value-of select="$uncontracted-pre"/> -->  
                     <xsl:apply-templates mode="#current"/>
-                    <xsl:value-of select="$uncontracted-post"/>
+                    <!-- <xsl:value-of select="$uncontracted-post"/> --> 
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates mode="#current"/>

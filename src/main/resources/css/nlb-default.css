@@ -1,18 +1,14 @@
 /*
-last updated 09.03.2016 KL: 14:03
+last updated 10.03.2016 KL: 17:56
 */
 
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
 /* -------------------------------------------------------------------------- */
-@page 
-	{ 
-		size: 34 28;
-		margin-top: 0;
-		margin-bottom: 1;
-		margin-left: 2;
-		margin-right: 2;
-		
+
+
+ @page body 
+	{
 		@bottom-right 
 			{
 				content:  string(print-page , last);
@@ -26,7 +22,16 @@ last updated 09.03.2016 KL: 14:03
 		@bottom-center 
 			{
 				content: counter(page);
-			}			
+			}	
+  }
+
+@page 
+	{ 
+		size: 34 28;
+		margin-top: 0;
+		margin-bottom: 1;
+		margin-left: 2;
+		margin-right: 2;
 	}
 	
 pagenum 
@@ -40,18 +45,28 @@ bodymatter	pagenum
 		-obfl-marker: pagenum;
 		string-set: print-page '⠿'content();
 	}
+	
+bodymatter 
+	{
+		page: body;
+	}
 
 /* -------------------------------------------------------------------------- */
 /*               for volume breaking, toc, titlepage 						  */
 /* -------------------------------------------------------------------------- */
-@volume  
+@volume 
 	{
 		max-length: 75;
-		@begin 	
+		@begin 
 		{
-			content: flow(volume-toc);
+			content: flow(front) flow(volume-toc);
 		}
 	}
+	
+ level1.first-page {
+    flow: front;
+  }
+	
 
 .titlepage, .colophon 
 	{
