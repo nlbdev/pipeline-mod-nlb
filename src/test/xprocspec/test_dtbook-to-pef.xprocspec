@@ -116,7 +116,15 @@
                                     size: 35 15;
                                     margin-top: 0;
                                     margin-left: 0;
-                                }
+                                    
+                                    
+                                    
+                                        @left 
+                                            {
+                                                content: none;
+                                               }
+                                         
+                                        }
                                 h1, h2, h3, p {
                                     text-indent: 0;
                                     text-align: left;
@@ -170,21 +178,21 @@
         <x:expect label="result" type="compare">
             <x:document type="inline" select="//pef:row">
                 <page xmlns="http://www.daisy.org/ns/2008/pef">
-                    <row>⠀⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
-                    <row>⠀⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
                 </page>
             </x:document>
         </x:expect>
@@ -207,6 +215,11 @@
                                     size: 35 15;
                                     margin-top: 0;
                                     margin-left: 0;
+                                    
+                                    @left 
+                                    {
+                                    content: none;
+                                    }
                                 }
                                 h1, h2, h3, p {
                                     text-indent: 0;
@@ -253,14 +266,14 @@
         <x:expect label="result" type="compare">
             <x:document type="inline" select="//pef:row">
                 <page xmlns="http://www.daisy.org/ns/2008/pef">
-                    <row>⠀⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
-                    <row>⠀⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
-                    <row>⠀⠰⠁⠀⠃⠀⠁⠀⠇⠇</row>
-                    <row>⠀⠰⠁⠀⠃⠀⠁⠀⠇⠇</row>
-                    <row>⠀⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
-                    <row>⠀⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
-                    <row>⠀⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
-                    <row>⠀⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠇⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
                 </page>
             </x:document>
         </x:expect>

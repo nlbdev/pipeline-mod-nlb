@@ -1,12 +1,18 @@
 /*
-last updated 10.03.2016 KL: 17:56
+last updated 11.03.2016 KL: 10:56
 */
 
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
 /* -------------------------------------------------------------------------- */
-
-
+@page 
+	{ 
+		margin-top: 0;
+		margin-bottom: 1;
+		margin-left: 2;
+		margin-right: 2;
+	}
+/*
  @page body 
 	{
 		@bottom-right 
@@ -24,15 +30,7 @@ last updated 10.03.2016 KL: 17:56
 				content: counter(page);
 			}	
   }
-
-@page 
-	{ 
-		size: 34 28;
-		margin-top: 0;
-		margin-bottom: 1;
-		margin-left: 2;
-		margin-right: 2;
-	}
+*/
 	
 pagenum 
 	{
@@ -45,11 +43,12 @@ bodymatter	pagenum
 		-obfl-marker: pagenum;
 		string-set: print-page '⠿'content();
 	}
-	
+
 bodymatter 
 	{
 		page: body;
 	}
+	
 
 /* -------------------------------------------------------------------------- */
 /*               for volume breaking, toc, titlepage 						  */
@@ -93,10 +92,6 @@ bodymatter
 /*                                  general                                   */
 /* -------------------------------------------------------------------------- */
 head { display: none; }
-book 
-	{
-		hyphens: auto;
-	}
 
 level1,
 	frontmatter, bodymatter, rearmatter 
@@ -107,7 +102,7 @@ level1,
 	}
 
 blockquote, sidebar, epigraph, note, noteref,
-	.Rammetekst, imggroup , caption , poem , linegroup , line
+	.Rammetekst,   poem , linegroup , line
 	{
 		display: block;
 	}
@@ -304,7 +299,7 @@ caption
 		margin-left: 2;
 		text-indent: 2;	
 		text-align: left;
-		display: block; 
+		
 	}
 	
 poem
