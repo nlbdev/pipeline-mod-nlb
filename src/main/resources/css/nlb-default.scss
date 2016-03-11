@@ -12,36 +12,40 @@ last updated 11.03.2016 KL: 10:56
 		margin-left: 2;
 		margin-right: 2;
 	}
-/*
- @page body 
+@page body
 	{
-		@bottom-right 
+		@if $show-print-page-numbers
 			{
-				content:  string(print-page , last);
-			}
-		
-		@left 
-			{
-				content: -obfl-marker-indicator(pagenum, '⠿');
+			@bottom-right
+				{
+					content:  string(print-page , last);
+				}
+			
+			@left
+				{
+					content: -obfl-marker-indicator(pagenum, '⠿');
+				}
 			}
 			
 		@bottom-center 
 			{
 				content: counter(page);
-			}	
-  }
-*/
+			}
+}
 	
 pagenum 
 	{
 		display: none;
 	}
-	
-bodymatter	pagenum  
+
+@if $show-print-page-numbers
 	{
-		display: none;
-		-obfl-marker: pagenum;
-		string-set: print-page '⠿'content();
+	bodymatter pagenum
+		{
+			display: none;
+			-obfl-marker: pagenum;
+			string-set: print-page '⠿'content();
+		}
 	}
 
 bodymatter 

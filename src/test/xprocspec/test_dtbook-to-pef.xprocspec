@@ -168,6 +168,7 @@
                 </x:document>
             </x:input>
             <x:option name="braille-standard" select="'(dots:6)(grade:0)'"/>
+            <x:option name="show-print-page-numbers" select="'false'"/>
             <x:option name="pef-output-dir" select="resolve-uri('5/pef-output-dir',$temp-dir)"/>
             <x:option name="preview-output-dir" select="resolve-uri('5/preview-output-dir',$temp-dir)"/>
             <x:option name="temp-dir" select="resolve-uri('5/temp-dir',$temp-dir)"/>
@@ -256,6 +257,7 @@
                 </x:document>
             </x:input>
             <x:option name="braille-standard" select="'(dots:6)(grade:1)'"/>
+            <x:option name="show-print-page-numbers" select="'false'"/>
             <x:option name="pef-output-dir" select="resolve-uri('6/pef-output-dir',$temp-dir)"/>
             <x:option name="preview-output-dir" select="resolve-uri('6/preview-output-dir',$temp-dir)"/>
             <x:option name="temp-dir" select="resolve-uri('6/temp-dir',$temp-dir)"/>
