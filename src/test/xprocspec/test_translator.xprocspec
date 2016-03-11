@@ -34,7 +34,7 @@
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -116,7 +116,7 @@
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:scenario label="grade 0">
@@ -176,7 +176,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:context label="result">
@@ -240,7 +240,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:context label="result">
@@ -285,7 +285,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -347,7 +347,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -404,7 +404,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:context label="result">
@@ -463,7 +463,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -517,7 +517,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 

@@ -81,7 +81,7 @@
     </nlb:pre-processing>
     
     <px:dtbook-to-pef>
-        <p:with-option name="stylesheet" select="concat('http://www.nlb.no/pipeline/modules/braille/default.css', if ($stylesheet) then concat(' ',$stylesheet) else '')"/>
+        <p:with-option name="stylesheet" select="concat('http://www.nlb.no/pipeline/modules/braille/default.scss', if ($stylesheet) then concat(' ',$stylesheet) else '')"/>
         <p:with-option name="transform" select="concat('(formatter:dotify)(translator:nlb)',$braille-standard)"/>
         <p:with-option name="main-document-language" select="'no'"/>
         <p:with-option name="include-symbols-list" select="'false'"/>
