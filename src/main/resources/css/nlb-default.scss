@@ -2,11 +2,14 @@
 last updated 11.03.2016 KL: 10:56
 */
 
+/* Declare parameters. Values are passed in from nlb:dtbook-to-pef. */
+$show-print-page-numbers: false !default;
+
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
 /* -------------------------------------------------------------------------- */
-@page 
-	{ 
+@page
+	{
 		margin-top: 0;
 		margin-bottom: 1;
 		margin-left: 2;
@@ -27,13 +30,13 @@ last updated 11.03.2016 KL: 10:56
 				}
 			}
 			
-		@bottom-center 
+		@bottom-center
 			{
 				content: counter(page);
 			}
 }
 	
-pagenum 
+pagenum
 	{
 		display: none;
 	}
@@ -48,7 +51,7 @@ pagenum
 		}
 	}
 
-bodymatter 
+bodymatter
 	{
 		page: body;
 	}
@@ -57,10 +60,10 @@ bodymatter
 /* -------------------------------------------------------------------------- */
 /*               for volume breaking, toc, titlepage 						  */
 /* -------------------------------------------------------------------------- */
-@volume 
+@volume
 	{
 		max-length: 75;
-		@begin 
+		@begin
 		{
 			content: flow(front) flow(volume-toc);
 		}
@@ -71,22 +74,22 @@ bodymatter
   }
 	
 
-.titlepage, .colophon 
+.titlepage, .colophon
 	{
 		display: block;
 		page-break-after: right;
 		flow: titlepage;
 	}
-#generated-volume-toc li 
+#generated-volume-toc li
 	{
 		display: block;
 		margin-left: 2;
 		margin-top: 2;
 		text-indent: -2;
 	}
-#generated-volume-toc li a::after 
+#generated-volume-toc li a::after
 	{
-		content: ' ' leader('⠄') ' ' target-counter(attr(href), page); 
+		content: ' ' leader('⠄') ' ' target-counter(attr(href), page);
 		margin-left: 2;
 		margin-top: 2;
 		text-indent: -2;
@@ -98,7 +101,7 @@ bodymatter
 head { display: none; }
 
 level1,
-	frontmatter, bodymatter, rearmatter 
+	frontmatter, bodymatter, rearmatter
 	{
 		display: block;
 		page-break-before: always;
@@ -111,32 +114,32 @@ blockquote, sidebar, epigraph, note, noteref,
 		display: block;
 	}
 
-doctitle, docauthor 
+doctitle, docauthor
 	{
 		display: none;
 	}
 	
 /* -------------------------------------------------------------------------- */
 /*                Frontmatter                        						  */
-/* -------------------------------------------------------------------------- */	
+/* -------------------------------------------------------------------------- */
 
-frontmatter 
+frontmatter
 	{
-		margin-left: 3
+		margin-left: 3;
 		margin-right: 3;
 		text-align: left;
 	}
-.titlepage ,.uncontracted-letters ,h1 
-	{ 
-		text-transform:uncontracted; 
+.titlepage ,.uncontracted-letters ,h1
+	{
+		text-transform:uncontracted;
 	}
 	
-.titlepage  
-	{ 
-		text-transform:uncontracted; 
+.titlepage
+	{
+		text-transform:uncontracted;
 		margin-left: 1;
 		margin-top: 1;
-		page-break-after: always; 
+		page-break-after: always;
 	}
 	
 
@@ -144,25 +147,25 @@ frontmatter
 /*                class                        					        	  */
 /* -------------------------------------------------------------------------- */
 .part h1, h1.part
-	{  
+	{
 		margin-left: 1;
 		margin-top: 2;
 		text-align: center;
 		page-break-before: always;
 		page-break-after: right;
-		border: ⠉ ⠸ ⠤ ⠇;		 
+		border: ⠉ ⠸ ⠤ ⠇;
 	}
 	
-.precedingemptyline 
-	{  
-		margin-top: 1;				 
+.precedingemptyline
+	{
+		margin-top: 1;
 	}
 	
 .Rammetekst
-	{  
+	{
 		margin-top: 1;
 		margin-bottom: 1;
-		text-indent: 2;	
+		text-indent: 2;
 		text-align: left;
 		margin-left: 2;
 	}
@@ -185,7 +188,7 @@ h1 , .part h2
 	}
 	
 h2 , .part h3
-	{	
+	{
 		margin-top: 2;
 		margin-left: 5;
 		margin-right: 5;
@@ -194,67 +197,67 @@ h2 , .part h3
 	}
 	
 h3 , .part h4
-	{	
+	{
 		margin-top: 1;
 		margin-left: 5;
-		margin-right: 5;	
+		margin-right: 5;
 		text-align: center;
 	}
 
 h4 , .part h5
-	{	
+	{
 		margin-top: 1;
 		margin-left: 1;
-		margin-right: 5;	
+		margin-right: 5;
 		text-align: left;
 		text-indent: 0;
 	}
 	
 h5 , .part h6
-	{	
+	{
 		margin-top: 1;
 		margin-left: 1;
-		margin-right: 5;	
+		margin-right: 5;
 		text-align: left;
 		text-indent: 0;
 	}
-h5::after , .part h6::after	
+h5::after , .part h6::after
 	{
 		content: ":";
 	}
 	
 h6
-	{	
+	{
 		margin-top: 1;
 		margin-left: 1;
-		margin-right: 5;	
+		margin-right: 5;
 		text-align: left;
 		text-indent: 0;
 		border: ⠉;
 	}
-p 
-	{	    
-		text-indent: 2;	
+p
+	{
+		text-indent: 2;
 		text-align: left;
 		widows: 2;
-		orphans: 2;		
+		orphans: 2;
 	}
 
 blockquote
-	{	
+	{
 		margin-top: 1;
 		margin-bottom: 1;
 		margin-left: 2;
-		text-indent: 2;	
+		text-indent: 2;
 		text-align: left;
 	}
 	
 sidebar
-	{	
+	{
 		margin-top: 1;
 		margin-bottom: 1;
 		margin-left: 2;
-		text-indent: 2;	
+		text-indent: 2;
 		text-align: left;
 	}
 
@@ -268,7 +271,7 @@ epigraph
 		margin-top: 1;
 		margin-bottom: 1;
 		margin-left: 2;
-		text-indent: 2;	
+		text-indent: 2;
 		text-align: left;
 	}
 	
@@ -283,13 +286,13 @@ prodnote::after
 	}
 note , noteref
 	{
-		text-indent: 2;	
+		text-indent: 2;
 		text-align: left;
 	}
 
-imggroup 
-	{ 
-		display:  block; 
+imggroup
+	{
+		display:  block;
 	}
 	
 caption::before
@@ -301,14 +304,14 @@ caption
 		margin-top: 1;
 		margin-bottom: 1;
 		margin-left: 2;
-		text-indent: 2;	
+		text-indent: 2;
 		text-align: left;
 		
 	}
 	
 poem
 	{
-	text-indent: 2;	
+	text-indent: 2;
 	text-align: left;
 	}
 	
@@ -330,45 +333,44 @@ list
 	}
 li
 	{
-	text-indent: 2;	
+	text-indent: 2;
 	text-align: left;
 	}
 
-	}
 /* -------------------------------------------------------------------------- */
 /*                Note and endnote                    					      */
-/* -------------------------------------------------------------------------- */	
-@volume 
+/* -------------------------------------------------------------------------- */
+@volume
 	{
-	  @end 
+	  @end
 		{
 			content: flow(endnotes, volume);
 		}
 	}
 
-noteref::before 
+noteref::before
 	{
 		content: '⠠';
 	}
 
-noteref::alternate 
+noteref::alternate
 	{
 		flow: endnotes;
 		display: block;
 		content: target-content(attr(idref));
 	}
 
-level1.footnotes 
+level1.footnotes
 	{
-		display: none; 
+		display: none;
 	}
 
-note p::before 
+note p::before
 	{
 		content: '⠠';
 	}
 	
-note p 
+note p
 	{
 		margin-left: 4;
 		text-indent: -2;
