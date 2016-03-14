@@ -6,7 +6,8 @@
 
     <xsl:output indent="yes"/>
 
-    <xsl:param name="contraction-grade" select="'0'"/>
+    <xsl:param name="braille-standard" select="'(dots:6)(grade:0)'"/>
+    <xsl:variable name="contraction-grade" select="replace($braille-standard,'.*\(grade:(.*)\).*','$1')"/>
 
     <xsl:template match="frontmatter/docauthor">
         <xsl:copy>
@@ -24,7 +25,7 @@
     </xsl:template>
 
     <xsl:template name="add-information-based-from-metadata">
-        <level1 class="first-page" style="text-align: center; page-break-inside:avoid ; ">
+        <level1 class="first-page" style="text-align: center; page-break-inside:avoid ; flow: front; ">
 
             <xsl:variable name="author" select="//meta[@name eq 'dc:Creator']/@content"/>
             <xsl:for-each select="$author[position() &lt;= 3]">
@@ -80,7 +81,7 @@
                 />
             </p>
             <p class="bind"
-                style="display: block; page-break-after: always; @page margin-bottom: 1;  ">1 av
+                style="display: block; page-break-after: always; @page margin-bottom: 1; content: 'Bind ' -obfl-evaluate($volume) ' of ' -obfl-evaluate($volumes) ;">1 av
                 1</p>
         </level1>
         <xsl:choose>

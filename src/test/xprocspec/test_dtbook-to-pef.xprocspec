@@ -3,6 +3,7 @@
     xmlns:p="http://www.w3.org/ns/xproc"
     xmlns:px="http://www.daisy.org/ns/pipeline/xproc"
     xmlns:nlb="http://www.nlb.no/ns/pipeline/xproc"
+    xmlns:pef="http://www.daisy.org/ns/2008/pef"
     script="http://www.nlb.no/pipeline/modules/braille/dtbook-to-pef.xpl">
     
     <x:scenario label="basic test">
@@ -20,5 +21,336 @@
         <x:expect label="Exactly one PEF file should be present in the output directory" type="xpath"
             test="count(/*/*[ends-with(@name,'.pef')])" equals="1"/>
     </x:scenario>
+    
+    <x:scenario label="ability to override css rules - with a link element">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="file" href="../resources/DTBook-override-css/book-with-link.xml"/>
+            </x:input>
+            <x:option name="pef-output-dir" select="resolve-uri('2/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('2/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('2/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="the output directory contents">
+            <x:document type="file" base-uri="temp-dir" href="3/pef-output-dir/book.pef" select="(//pef:row[contains(text(),'⠠⠞⠑⠎⠞⠁⠧⠎⠝⠊⠞⠞⠄')])[1]"/>
+        </x:context>
+        <x:expect label="The paragraph should be indented by 6 (2 page margin-left, 4 p text-indent)" type="compare">
+            <x:document type="inline">
+                <row xmlns="http://www.daisy.org/ns/2008/pef">⠀⠀⠀⠀⠀⠀⠠⠞⠑⠎⠞⠁⠧⠎⠝⠊⠞⠞⠄</row> 
+            </x:document>
+        </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="ability to override css rules - by passing a css file into the script">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="file" href="../resources/DTBook-override-css/book.xml"/>
+            </x:input>
+            <x:option name="stylesheet" select="resolve-uri('../resources/DTBook-override-css/indent-p.css')"/>
+            <x:option name="pef-output-dir" select="resolve-uri('3/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('3/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('3/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="the output directory contents">
+            <x:document type="file" base-uri="temp-dir" href="3/pef-output-dir/book.pef" select="(//pef:row[contains(text(),'⠠⠞⠑⠎⠞⠁⠧⠎⠝⠊⠞⠞⠄')])[1]"/>
+        </x:context>
+        <x:expect label="The paragraph should be indented by 6 (2 page margin-left, 4 p text-indent)" type="compare">
+            <x:document type="inline">
+                <row xmlns="http://www.daisy.org/ns/2008/pef">⠀⠀⠀⠀⠀⠀⠠⠞⠑⠎⠞⠁⠧⠎⠝⠊⠞⠞⠄</row> 
+            </x:document>
+        </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="ability to convert non-norwegian books">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline" xml:base="file:/tmp/book.xml">
+                    <dtbook version="2005-3" xml:lang="en" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+                        <head>
+                            <meta name="dtb:uid" content="123456"/>
+                            <meta name="dc:Title" content="Testbok"/>
+                            <meta name="dc:Creator" content="Norsk lyd- og blindeskriftbibliotek"/>
+                            <meta name="dc:Date" content="2016-03-01"/>
+                            <meta name="dc:Publisher" content="NLB"/>
+                            <meta name="dc:Language" content="en"/>
+                        </head>
+                        <book>
+                            <frontmatter>
+                                <doctitle>Test book</doctitle>
+                                <docauthor>Norwegian library for talking books and braille</docauthor>
+                            </frontmatter>
+                            <bodymatter>
+                                <level1>
+                                    <h1>This is a test headline</h1>
+                                    <p>This is a test paragraph.</p>
+                                </level1>
+                            </bodymatter>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="pef-output-dir" select="resolve-uri('4/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('4/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('4/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="the output directory contents">
+            <x:document type="directory" base-uri="temp-dir" href="4/pef-output-dir/"/>
+        </x:context>
+        <x:expect label="Exactly one PEF file should be present in the output directory" type="xpath" test="count(/*/*[ends-with(@name,'.pef')])" equals="1"/>
+    </x:scenario>
+
+    <x:scenario label="test for other languages">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline" xml:base="file:/tmp/book.xml">
+                    <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+                        <head>
+                            <meta name="dtb:uid" content="123456"/>
+                            <meta name="dc:Title" content="Testbok"/>
+                            <meta name="dc:Creator" content="Norsk lyd- og blindeskriftbibliotek"/>
+                            <meta name="dc:Date" content="2016-03-01"/>
+                            <meta name="dc:Publisher" content="NLB"/>
+                            <meta name="dc:Language" content="no"/>
+                            <style media="embossed" type="text/css">
+                                @page  {
+                                    size: 35 15;
+                                    margin-top: 0;
+                                    margin-left: 0;
+                                    
+                                    
+                                    
+                                        @left 
+                                            {
+                                                content: none;
+                                               }
+                                         
+                                        }
+                                h1, h2, h3, p {
+                                    text-indent: 0;
+                                    text-align: left;
+                                    margin-left: 0;
+                                    border: none;
+                                    text-transform: auto;
+                                }
+                            </style>
+                        </head>
+                        <book>
+                            <frontmatter>
+                                <doctitle>Test</doctitle>
+                                <docauthor>Test</docauthor>
+                            </frontmatter>
+                            <bodymatter>
+                                <level1 xml:lang="no">
+                                    <h1>aa ll bb cc</h1>
+                                    <p xml:lang="no">aaa bb cc</p>
+                                    <p xml:lang="en">aaa bb cc</p>
+                                    <p xml:lang="no">aaa bb cc</p>
+                                    <p xml:lang="fr">aaa bb cc</p>
+                                    
+                                    <level2 xml:lang="en">
+                                        <h2>aa ll bb cc</h2>
+                                        <p xml:lang="no">aaa bb cc</p>
+                                        <p xml:lang="en">aaa bb cc</p>
+                                        <p xml:lang="no">aaa bb cc</p>
+                                        <p xml:lang="fr">aaa bb cc</p>
+                                        <level3 xml:lang="no">
+                                            <h3>aa ll bb cc</h3>
+                                            <p xml:lang="no">aaa bb cc</p>
+                                            <p xml:lang="en">aaa bb cc</p>
+                                            <p xml:lang="no">aaa bb cc</p>
+                                            <p xml:lang="fr">aaa bb cc</p>
+                                        </level3>
+                                    </level2>
+                                </level1>
+                            </bodymatter>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="braille-standard" select="'(dots:6)(grade:0)'"/>
+            <x:option name="show-print-page-numbers" select="'false'"/>
+            <x:option name="pef-output-dir" select="resolve-uri('5/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('5/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('5/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="result">
+            <x:document type="file" base-uri="temp-dir" href="5/pef-output-dir/book.pef" select="//pef:page[pef:row[contains(text(),'⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉')]]/pef:row[text() and following-sibling::pef:row]"/>
+        </x:context>
+        <x:expect label="result" type="compare">
+            <x:document type="inline" select="//pef:row">
+                <page xmlns="http://www.daisy.org/ns/2008/pef">
+                    <row>⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠀⠇⠇⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                    <row>⠁⠁⠁⠀⠃⠃⠀⠉⠉</row>
+                </page>
+            </x:document>
+        </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="test for text-transform:uncontracted other languages">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline" xml:base="file:/tmp/book.xml">
+                    <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+                        <head>
+                            <meta name="dtb:uid" content="123456"/>
+                            <meta name="dc:Title" content="Testbok"/>
+                            <meta name="dc:Creator" content="Norsk lyd- og blindeskriftbibliotek"/>
+                            <meta name="dc:Date" content="2016-03-01"/>
+                            <meta name="dc:Publisher" content="NLB"/>
+                            <meta name="dc:Language" content="no"/>
+                            <style media="embossed" type="text/css">
+                                @page  {
+                                    size: 35 15;
+                                    margin-top: 0;
+                                    margin-left: 0;
+                                    
+                                    @left 
+                                    {
+                                    content: none;
+                                    }
+                                }
+                                h1, h2, h3, p {
+                                    text-indent: 0;
+                                    text-align: left;
+                                    margin-left: 0;
+                                    border: none;
+                                    text-transform: auto;
+                                }
+                            </style>
+                        </head>
+                        <book>
+                            <frontmatter>
+                                <doctitle>l</doctitle>
+                                <docauthor>a</docauthor>
+                            </frontmatter>
+                            <bodymatter>
+                                <level1>
+                                    <h1>a ble at l</h1>
+                                    <p>a ble at l</p>
+                                </level1>
+                                <level1>
+                                    <h1>a ble at ll</h1>
+                                    <p>a ble at ll</p>
+                                    <p xml:lang="en">a ble at ll</p>
+                                    <level2 xml:lang="en">
+                                        <h2>a ble at ll</h2>
+                                        <p>a ble at ll</p>
+                                        <p xml:lang="no">a ble at ll</p>
+                                    </level2>
+                                </level1>
+                            </bodymatter>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="braille-standard" select="'(dots:6)(grade:1)'"/>
+            <x:option name="show-print-page-numbers" select="'false'"/>
+            <x:option name="pef-output-dir" select="resolve-uri('6/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('6/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('6/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="result">
+            <x:document type="file" base-uri="temp-dir" href="6/pef-output-dir/book.pef" select="//pef:page[not(pef:row[contains(text(),'⠠⠕⠍⠀⠃⠕⠅⠁') or contains(text(),'⠝⠕⠗⠎⠅⠀⠇⠽⠙') or contains(text(),'⠼⠁⠀⠁⠧⠀⠼⠁')])]/pef:row[text() and not(position()=last())]"/>
+        </x:context>
+        <x:expect label="result" type="compare">
+            <x:document type="inline" select="//pef:row">
+                <page xmlns="http://www.daisy.org/ns/2008/pef">
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠇⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                    <row>⠁⠀⠃⠇⠑⠀⠁⠞⠀⠇⠇</row>
+                </page>
+            </x:document>
+        </x:expect>
+    </x:scenario>
+    
+    
+    <!--  new testes for css -->
+    
+    <!--  
+    <x:scenario label="test for css">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline" xml:base="file:/tmp/book.xml">
+                    <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+                        <head>
+                            <meta name="dtb:uid" content="123456"/>
+                            <meta name="dc:Title" content="aaa"/>
+                            <meta name="dc:Creator" content="abc abc"/>
+                            <meta name="dc:Creator" content="lll "/>
+                            <meta name="dc:Date" content="2016-03-01"/>
+                            <meta name="dc:Publisher" content="NLB"/>
+                            <meta name="dc:Language" content="no"/>
+                            <style media="embossed" type="text/css">
+                                @page  {
+                                size: 28 3;               
+                                         @left 
+                                        {
+                                        content: none;
+                                        }
+                                    }
+                                
+                            </style>
+                        </head>
+                        <book>
+                            <frontmatter>
+                                <doctitle>l</doctitle>
+                                <docauthor>a</docauthor>
+                            </frontmatter>
+                            <bodymatter>
+                                <level1>
+                                    <h1>a ble at l</h1>
+                                    <p>a ble at l</p>
+                                </level1>
+                            </bodymatter>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="braille-standard" select="'(dots:6)(grade:0)'"/>
+            <x:option name="show-print-page-numbers" select="'false'"/>
+            <x:option name="pef-output-dir" select="resolve-uri('7/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('7/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('7/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="result">
+            <x:document type="file" base-uri="temp-dir" href="7/pef-output-dir/book.pef"     />
+        </x:context>
+        <x:expect label="result" type="compare">
+            <x:document type="inline" select="//pef:row">
+                <page xmlns="http://www.daisy.org/ns/2008/pef">
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠰⠇</row>
+                    <row>⠰⠁⠀⠃⠀⠁⠀⠇⠇</row>
+                  
+                </page>
+            </x:document>
+        </x:expect>
+    </x:scenario>
+    
+    
+    -->
+    
+    
+    
+   
+    
     
 </x:description>

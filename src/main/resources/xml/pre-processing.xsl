@@ -6,16 +6,17 @@
 
     <xsl:param name="uncontracted-pre" select="'⠐⠂ '"/>
     <xsl:param name="uncontracted-post" select="' ⠐⠂'"/>
-    <xsl:template match="element()[(ancestor-or-self::*/(@xml:lang | @lang))[last()] != 'no']">        <xsl:copy>
+    <xsl:template match="element()[(ancestor-or-self::*/(@xml:lang | @lang))[last()] != 'no']">
+        <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:if test="@xml:lang | @lang">
                 <xsl:attribute name="style" select="concat(@style,'text-transform:uncontracted;')"/>
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="matches(local-name(), '^(h[1-6]|p|li|td|th|bh|caption)$')">
-                    <xsl:value-of select="$uncontracted-pre"/>
+                    <!-- <xsl:value-of select="$uncontracted-pre"/> -->  
                     <xsl:apply-templates mode="#current"/>
-                    <xsl:value-of select="$uncontracted-post"/>
+                    <!-- <xsl:value-of select="$uncontracted-post"/> --> 
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates mode="#current"/>

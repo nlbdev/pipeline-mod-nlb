@@ -1,0 +1,378 @@
+/*
+last updated 11.03.2016 KL: 10:56
+*/
+
+/* Declare parameters. Values are passed in from nlb:dtbook-to-pef. */
+$show-print-page-numbers: false !default;
+
+/* -------------------------------------------------------------------------- */
+/*                displaying Original and Braille Page                        */
+/* -------------------------------------------------------------------------- */
+@page
+	{
+		margin-top: 0;
+		margin-bottom: 1;
+		margin-left: 2;
+		margin-right: 2;
+	}
+@page body
+	{
+		@if $show-print-page-numbers
+			{
+			@bottom-right
+				{
+					content:  string(print-page , last);
+				}
+			
+			@left
+				{
+					content: -obfl-marker-indicator(pagenum, '⠿');
+				}
+			}
+			
+		@bottom-center
+			{
+				content: counter(page);
+			}
+}
+	
+pagenum
+	{
+		display: none;
+	}
+
+@if $show-print-page-numbers
+	{
+	bodymatter pagenum
+		{
+			display: none;
+			-obfl-marker: pagenum;
+			string-set: print-page '⠿'content();
+		}
+	}
+
+bodymatter
+	{
+		page: body;
+		counter-reset: page;
+	}
+	
+
+/* -------------------------------------------------------------------------- */
+/*               for volume breaking, toc, titlepage 						  */
+/* -------------------------------------------------------------------------- */
+@volume
+	{
+		max-length: 75;
+		@begin
+		{
+			content: flow(front) flow(volume-toc);
+		}
+	}
+	
+ level1.first-page {
+    flow: front;
+  }
+
+.titlepage, .colophon
+	{
+		display: block;
+		page-break-after: right;
+		flow: titlepage;
+	}
+#generated-volume-toc li
+	{
+		display: block;
+		margin-left: 2;
+		margin-top: 2;
+		text-indent: -2;
+	}
+#generated-volume-toc li a::after
+	{
+		content: ' ' leader('⠄') ' ' target-counter(attr(href), page);
+		margin-left: 2;
+		margin-top: 2;
+		text-indent: -2;
+	}
+
+/* -------------------------------------------------------------------------- */
+/*                                  general                                   */
+/* -------------------------------------------------------------------------- */
+head { display: none; }
+
+level1,
+	frontmatter, bodymatter, rearmatter
+	{
+		display: block;
+		page-break-before: always;
+		page-break-after: always;
+	}
+
+blockquote, sidebar, epigraph, note, noteref,
+	.Rammetekst,   poem , linegroup , line
+	{
+		display: block;
+	}
+
+doctitle, docauthor
+	{
+		display: none;
+	}
+	
+/* -------------------------------------------------------------------------- */
+/*                Frontmatter                        						  */
+/* -------------------------------------------------------------------------- */
+
+frontmatter
+	{
+		margin-left: 3;
+		margin-right: 3;
+		text-align: left;
+	}
+.titlepage ,.uncontracted-letters ,h1
+	{
+		text-transform:uncontracted;
+	}
+	
+.titlepage
+	{
+		text-transform:uncontracted;
+		margin-left: 1;
+		margin-top: 1;
+		page-break-after: always;
+	}
+	
+
+/* -------------------------------------------------------------------------- */
+/*                class                        					        	  */
+/* -------------------------------------------------------------------------- */
+.part h1, h1.part
+	{
+		margin-left: 1;
+		margin-top: 2;
+		text-align: center;
+		page-break-before: always;
+		page-break-after: right;
+		border: ⠉ ⠸ ⠤ ⠇;
+	}
+	
+.precedingemptyline
+	{
+		margin-top: 1;
+	}
+	
+.Rammetekst
+	{
+		margin-top: 1;
+		margin-bottom: 1;
+		text-indent: 2;
+		text-align: left;
+		margin-left: 2;
+	}
+.Rammetekst::before
+	{
+		content: "Rammetekst:";
+	}
+/* -------------------------------------------------------------------------- */
+/*                element                    					        	  */
+/* -------------------------------------------------------------------------- */
+h1 , .part h2
+	{
+		page-break-before: always;
+		margin-top: 2;
+		margin-left: 5;
+		margin-right: 5;
+		margin-bottom: 1;
+		text-align: center;
+		border: ⠉;
+	}
+	
+h2 , .part h3
+	{
+		margin-top: 2;
+		margin-left: 5;
+		margin-right: 5;
+		margin-bottom: 1;
+		text-align: center;
+	}
+	
+h3 , .part h4
+	{
+		margin-top: 1;
+		margin-left: 5;
+		margin-right: 5;
+		text-align: center;
+	}
+
+h4 , .part h5
+	{
+		margin-top: 1;
+		margin-left: 1;
+		margin-right: 5;
+		text-align: left;
+		text-indent: 0;
+	}
+	
+h5 , .part h6
+	{
+		margin-top: 1;
+		margin-left: 1;
+		margin-right: 5;
+		text-align: left;
+		text-indent: 0;
+	}
+h5::after , .part h6::after
+	{
+		content: ":";
+	}
+	
+h6
+	{
+		margin-top: 1;
+		margin-left: 1;
+		margin-right: 5;
+		text-align: left;
+		text-indent: 0;
+		border: ⠉;
+	}
+p
+	{
+		text-indent: 2;
+		text-align: left;
+		widows: 2;
+		orphans: 2;
+	}
+
+blockquote
+	{
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;
+		text-align: left;
+	}
+	
+sidebar
+	{
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;
+		text-align: left;
+	}
+
+sidebar::before
+	{
+		content: "Margtekst:";
+	}
+	
+epigraph
+	{
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;
+		text-align: left;
+	}
+	
+prodnote::before
+	{
+		content: "⠷";
+	}
+	
+prodnote::after
+	{
+		content: "⠾";
+	}
+note , noteref
+	{
+		text-indent: 2;
+		text-align: left;
+	}
+
+imggroup
+	{
+		display:  block;
+	}
+	
+caption::before
+	{
+		content: "Bildetekst:";
+	}
+caption
+	{
+		margin-top: 1;
+		margin-bottom: 1;
+		margin-left: 2;
+		text-indent: 2;
+		text-align: left;
+		
+	}
+	
+poem
+	{
+	text-indent: 2;
+	text-align: left;
+	}
+	
+linegroup
+	{
+		margin-bottom: 1;
+		text-indent: -2;
+	}
+line
+	{
+		margin-left: 2;
+	   text-indent: -2;
+	}
+list
+	{
+		margin-left: 2;
+		text-indent: -2;
+		margin-bottom: 1;
+	}
+li
+	{
+	text-indent: 2;
+	text-align: left;
+	}
+
+/* -------------------------------------------------------------------------- */
+/*                Note and endnote                    					      */
+/* -------------------------------------------------------------------------- */
+@volume
+	{
+	  @end
+		{
+			content: flow(endnotes, volume);
+		}
+	}
+
+noteref::before
+	{
+		content: '⠠';
+	}
+
+noteref::alternate
+	{
+		flow: endnotes;
+		display: block;
+		content: target-content(attr(idref));
+	}
+
+level1.footnotes
+	{
+		display: none;
+	}
+
+note p::before
+	{
+		content: '⠠';
+	}
+	
+note p
+	{
+		margin-left: 4;
+		text-indent: -2;
+	}
+

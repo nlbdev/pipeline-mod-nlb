@@ -34,7 +34,7 @@
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -116,7 +116,7 @@
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:scenario label="grade 0">
@@ -176,34 +176,55 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
-    <x:expect label="result" type="compare" pending="no perfect translation">
+    <x:expect label="result" type="compare" >
       <x:document type="inline">
         <div xmlns="http://www.w3.org/1999/xhtml">
-          <p> ⠓⠥⠝⠙ ⠓⠥⠝⠙<strong>⠆⠑⠝⠰</strong> ⠓⠥⠝⠙<strong>⠆⠑⠗⠰</strong> ⠓⠥⠝⠙<strong>⠆⠑⠝⠑⠰</strong>
+          <p> ⠓⠥⠝⠙ ⠓⠥⠝⠙
+            <strong>⠠⠄⠑⠝⠠⠄</strong> ⠓⠥⠝⠙
+            <strong>⠠⠄⠑⠗⠠⠄</strong> ⠓⠥⠝⠙
+            <strong>⠠⠄⠑⠝⠑⠠⠄</strong>
           </p>
-          <p> ⠓⠥⠝⠙ ⠓⠥⠝⠙<strong>⠆⠑⠝⠰ </strong>⠓⠥⠝⠙<strong>⠆⠑⠗⠰ </strong>⠓⠥⠝⠙<strong>⠆⠑⠝⠑⠰</strong>
+          <p> ⠓⠥⠝⠙ ⠓⠥⠝⠙
+            <strong>⠠⠄⠑⠝ ⠠⠄</strong>⠓⠥⠝⠙
+            <strong>⠠⠄⠑⠗ ⠠⠄</strong>⠓⠥⠝⠙
+            <strong>⠠⠄⠑⠝⠑⠠⠄</strong>
           </p>
-          <p> ⠠⠙⠑⠞ ⠧⠁⠗ ⠃⠁⠗⠑ ⠙⠑⠞ ⠁⠞ ⠓⠥⠝ ⠕⠛⠎⠡ <strong>⠆⠍⠊⠎⠰</strong>⠥⠝⠞⠑ ⠓⠁⠍ ⠙⠑⠞⠄ </p>
-          <p> ⠠⠚⠑⠛ ⠧⠑⠗⠅⠑⠝ <strong>⠆⠧⠊⠇⠰ </strong>⠑⠇⠇⠑⠗ <strong>⠆⠅⠁⠝⠰ </strong>⠛⠚⠪⠗⠑ ⠙⠑⠞⠞⠑ ⠋⠕⠗ ⠙⠑⠛⠖ </p>
-          <p> ⠠⠅⠁⠗⠊⠝ ⠠⠋⠕⠎⠎⠥⠍ ⠎⠇⠕ ⠛⠚⠑⠝⠝⠕⠍ ⠎⠕⠍ ⠅⠗⠊⠍⠋⠕⠗⠋⠁⠞⠞⠑⠗ ⠍⠑⠙ ⠗⠕⠍⠁⠝⠑⠝ <strong>⠆⠑⠧⠁⠎ ⠪⠽⠑⠰</strong>⠂
-            ⠎⠕⠍ ⠅⠕⠍ ⠥⠞ ⠊ ⠼⠁⠊⠊⠑⠄ </p>
-          <p> ⠲⠠⠓⠪⠗ ⠓⠑⠗⠒ <strong>⠆⠙⠥ <u>⠸⠍⠡⠸ </u>⠛⠚⠪⠗⠑ ⠙⠑⠞⠰</strong>⠖⠲ </p>
-          <p> ⠠⠗⠕⠍⠁⠝⠑⠝ <strong>⠆⠠⠞⠥⠎⠑⠝ ⠎⠞⠗⠡⠇⠑⠝⠙⠑ ⠎⠕⠇⠑⠗⠰ </strong>⠁⠧ ⠙⠑⠝ ⠁⠋⠛⠓⠁⠝⠎⠅⠁⠍⠑⠗⠊⠅⠁⠝⠎⠅⠑
-            ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠑⠝ ⠠⠅⠓⠁⠇⠑⠙ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠞⠽⠙⠑⠗ ⠏⠡ ⠡ ⠃⠇⠊ ⠑⠝ ⠇⠊⠅⠑ ⠎⠞⠕⠗ ⠎⠥⠅⠎⠑⠎⠎ ⠎⠕⠍ ⠙⠑⠝ ⠋⠕⠗⠗⠊⠛⠑
-            ⠗⠕⠍⠁⠝⠑⠝⠂ <strong>⠆⠠⠙⠗⠁⠛⠑⠇⠪⠏⠑⠗⠑⠝⠰</strong>⠄ ⠠⠊ ⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑⠝ ⠋⠗⠁ <strong>⠆⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞⠰
-            </strong>⠼⠚⠋⠄⠚⠋⠄⠚⠛ ⠋⠕⠗⠅⠇⠁⠗⠑⠎ ⠙⠑⠞⠞⠑ ⠍⠑⠙⠒ <em>⠠⠄⠊⠅⠅⠑ ⠋⠕⠗⠙⠊ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠑⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠞ ⠛⠕⠙
-              ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠄ ⠠⠍⠑⠝ ⠋⠕⠗⠙⠊ ⠞⠑⠍⠁⠞⠊⠅⠅⠑⠝ ⠞⠊⠇ ⠙⠑⠝ ⠠⠠⠥⠎⠁⠃⠕⠎⠁⠞⠞⠑ ⠠⠓⠕⠎⠎⠑⠊⠝⠊⠂ ⠓⠁⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠇
-              ⠙⠗⠁⠛⠝⠊⠝⠛ ⠏⠡ ⠑⠞ ⠧⠑⠎⠞⠇⠊⠛ ⠏⠥⠃⠇⠊⠅⠥⠍⠄⠠⠄</em>
+          <p> ⠠⠙⠑⠞ ⠧⠁⠗ ⠃⠁⠗⠑ ⠙⠑⠞ ⠁⠞ ⠓⠥⠝ ⠕⠛⠎⠡
+            <strong>⠠⠄⠍⠊⠎⠠⠄</strong>⠥⠝⠞⠑ ⠓⠁⠍ ⠙⠑⠞
           </p>
-          <p> ⠠⠧⠊⠝⠚⠑⠂ ⠠⠋⠊⠝⠝⠤⠠⠑⠗⠊⠅⠄ ⠼⠃⠚⠚⠙⠄ <em>⠠⠄⠠⠎⠅⠗⠊⠧⠑⠗⠑⠛⠇⠑⠗⠠⠄</em>⠄ ⠼⠓⠄ ⠥⠞⠛⠄⠠⠕⠎⠇⠕ </p>
-          <p> ⠠⠓⠑⠇⠇⠑⠧⠊⠅⠂ ⠠⠁⠇⠋⠄ ⠼⠁⠊⠛⠚⠄ <em>⠠⠄⠛⠕⠙ ⠝⠽⠝⠕⠗⠎⠅⠠⠄</em>⠄ ⠠⠕⠎⠇⠕ </p>
-          <p> ⠠⠝⠽ ⠁⠋⠛⠓⠁⠝⠎⠅ ⠃⠑⠎⠞⠎⠑⠇⠛⠑⠗⠄⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑ <em>⠠⠄⠙⠁⠛⠃⠇⠁⠙⠑⠞⠠⠄</em>⠼⠚⠋⠄⠚⠋⠄⠚⠛ </p>
+          <p> ⠠⠚⠑⠛ ⠧⠑⠗⠅⠑⠝
+            <strong>⠠⠄⠧⠊⠇ ⠠⠄</strong>⠑⠇⠇⠑⠗
+            <strong>⠠⠄⠅⠁⠝ ⠠⠄</strong>⠛⠚⠪⠗⠑ ⠙⠑⠞⠞⠑ ⠋⠕⠗ ⠙⠑⠛⠖
+          </p>
+          <p> ⠠⠅⠁⠗⠊⠝ ⠠⠋⠕⠎⠎⠥⠍ ⠎⠇⠕ ⠛⠚⠑⠝⠝⠕⠍ ⠎⠕⠍ ⠅⠗⠊⠍⠋⠕⠗⠋⠁⠞⠞⠑⠗ ⠍⠑⠙ ⠗⠕⠍⠁⠝⠑⠝
+            <strong>⠠⠄⠠⠑⠧⠁⠎ ⠪⠽⠑⠠⠄</strong>⠂ ⠎⠕⠍ ⠅⠕⠍ ⠥⠞ ⠊ ⠼⠁⠊⠊⠑⠄
+          </p>
+          <p> ⠲⠠⠓⠪⠗ ⠓⠑⠗⠒
+            <strong>⠠⠄⠙⠥
+              <u>⠸⠍⠡ ⠸</u>⠛⠚⠪⠗⠑ ⠙⠑⠞⠠⠄
+            </strong>⠖⠲
+          </p>
+          <p> ⠠⠗⠕⠍⠁⠝⠑⠝
+            <strong>⠠⠄⠠⠞⠥⠎⠑⠝ ⠎⠞⠗⠡⠇⠑⠝⠙⠑ ⠎⠕⠇⠑⠗ ⠠⠄</strong>⠁⠧ ⠙⠑⠝ ⠁⠋⠛⠓⠁⠝⠎⠅⠤⠁⠍⠑⠗⠊⠅⠁⠝⠎⠅⠑ ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠑⠝ ⠠⠅⠓⠁⠇⠑⠙ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠞⠽⠙⠑⠗ ⠏⠡ ⠡ ⠃⠇⠊ ⠑⠝ ⠇⠊⠅⠑ ⠎⠞⠕⠗ ⠎⠥⠅⠎⠑⠎⠎ ⠎⠕⠍ ⠙⠑⠝ ⠋⠕⠗⠗⠊⠛⠑ ⠗⠕⠍⠁⠝⠑⠝⠂
+            <strong>⠠⠄⠠⠙⠗⠁⠛⠑⠇⠪⠏⠑⠗⠑⠝⠠⠄</strong>⠄ ⠠⠊ ⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑⠝ ⠋⠗⠁
+            <strong>⠠⠄⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞ ⠠⠄</strong>⠼⠚⠋⠄⠚⠋⠄⠚⠛ ⠋⠕⠗⠅⠇⠁⠗⠑⠎ ⠙⠑⠞⠞⠑ ⠍⠑⠙⠒
+            <em>⠆⠠⠊⠅⠅⠑ ⠋⠕⠗⠙⠊ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠑⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠞ ⠛⠕⠙ ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠄ ⠠⠍⠑⠝ ⠋⠕⠗⠙⠊ ⠞⠑⠍⠁⠞⠊⠅⠅⠑⠝ ⠞⠊⠇ ⠙⠑⠝ ⠠⠠⠥⠎⠁⠤⠃⠕⠎⠁⠞⠞⠑ ⠠⠓⠕⠎⠎⠑⠊⠝⠊⠂ ⠓⠁⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠇ ⠙⠗⠁⠛⠝⠊⠝⠛ ⠏⠡ ⠑⠞ ⠧⠑⠎⠞⠇⠊⠛ ⠏⠥⠃⠇⠊⠅⠥⠍⠄⠰</em>
+          </p>
+          <p> ⠠⠧⠊⠝⠚⠑⠂ ⠠⠋⠊⠝⠝⠤⠠⠑⠗⠊⠅⠄ ⠼⠃⠚⠚⠙⠄
+            <em>⠆⠠⠎⠅⠗⠊⠧⠑⠗⠑⠛⠇⠑⠗⠰</em>⠄ ⠼⠓⠄ ⠥⠞⠛⠄ ⠠⠕⠎⠇⠕
+          </p>
+          <p> ⠠⠓⠑⠇⠇⠑⠧⠊⠅⠂ ⠠⠁⠇⠋⠄ ⠼⠁⠊⠛⠚⠄
+            <em>⠆⠠⠛⠕⠙ ⠝⠽⠝⠕⠗⠎⠅⠰</em>⠄ ⠠⠕⠎⠇⠕
+          </p>
+          <p> ⠠⠝⠽ ⠁⠋⠛⠓⠁⠝⠎⠅ ⠃⠑⠎⠞⠎⠑⠇⠛⠑⠗⠄ ⠠⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑
+            <em>⠆⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞ ⠰</em>⠼⠚⠋⠄⠚⠋⠄⠚⠛
+          </p>
         </div>
       </x:document>
     </x:expect>
@@ -219,7 +240,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:context label="result">
@@ -264,7 +285,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -326,7 +347,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -383,7 +404,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
     <x:context label="result">
@@ -442,7 +463,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -496,7 +517,7 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
+      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
       />
     </x:call>
 
@@ -524,172 +545,5 @@
       </x:document>
     </x:expect>
   </x:scenario>
-
-
-  <!--   ############################  -->
-
-  <!--   ***test for other language*** -->
-
-  <x:scenario label="test for bold, italic, strike through  and strong for DTbook">
-    <x:call step="pxi:transform">
-
-      <x:input port="source">
-        <x:document type="inline">
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-            <level1 xml:lang="no">
-              <h1>aa ll bb cc</h1>
-              <p xml:lang="no">aaa bb cc</p>
-              <p xml:lang="en">aaa bb cc</p>
-              <p xml:lang="no">aaa bb cc</p>
-              <p xml:lang="fr">aaa bb cc</p>
-
-              <level2 xml:lang="en">
-                <h1>aa ll bb cc</h1>
-                <p xml:lang="no">aaa bb cc</p>
-                <p xml:lang="en">aaa bb cc</p>
-                <p xml:lang="no">aaa bb cc</p>
-                <p xml:lang="fr">aaa bb cc</p>
-                <level3 xml:lang="no">
-                  <h1>aa ll bb cc</h1>
-                  <p xml:lang="no">aaa bb cc</p>
-                  <p xml:lang="en">aaa bb cc</p>
-                  <p xml:lang="no">aaa bb cc</p>
-                  <p xml:lang="fr">aaa bb cc</p>
-                </level3>
-              </level2>
-            </level1>
-          </div>
-
-        </x:document>
-      </x:input>
-      <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
-      />
-    </x:call>
-
-
-    <x:context label="result">
-      <x:document type="port" port="result"/>
-    </x:context>
-    <x:expect label="result" type="compare">
-      <x:document type="inline">
-
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-          <level1 xml:lang="no">
-            <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
-            <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
-            <p xml:lang="en">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
-            <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
-            <p xml:lang="fr">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
-            <level2 xml:lang="en">
-              <h1>⠐⠂ ⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉ ⠐⠂</h1>
-              <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
-              <p xml:lang="en">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
-              <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
-              <p xml:lang="fr">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
-              <level3 xml:lang="no">
-                <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
-                <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
-                <p xml:lang="en">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
-                <p xml:lang="no">⠁⠁⠁ ⠃⠃ ⠉⠉</p>
-                <p xml:lang="fr">⠐⠂ ⠁⠁⠁ ⠃⠃ ⠉⠉ ⠐⠂</p>
-              </level3>
-            </level2>
-          </level1>
-        </div>
-
-
-      </x:document>
-    </x:expect>
-  </x:scenario>
-
-
-
-  <!--   **** test for text-transform:uncontracted for other languages  ***  -->
-  
-  
-  
-  
-  <x:scenario label="test for text-transform:uncontracted other languages">
-    <x:call step="pxi:transform">
-      
-      <x:input port="source">
-        <x:document type="inline">
-          
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
-            
-            <doctitle>l</doctitle>
-            <docauthor>a</docauthor>
-            <level1 class="titlepage">
-              <h1>a ble at l</h1>
-              <p>a ble at l </p>
-            </level1>
-            
-            <level1>
-              <h1>a ble at ll</h1>
-              <p>a ble at ll</p>
-              <p xml:lang="en">a ble at ll</p>
-                <level2 xml:lang="en">
-                <h1>a ble at ll</h1>
-                <p>a ble at ll</p>
-                <p xml:lang="no">a ble at ll</p>
-                </level2>
-            </level1>
-          </div>
-          
-        </x:document>
-      </x:input>
-      <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.css'"
-      />
-    </x:call>
-    
-    
-    <x:context label="result">
-      <x:document type="port" port="result"/>
-    </x:context>
-    <x:expect label="result" type="compare">
-      <x:document type="inline">
-        
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
-          
-          <doctitle>⠰⠇</doctitle>
-          <docauthor>⠰⠁</docauthor>
-          <level1 class="titlepage">
-            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
-            <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
-          </level1>
-          
-          <level1>
-            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
-            <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
-            <p xml:lang="en">⠐⠂ ⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇ ⠐⠂</p>
-            <level2 xml:lang="en">
-              <h1>⠐⠂ ⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇ ⠐⠂</h1>
-              <p>⠐⠂ ⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇ ⠐⠂</p>
-              <p xml:lang="no">⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</p>
-            </level2>
-          </level1>
-        </div>
-        
-      </x:document>
-    </x:expect>
-  </x:scenario>
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </x:description>
