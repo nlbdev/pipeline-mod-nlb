@@ -96,6 +96,61 @@ bodymatter
 	}
 
 /* -------------------------------------------------------------------------- */
+/*                        Generated content CSS                               */
+/* -------------------------------------------------------------------------- */
+.first-page
+	{
+		flow: front; 		
+	}
+.first-page p , .third-page  p
+	{
+		display: block; 		
+	}
+.author-1
+	{ 
+		margin-top: 3; 
+	}
+.translater-1
+	{ 
+		margin-top: 2; 
+	}
+.title-pef
+	{
+		display: block;
+		margin-top: 1;
+	}
+.nlb
+	{
+		margin-top: 4;
+	}
+.year
+	{
+		margin-top: 2;
+	}
+/*
+.bind
+	{
+		display: block; 
+		page-break-after: always;
+		content: 'Bind ' -obfl-evaluate($volume) ' of ' -obfl-evaluate($volumes) ;	
+		
+	}
+*/	
+
+.second-page h1 , third-page h1
+	{
+		display: block; 
+		page-break-before: always;		
+	}
+.contraction-level 
+	{
+		margin-top: 1;
+	}
+.contact
+	{
+		page-break-after: always;
+	}
+/* -------------------------------------------------------------------------- */
 /*                                  general                                   */
 /* -------------------------------------------------------------------------- */
 head { display: none; }
