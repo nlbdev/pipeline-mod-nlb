@@ -77,7 +77,7 @@ bodymatter
 .titlepage, .colophon
 	{
 		display: block;
-		page-break-after: right;
+		page-break-after: always;
 		flow: titlepage;
 	}
 #generated-volume-toc li
@@ -110,7 +110,7 @@ bodymatter
 	{ 
 		margin-top: 3; 
 	}
-.translater-1
+.translater
 	{ 
 		margin-top: 2; 
 	}
@@ -132,7 +132,7 @@ bodymatter
 	{
 		display: block; 
 		page-break-after: always;
-		content: 'Bind ' -obfl-evaluate($volume) ' of ' -obfl-evaluate($volumes) ;	
+		content:  -obfl-evaluate('(round $volume)') ' av ' -obfl-evaluate('(round $volumes)') ;	
 		
 	}
 */	
@@ -160,7 +160,7 @@ level1,
 	{
 		display: block;
 		page-break-before: always;
-		page-break-after: always;
+		
 	}
 
 blockquote, sidebar, epigraph, note, noteref,
@@ -206,8 +206,7 @@ frontmatter
 		margin-left: 1;
 		margin-top: 2;
 		text-align: center;
-		page-break-before: always;
-		page-break-after: right;
+		page-break-before: right;		
 		border: ⠉ ⠸ ⠤ ⠇;
 	}
 	
@@ -233,7 +232,7 @@ frontmatter
 /* -------------------------------------------------------------------------- */
 h1 , .part h2
 	{
-		page-break-before: always;
+		page-break-before: right;
 		margin-top: 2;
 		margin-left: 5;
 		margin-right: 5;

@@ -53,7 +53,8 @@
 
 
             <xsl:variable name="contributor" select="//meta[@name eq 'dc:Contributor']/@content"/>
-            <xsl:for-each select="$contributor[position() &lt;= 3]">
+            <p class="translater">Oversatt av</p>
+            <xsl:for-each select="$contributor[position() &lt;= 3]">                
                 <xsl:choose>
                     <xsl:when test="position() = 1">
                         <p class="translater-1">
