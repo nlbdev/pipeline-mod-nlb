@@ -80,7 +80,7 @@
                 <xsl:value-of select="concat('Norge ', format-dateTime(current-dateTime(), '[Y]'))"
                 />
             </p>
-            <p class="bind">1 av 1</p>
+            <p class="bind"> av </p>
         </level1>
         <xsl:choose>
             <xsl:when test="exists(//frontmatter/level1[@class eq 'colophon'])">

@@ -1,5 +1,5 @@
 /*
-last updated 11.03.2016 KL: 10:56
+last updated 21.03.2016 KL: 15:00
 */
 
 /* Declare parameters. Values are passed in from nlb:dtbook-to-pef. */
@@ -132,10 +132,29 @@ bodymatter
 	{
 		display: block; 
 		page-break-after: always;
-		content:  -obfl-evaluate('(round $volume)') ' av ' -obfl-evaluate('(round $volumes)') ;	
+		content:  -obfl-evaluate('(round $volume)') " av " -obfl-evaluate('(round $volumes)') ;	
 		
 	}
 */	
+
+.bind::before
+	{
+		display: inline;                                
+		content:  -obfl-evaluate('(round $volume)') ;
+	}
+	
+.bind
+	{
+		display: inline; 
+	}
+	
+.bind::after
+	{
+		display: inline;                                
+		content:  -obfl-evaluate('(round $volumes)')  ;
+		page-break-after: always;
+	}                    
+
 
 .second-page h1 , third-page h1
 	{
@@ -379,6 +398,11 @@ line
 		margin-left: 2;
 	   text-indent: -2;
 	}
+
+/* -------------------------------------------------------------------------- */
+/*                Lists                             					      */
+/* -------------------------------------------------------------------------- */
+
 list
 	{
 		margin-left: 2;
@@ -387,9 +411,25 @@ list
 	}
 li
 	{
-	text-indent: 2;
-	text-align: left;
+		text-indent: 2;
+		text-align: left;
+		display: list-item;
 	}
+list 
+	{
+		counter-reset: list-item;
+	}
+	
+list[type=ul] 
+	{
+		list-style-type: '*';
+	}
+	
+list[type=ol] 
+	{
+		list-style-type: decimal;
+	}
+
 
 /* -------------------------------------------------------------------------- */
 /*                Note and endnote                    					      */
