@@ -10,18 +10,12 @@
       <p:output port="result"/>
       <p:option name="grade" select="'0'"/>
       <p:option name="dots" select="'6'"/>
-      <p:option name="stylesheet" required="true"/>
       <p:import href="http://www.daisy.org/pipeline/modules/braille/common-utils/library.xpl"/>
-      <p:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/library.xpl"/>
-      <css:inline>
-        <p:with-option name="default-stylesheet" select="$stylesheet"/>
-      </css:inline>
       <px:transform>
         <p:with-option name="query"
           select="concat('(input:css)(input:html)(output:css)(translator:nlb)(locale:no)(grade:',$grade,')(dots:',$dots,')')"
         />
       </px:transform>
-      <p:delete match="@style"/>
     </p:declare-step>
   </x:script>
 
@@ -34,22 +28,18 @@
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
     </x:call>
 
     <x:scenario label="grade 0">
       <x:call>
         <x:option name="grade" select="'0'"/>
       </x:call>
-      <x:context label="result">
-        <x:document type="port" port="result"/>
+      <x:context label="pef">
+        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
-            <p>⠋⠕⠕­⠃⠁⠗</p>
-          </div>
+          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠁⠗</p>
         </x:document>
       </x:expect>
     </x:scenario>
@@ -58,9 +48,6 @@
       <x:call>
         <x:option name="grade" select="'1'"/>
       </x:call>
-      <x:context label="result">
-        <x:document type="port" port="result"/>
-      </x:context>
       <x:context label="pef">
         <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
       </x:context>
@@ -75,9 +62,6 @@
       <x:call>
         <x:option name="grade" select="'2'"/>
       </x:call>
-      <x:context label="result">
-        <x:document type="port" port="result"/>
-      </x:context>
       <x:context label="pef">
         <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
       </x:context>
@@ -92,9 +76,6 @@
       <x:call>
         <x:option name="grade" select="'3'"/>
       </x:call>
-      <x:context label="result">
-        <x:document type="port" port="result"/>
-      </x:context>
       <x:context label="pef">
         <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
       </x:context>
@@ -116,8 +97,6 @@
           </div>
         </x:document>
       </x:input>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
     </x:call>
     <x:scenario label="grade 0">
       <x:call>
@@ -128,7 +107,7 @@
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml" style="hyphens: manual; text-transform: none">
             <p>⠋⠕⠕­⠃⠁⠗</p>
           </div>
         </x:document>
@@ -176,15 +155,13 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
     </x:call>
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare" >
       <x:document type="inline">
-        <div xmlns="http://www.w3.org/1999/xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="text-transform: none">
           <p> ⠓⠥⠝⠙ ⠓⠥⠝⠙
             <strong>⠠⠄⠑⠝⠠⠄</strong> ⠓⠥⠝⠙
             <strong>⠠⠄⠑⠗⠠⠄</strong> ⠓⠥⠝⠙
@@ -240,189 +217,14 @@
         </x:document>
       </x:input>
       <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
     </x:call>
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        <div xmlns="http://www.w3.org/1999/xhtml"> ⠋⠕⠕⠃⠼ <div> ⠋⠕⠕⠃⠁⠗ </div>
+        <div xmlns="http://www.w3.org/1999/xhtml" style="text-transform: none"> ⠋⠕⠕⠃⠼ <div style="text-transform: none"> ⠋⠕⠕⠃⠁⠗ </div>
         </div>
-      </x:document>
-    </x:expect>
-  </x:scenario>
-
-
-
-  <!--   **** test for text-transform:uncontracted   ***  -->
-
-
-
-
-  <x:scenario label="test for text-transform:uncontracted">
-    <x:call step="pxi:transform">
-
-      <x:input port="source">
-        <x:document type="inline">
-
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
-
-            <doctitle>l</doctitle>
-            <docauthor>a</docauthor>
-            <level1 class="titlepage">
-              <h1>a ble at l</h1>
-              <p>a ble at l </p>
-            </level1>
-
-            <level1>
-              <h1>a ble at ll</h1>
-              <p>a ble at ll</p>
-            </level1>
-          </div>
-
-        </x:document>
-      </x:input>
-      <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
-    </x:call>
-
-
-    <x:context label="result">
-      <x:document type="port" port="result"/>
-    </x:context>
-    <x:expect label="result" type="compare">
-      <x:document type="inline">
-
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
-
-          <doctitle>⠰⠇</doctitle>
-          <docauthor>⠰⠁</docauthor>
-          <level1 class="titlepage">
-            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
-            <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
-          </level1>
-
-          <level1>
-            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
-            <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
-          </level1>
-        </div>
-
-      </x:document>
-    </x:expect>
-  </x:scenario>
-
-
-
-  <!--   *** test for Blocks of consecutive letters*** -->
-
-
-
-  <x:scenario label="test for Blocks of consecutive letters should not be contracted">
-    <x:call step="pxi:transform">
-
-      <x:input port="source">
-        <x:document type="inline">
-
-          <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
-
-            <doctitle>l</doctitle>
-            <docauthor>a</docauthor>
-            <level1 class="titlepage">
-              <h1>a ble at l</h1>
-              <p>a ble at l </p>
-            </level1>
-
-            <level1>
-              <h1>a ble at ll</h1>
-              <p>a ble at ll</p>
-              <p>a BLE AT forat ll</p>
-              <p> a ble at ll <span class="uncontracted-letters">a BLE AT ll</span> a ble at ll</p>
-            </level1>
-          </div>
-
-        </x:document>
-      </x:input>
-      <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
-    </x:call>
-
-
-    <x:context label="result">
-      <x:document type="port" port="result"/>
-    </x:context>
-    <x:expect label="result" type="compare">
-      <x:document type="inline">
-
-        <div xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
-
-          <doctitle>⠰⠇</doctitle>
-          <docauthor>⠰⠁</docauthor>
-          <level1 class="titlepage">
-            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇</h1>
-            <p> ⠁ ⠃⠇⠑ ⠁⠞ ⠇</p>
-          </level1>
-
-          <level1>
-            <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠇⠇</h1>
-            <p>⠰⠁ ⠃ ⠁ ⠇⠇</p>
-            <p>⠰⠁ ⠠⠠⠃ ⠠⠠⠁ ⠫⠁ ⠇⠇</p>
-            <p>⠰⠁ ⠃ ⠁ ⠇⠇<span class="uncontracted-letters"> ⠁ ⠠⠠⠃⠇⠑ ⠠⠠⠁⠞ ⠇⠇ </span> ⠰⠁ ⠃ ⠁ ⠇⠇ </p>
-          </level1>
-        </div>
-
-      </x:document>
-    </x:expect>
-  </x:scenario>
-
-
-  <!--  *** test for URLs and e-mail addresses***  -->
-
-
-
-  <x:scenario label="test for URLs and e-mail addresses should not be contracted">
-    <x:call step="pxi:transform">
-
-      <x:input port="source">
-        <x:document type="inline">
-
-          <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-            <level1>
-              <h1>a ble at er der</h1>
-              <p>a ble at er der</p>
-              <p>aa@ll.bb</p>
-              <p>bleer@at.er er</p>
-              <p> ll <span class="uncontracted-letters">bleer@at.er er</span> er</p>
-              <p> ll <span>www.bleerat.er er </span> er</p>
-            </level1>
-          </div>
-
-        </x:document>
-      </x:input>
-      <x:option name="grade" select="'1'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
-    </x:call>
-    <x:context label="result">
-      <x:document type="port" port="result"/>
-    </x:context>
-    <x:context label="pef">
-      <x:document type="port" port="result" select="/*/*[local-name()='level1']"/>
-    </x:context>
-    <x:expect label="result" type="compare">
-      <x:document type="inline">
-        <level1 xmlns="http://www.daisy.org/z3986/2005/dtbook/">
-          <h1>⠁ ⠃⠇⠑ ⠁⠞ ⠑⠗ ⠙⠑⠗</h1>
-          <p>⠰⠁ ⠃ ⠁ ⠱ ⠙⠱</p>
-          <p>⠁⠁⠈⠇⠇⠄⠃⠃</p>
-          <p>⠃⠇⠑⠑⠗⠈⠁⠞⠄⠱ ⠱</p>
-          <p>⠇⠇<span class="uncontracted-letters">⠃⠇⠑⠑⠗⠈⠁⠞⠄⠑⠗ ⠑⠗</span> ⠱ </p>
-          <p>⠇⠇<span>⠣⠺⠺⠺⠄⠃⠇⠑⠑⠗⠁⠞⠄⠑⠗⠜ ⠱ </span>⠱</p>
-        </level1>
       </x:document>
     </x:expect>
   </x:scenario>
@@ -443,7 +245,6 @@
 
   <x:scenario label="test for bold, italic, strike through  and strong for html">
     <x:call step="pxi:transform">
-
       <x:input port="source">
         <x:document type="inline">
           <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
@@ -459,22 +260,16 @@
               <p>aa <b>bb</b> cc </p>
             </level1>
           </div>
-
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
     </x:call>
-
-
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-
-        <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
+        <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml" style="text-transform: none">
           <level1>
             <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
             <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p>
@@ -484,10 +279,8 @@
             <p>⠁⠁ <s>⠐⠂⠃⠃⠐⠂</s> ⠉⠉ </p>
             <p>⠁⠁ <strong>⠠⠄⠃⠃⠠⠄</strong> ⠉⠉ </p>
             <p>⠁⠁ <b>⠠⠄⠃⠃⠠⠄</b> ⠉⠉ </p>
-
           </level1>
         </div>
-
       </x:document>
     </x:expect>
   </x:scenario>
@@ -498,7 +291,6 @@
 
   <x:scenario label="test for bold, italic, strike through  and strong for DTbook">
     <x:call step="pxi:transform">
-
       <x:input port="source">
         <x:document type="inline">
           <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
@@ -513,22 +305,16 @@
               <p>aa <b>bb</b> cc </p>
             </level1>
           </div>
-
         </x:document>
       </x:input>
       <x:option name="grade" select="'0'"/>
-      <x:option name="stylesheet" select="'http://www.nlb.no/pipeline/modules/braille/default.scss'"
-      />
     </x:call>
-
-
     <x:context label="result">
       <x:document type="port" port="result"/>
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-
-        <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+        <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/" style="text-transform: none">
           <level1>
             <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
             <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p>
@@ -538,10 +324,8 @@
             <p>⠁⠁ <s>⠐⠂⠃⠃⠐⠂</s> ⠉⠉ </p>
             <p>⠁⠁ <strong>⠠⠄⠃⠃⠠⠄</strong> ⠉⠉ </p>
             <p>⠁⠁ <b>⠠⠄⠃⠃⠠⠄</b> ⠉⠉ </p>
-
           </level1>
         </div>
-
       </x:document>
     </x:expect>
   </x:scenario>
