@@ -1,3 +1,16 @@
+pipeline-mod-nlb v1.6.0
+=======================
+
+Includes
+--------
+- NLB-specific scripts from DTBook, HTML and EPUB3 to PEF
+  (https://github.com/snaekobbi/pipeline-mod-nlb/pull/22)
+- Remove 5-2 surrounding other languages when using the norwegian braille table
+  (https://github.com/snaekobbi/pipeline-mod-nlb/issues/25)
+- Allow all languages as input
+- Do not perform contractions for foreign languages
+- Handle multiple authors and contributors on title page
+
 pipeline-mod-nlb v1.5.0
 =======================
 
@@ -7,7 +20,6 @@ Includes
   (https://github.com/snaekobbi/pipeline-mod-nlb/issues/18)
 - Treat `strong` as `em` when no `em` present
   (https://github.com/snaekobbi/pipeline-mod-nlb/issues/2)
-
 
 pipeline-mod-nlb v1.4.0
 =======================
