@@ -183,17 +183,17 @@
     <!-- ====== -->
     <!-- Hefter -->
     <!-- ====== -->
-    <p:option name="number-of-pages" select="'50'">
+    <p:option name="number-of-sheets" select="'50'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Hefter: Antall sider</h2>
         </p:documentation>
     </p:option>
-    <p:option name="maximum-number-of-pages" select="'70'">
+    <p:option name="maximum-number-of-sheets" select="'70'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Hefter: Største antall sider</h2>
         </p:documentation>
     </p:option>
-    <p:option name="minimum-number-of-pages" select="'30'">
+    <p:option name="minimum-number-of-sheets" select="'30'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Hefter: Minste antall sider</h2>
         </p:documentation>
