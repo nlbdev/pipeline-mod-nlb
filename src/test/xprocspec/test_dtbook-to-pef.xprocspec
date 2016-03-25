@@ -1471,6 +1471,153 @@
         
     </x:scenario>
 
-
+    <x:scenario label="toc-depth" focus="true">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline">
+                    <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no" version="2005-3">
+                        <book>
+                            <bodymatter>
+                                <level1>
+                                    <h1>h1 a</h1>
+                                    <p>blabla</p>
+                                    <level2>
+                                        <h2>h2 a</h2>
+                                        <p>blabla</p>
+                                        <level3>
+                                            <h3>h3 a</h3>
+                                            <p>blabla</p>
+                                        </level3>
+                                    </level2>
+                                </level1>
+                                <level1>
+                                    <h1>h1 b</h1>
+                                    <p>blabla</p>
+                                </level1>
+                            </bodymatter>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="toc-depth" select="2"/>
+            <x:option name="pef-output-dir" select="resolve-uri('12/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('12/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('12/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="result">
+            <x:document type="file" base-uri="temp-dir" href="12/pef-output-dir/test_dtbook-to-pef.pef"/>
+        </x:context>
+        <x:expect label="result" type="custom" href="http://www.daisy.org/pipeline/modules/braille/pef-utils/library.xpl" step="x:pef-compare">
+            <x:document type="inline">
+                <pef xmlns="http://www.daisy.org/ns/2008/pef" version="2008-1" xml:lang="no">
+                    <head>
+                        <meta xmlns:dc="http://purl.org/dc/elements/1.1/">
+                            <dc:format>application/x-pef+xml</dc:format>
+                        </meta>
+                    </head>
+                    <body>
+                        <volume cols="30" rows="28" rowgap="0" duplex="true">
+                            <section>
+                                <page>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠓⠼⠁⠀⠁⠀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠀⠼⠁</row>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠓⠼⠃⠀⠁⠀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠀⠼⠁</row>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠓⠼⠁⠀⠃⠀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠀⠼⠉</row>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                                </page>
+                            </section>
+                            <section>
+                                <page>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠓⠼⠁⠀⠁</row>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠃⠇⠁⠃⠇⠁</row>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠓⠼⠃⠀⠁</row>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠃⠇⠁⠃⠇⠁</row>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠓⠼⠉⠀⠁</row>
+                                    <row>⠀⠀⠀⠀⠃⠇⠁⠃⠇⠁</row>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                                </page>
+                            </section>
+                            <section>
+                                <page>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠓⠼⠁⠀⠃</row>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠃⠇⠁⠃⠇⠁</row>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row/>
+                                    <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                                </page>
+                            </section>
+                        </volume>
+                    </body>
+                </pef>
+            </x:document>
+        </x:expect>
+    </x:scenario>
     
 </x:description>
