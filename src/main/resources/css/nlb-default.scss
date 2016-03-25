@@ -54,7 +54,7 @@ pagenum
 bodymatter
 	{
 		page: body;
-		counter-reset: page;
+		counter-set: page;
 	}
 	
 
@@ -77,8 +77,13 @@ bodymatter
 .titlepage, .colophon
 	{
 		display: block;
-		page-break-after: always;
+		page-break-before: always;
 		flow: titlepage;
+	}
+
+#generated-volume-toc
+	{
+	page-break-before: always;
 	}
 #generated-volume-toc li
 	{
@@ -178,8 +183,6 @@ level1,
 	frontmatter, bodymatter, rearmatter
 	{
 		display: block;
-		page-break-before: always;
-		
 	}
 
 blockquote, sidebar, epigraph, note, noteref,
@@ -203,7 +206,7 @@ frontmatter
 		margin-right: 3;
 		text-align: left;
 	}
-.titlepage ,.uncontracted-letters ,h1
+.uncontracted-letters ,h1
 	{
 		text-transform:uncontracted;
 	}
@@ -213,7 +216,6 @@ frontmatter
 		text-transform:uncontracted;
 		margin-left: 1;
 		margin-top: 1;
-		page-break-after: always;
 	}
 	
 
@@ -257,7 +259,7 @@ h1 , .part h2
 		margin-right: 5;
 		margin-bottom: 1;
 		text-align: center;
-		border: ⠉;
+		border: ⠉ none;
 	}
 	
 h2 , .part h3
