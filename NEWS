@@ -1,3 +1,12 @@
+pipeline-mod-nlb v1.7.0
+=======================
+
+Includes
+--------
+- Improved support for lists
+- Fix for emphasised text with white space
+- Various bugfixes
+
 pipeline-mod-nlb v1.6.0
 =======================
 
