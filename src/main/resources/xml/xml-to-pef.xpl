@@ -8,6 +8,8 @@
     exclude-inline-prefixes="#all"
     name="main">
     
+    <p:option name="include-obfl" select="'false'"/>
+    
     <p:option name="braille-standard" select="'(dots:6)(grade:0)'">
         <p:pipeinfo>
             <px:data-type>

@@ -36,6 +36,7 @@
         </p:documentation>
     </p:input>
     
+    <p:option name="include-obfl"/>
     <p:option name="braille-standard"/>
     <p:option name="hyphenation"/>
     <p:option name="line-spacing"/>
@@ -86,6 +87,7 @@
         <p:with-option name="main-document-language" select="'no'"/>
         <p:with-option name="include-symbols-list" select="'false'"/>
         <p:with-option name="include-preview" select="'true'"/>
+        <p:with-option name="include-obfl" select="$include-obfl"/>
         <p:with-option name="page-width" select="$page-width"/>
         <p:with-option name="page-height" select="$page-height"/>
         <p:with-option name="left-margin" select="$left-margin"/>
