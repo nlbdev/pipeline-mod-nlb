@@ -88,6 +88,14 @@
             <h2 px:role="name">Layout: Tosidig trykk</h2>
         </p:documentation>
     </p:option>
+    <p:option name="include-obfl" required="false" px:type="boolean" select="'false'">
+        <p:documentation>
+            <h2 px:role="name">Layout: Inkluder OBFL</h2>
+            <p px:role="desc" xml:space="preserve">Lagrer mellom-formatet OBFL som en fil i resultatet.
+
+Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
+        </p:documentation>
+    </p:option>
     
     <!-- =============== -->
     <!-- Blokk-elementer -->

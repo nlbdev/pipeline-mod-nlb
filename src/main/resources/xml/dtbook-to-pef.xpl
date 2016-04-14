@@ -45,6 +45,7 @@
     <p:option name="page-height"/>
     <p:option name="left-margin"/>
     <p:option name="duplex"/>
+    <p:option name="include-obfl"/>
     <p:option name="include-captions"/>
     <p:option name="include-images"/>
     <p:option name="include-image-groups"/>
@@ -86,6 +87,7 @@
         <p:with-option name="main-document-language" select="'no'"/>
         <p:with-option name="include-symbols-list" select="'false'"/>
         <p:with-option name="include-preview" select="'true'"/>
+        <p:with-option name="include-obfl" select="$include-obfl"/>
         <p:with-option name="page-width" select="$page-width"/>
         <p:with-option name="page-height" select="$page-height"/>
         <p:with-option name="left-margin" select="$left-margin"/>
