@@ -8,8 +8,6 @@
     exclude-inline-prefixes="#all"
     name="main">
     
-    <p:option name="include-obfl" select="'false'"/>
-    
     <p:option name="braille-standard" select="'(dots:6)(grade:0)'">
         <p:pipeinfo>
             <px:data-type>
@@ -88,6 +86,14 @@
     <p:option name="duplex" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Layout: Tosidig trykk</h2>
+        </p:documentation>
+    </p:option>
+    <p:option name="include-obfl" required="false" px:type="boolean" select="'false'">
+        <p:documentation>
+            <h2 px:role="name">Layout: Inkluder OBFL</h2>
+            <p px:role="desc" xml:space="preserve">Lagrer mellom-formatet OBFL som en fil i resultatet.
+
+Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
         </p:documentation>
     </p:option>
     
