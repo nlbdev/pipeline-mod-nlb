@@ -2,12 +2,24 @@
 last updated 21.03.2016 KL: 15:00
 */
 
+
 /* Declare parameters. Values are passed in from nlb:dtbook-to-pef. */
 $show-print-page-numbers: false !default;
+$line-spacing: false !default;
 
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
 /* -------------------------------------------------------------------------- */
+/*
+@namespace epub 'http://www.idpf.org/2007/ops'
+section[epub|type~='cover'] 
+	{
+   display: block;
+	}
+	*/
+	
+
+
 @page
 	{
 		margin-top: 0;
@@ -50,8 +62,16 @@ pagenum
 			string-set: print-page '⠿'content();
 		}
 	}
+	
+@if $line-spacing == double 
+	{
+		@page:left 
+			{
+				margin-top: 1; 
+			}	  
+	}
 
-bodymatter
+bodymatter 
 	{
 		page: body;
 		counter-set: page;
@@ -186,7 +206,7 @@ level1,
 	}
 
 blockquote, sidebar, epigraph, note, noteref,
-	.Rammetekst,   poem , linegroup , line
+	.Rammetekst,   poem , linegroup , section.linegroup , div.linegroup , line , p.line
 	{
 		display: block;
 	}
@@ -390,12 +410,12 @@ poem
 	text-align: left;
 	}
 	
-linegroup
+linegroup , section.linegroup , div.linegroup
 	{
 		margin-bottom: 1;
 		text-indent: -2;
 	}
-line
+line , p.line
 	{
 		margin-left: 2;
 	   text-indent: -2;

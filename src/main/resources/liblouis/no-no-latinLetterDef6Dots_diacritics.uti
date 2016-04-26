@@ -22,7 +22,7 @@
 # This table maps letters with diacritics to their closest matching
 # letter a-z, including a dot 4 prefix as required by norwegian braille.
 
-uplow Ṥṥ 4-234        # Latin Letter S with Acute and Dot Above
+
 uplow Áá 4-1          # Latin Letter a with Acute
 uplow Ćć 4-14         # Latin Letter C with Acute
 uplow Éé 4-15         # Latin Letter E with Acute
