@@ -7,7 +7,8 @@
     <xsl:output indent="yes"/>
 
     <xsl:param name="braille-standard" select="'(dots:6)(grade:0)'"/>
-    <xsl:variable name="contraction-grade" select="replace($braille-standard,'.*\(grade:(.*)\).*','$1')"/>
+    <xsl:variable name="contraction-grade"
+        select="replace($braille-standard, '.*\(grade:(.*)\).*', '$1')"/>
 
     <xsl:template match="frontmatter/docauthor">
         <xsl:copy>
@@ -17,6 +18,17 @@
         <xsl:call-template name="add-information-based-from-metadata"/>
     </xsl:template>
 
+    <xsl:template match="noteref[normalize-space(.) eq '*']">       
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:value-of select="1 + count(preceding::noteref)"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="note/p[1]/text()[1][starts-with(normalize-space(.), '*')]">        
+        <xsl:value-of select="1 + count(preceding::note)"/>
+        <xsl:value-of select="substring-after(., '*')"/>
+    </xsl:template>
     <xsl:template match="node()" mode="#all" priority="-5">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
@@ -25,7 +37,7 @@
     </xsl:template>
 
     <xsl:template name="add-information-based-from-metadata">
-        <level1 class="first-page" >
+        <level1 class="first-page">
             <xsl:variable name="author" select="//meta[@name eq 'dc:Creator']/@content"/>
             <xsl:for-each select="$author[position() &lt;= 3]">
                 <xsl:choose>
@@ -54,7 +66,7 @@
 
             <xsl:variable name="contributor" select="//meta[@name eq 'dc:Contributor']/@content"/>
             <p class="translater">Oversatt av</p>
-            <xsl:for-each select="$contributor[position() &lt;= 3]">                
+            <xsl:for-each select="$contributor[position() &lt;= 3]">
                 <xsl:choose>
                     <xsl:when test="position() = 1">
                         <p class="translater-1">
@@ -111,8 +123,7 @@
             </p>
             <p class="pages">Antall Sider: </p>
             <p class="return">Boka skal ikke returneres.</p>
-            <p class="contact">Feil eller mangler
-                kan meldes til punkt@nlb.no.</p>
+            <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
 
         </level1>
     </xsl:template>
