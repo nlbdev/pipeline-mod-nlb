@@ -15,7 +15,6 @@
     
     <p:import href="http://www.daisy.org/pipeline/modules/common-utils/library.xpl"/>
     
-    <p:parameters name="parameters"/>
     <p:identity>
         <p:input port="source">
             <p:pipe port="source" step="main"/>
@@ -25,7 +24,7 @@
     <px:message message="Running NLB-specific pre-processing steps"/>
     <p:xslt>
         <p:input port="parameters">
-            <p:pipe port="result" step="parameters"/>
+            <p:pipe step="main" port="parameters"/>
         </p:input>
         <p:input port="stylesheet">
             <p:document href="pre-processing.xsl"/>
@@ -35,7 +34,7 @@
     <px:message message="Inserting boilerplate text" severity="DEBUG"/>
     <p:xslt>
         <p:input port="parameters">
-            <p:pipe port="result" step="parameters"/>
+            <p:pipe step="main" port="parameters"/>
         </p:input>
         <p:input port="stylesheet">
             <p:document href="insert-boilerplate.xsl"/>
