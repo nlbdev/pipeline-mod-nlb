@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0"
-    xpath-default-namespace="http://www.daisy.org/z3986/2005/dtbook/"
-    xmlns="http://www.daisy.org/z3986/2005/dtbook/">
+    xpath-default-namespace="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml">
 
     <xsl:output indent="yes"/>
 
