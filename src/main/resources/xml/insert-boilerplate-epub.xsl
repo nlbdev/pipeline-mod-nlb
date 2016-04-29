@@ -2,7 +2,15 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0"
     xpath-default-namespace="http://www.w3.org/1999/xhtml"
-    xmlns="http://www.w3.org/1999/xhtml">
+    xmlns="http://www.w3.org/1999/xhtml"  xmlns:f="http://www.daisy.org/ns/pipeline/internal-functions"
+    xmlns:epub="http://www.idpf.org/2007/ops" >
+    
+    <xsl:template match="/*">
+        <!-- for testing when everything else is commented out -->
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    
+    <!--
 
     <xsl:output indent="yes"/>
 
@@ -10,7 +18,7 @@
     <xsl:variable name="contraction-grade"
         select="replace($braille-standard, '.*\(grade:(.*)\).*', '$1')"/>
 
-    <xsl:template match="frontmatter/docauthor">
+    <xsl:template match="body[not(preceding::body)]">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
@@ -18,15 +26,15 @@
         <xsl:call-template name="add-information-based-from-metadata"/>
     </xsl:template>
 
-    <xsl:template match="noteref[normalize-space(.) eq '*']">       
+    <xsl:template match="a[f:types(.)='noteref'][normalize-space(.) eq '*']">       
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:value-of select="1 + count(preceding::noteref)"/>
+            <xsl:value-of select="1 + count(preceding::a[f:types(.)='noteref'])"/>
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="note/p[1]/text()[1][starts-with(normalize-space(.), '*')]">        
-        <xsl:value-of select="1 + count(preceding::note)"/>
+    <xsl:template match="aside[f:types(.)='note']/p[1]/text()[1][starts-with(normalize-space(.), '*')] | li[f:types(.)=('rearnote','footnote')]/p[1]/text()[1][starts-with(normalize-space(.), '*')]">        
+        <xsl:value-of select="1 + count(preceding::aside[f:types(.)='note'] | preceding::li[f:types(.)=('rearnote','footnote')])"/>
         <xsl:value-of select="substring-after(., '*')"/>
     </xsl:template>
     <xsl:template match="node()" mode="#all" priority="-5">
@@ -37,8 +45,8 @@
     </xsl:template>
 
     <xsl:template name="add-information-based-from-metadata">
-        <level1 class="first-page">
-            <xsl:variable name="author" select="//meta[@name eq 'dc:Creator']/@content"/>
+        <section class="first-page">
+            <xsl:variable name="author" select="//meta[@name eq 'dc:creator']/@content"/>
             <xsl:for-each select="$author[position() &lt;= 3]">
                 <xsl:choose>
                     <xsl:when test="position() = 1">
@@ -60,11 +68,11 @@
                 </xsl:choose>
             </xsl:for-each>
             <p class="title-pef">
-                <xsl:value-of select="//meta[@name eq 'dc:Title']/@content"/>
+                <xsl:value-of select="//meta[@name eq 'dc:title']/@content"/>
             </p>
 
 
-            <xsl:variable name="contributor" select="//meta[@name eq 'dc:Contributor']/@content"/>
+            <xsl:variable name="contributor" select="//meta[@name eq 'dc:contributor']/@content"/>
             <p class="translater">Oversatt av</p>
             <xsl:for-each select="$contributor[position() &lt;= 3]">
                 <xsl:choose>
@@ -93,19 +101,19 @@
                 />
             </p>
             <p class="bind"> av </p>
-        </level1>
+        </section>
         <xsl:choose>
             <xsl:when test="exists(//frontmatter/level1[@class eq 'colophon'])">
-                <level1 class="second-page">
+                <section class="second-page">
                     <h1>Colophon</h1>
                     <xsl:copy-of select="//frontmatter/level1[@class eq 'colophon']/descendant::p"/>
-                </level1>
+                </section>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:comment>No colophon!</xsl:comment>
             </xsl:otherwise>
         </xsl:choose>
-        <level1 class="third-page">
+        <section class="third-page">
             <h1>Om boka</h1>
             <p class="contraction-level">
                 <xsl:choose>
@@ -125,9 +133,21 @@
             <p class="return">Boka skal ikke returneres.</p>
             <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
 
-        </level1>
+        </section>
     </xsl:template>
+    
+    
+    
+    <xsl:function name="f:types" as="xs:string*">
+        <xsl:param name="element" as="element()"/>
+        <xsl:sequence select="tokenize($element/@epub:type,'\s+')"/>
+    </xsl:function>
+    
+    <xsl:function name="f:classes" as="xs:string*">
+        <xsl:param name="element" as="element()"/>
+        <xsl:sequence select="tokenize($element/@class,'\s+')"/>
+    </xsl:function>
 
-
+ -->
 
 </xsl:stylesheet>

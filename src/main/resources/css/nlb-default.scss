@@ -81,7 +81,7 @@ bodymatter , level1[epub|type~='bodymatter']
 		}
 	}
 	
- level1.first-page {
+ level1.first-page  , section.first-page{
     flow: front;
   }
 
