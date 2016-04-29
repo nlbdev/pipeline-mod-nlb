@@ -462,6 +462,23 @@ list[type=ol]
 /* -------------------------------------------------------------------------- */
 /*                Note and endnote                    					      */
 /* -------------------------------------------------------------------------- */
+@page 
+	{
+		@footnotes 
+			{
+				content: flow(footnotes);
+				-obfl-fallback-flow: endnotes;
+			}
+	} 
+
+@page 
+	{
+		@footnotes 
+			{
+				max-height: 15;
+			}
+	}
+	
 @volume
 	{
 	  @end
