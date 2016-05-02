@@ -9,7 +9,7 @@ import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
 
 import org.daisy.pipeline.braille.common.BrailleTranslator;
 import org.daisy.pipeline.braille.common.BrailleTranslatorProvider;
-import org.daisy.pipeline.braille.common.BrailleTranslator.CSSStyledText;
+import org.daisy.pipeline.braille.common.CSSStyledText;
 import static org.daisy.pipeline.braille.common.TransformProvider.util.dispatch;
 import static org.daisy.pipeline.braille.common.Query.util.query;
 import org.daisy.pipeline.datatypes.DatatypeRegistry;

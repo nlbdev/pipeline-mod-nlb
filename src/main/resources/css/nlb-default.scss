@@ -1,13 +1,16 @@
 /*
-last updated 21.03.2016 KL: 15:00
+last updated 27.04.2016 KL: 14:00
 */
+@namespace epub 'http://www.idpf.org/2007/ops';
 
 /* Declare parameters. Values are passed in from nlb:dtbook-to-pef. */
 $show-print-page-numbers: false !default;
+$line-spacing: false !default;
 
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
 /* -------------------------------------------------------------------------- */
+
 @page
 	{
 		margin-top: 0;
@@ -36,22 +39,30 @@ $show-print-page-numbers: false !default;
 			}
 }
 	
-pagenum
+pagenum , span[epub|type~='pagebreak'] ,  div[epub|type~='pagebreak']
 	{
 		display: none;
 	}
 
 @if $show-print-page-numbers
 	{
-	bodymatter pagenum
+	bodymatter pagenum , level1[epub|type~='bodymatter'] span[epub|type~='pagebreak'] , level1[epub|type~='bodymatter'] div[epub|type~='pagebreak']
 		{
 			display: none;
 			-obfl-marker: pagenum;
 			string-set: print-page '⠿'content();
 		}
 	}
+	
+@if $line-spacing == double 
+	{
+		@page:left 
+			{
+				margin-top: 1; 
+			}	  
+	}
 
-bodymatter
+bodymatter , level1[epub|type~='bodymatter']
 	{
 		page: body;
 		counter-set: page;
@@ -70,7 +81,7 @@ bodymatter
 		}
 	}
 	
- level1.first-page {
+ level1.first-page  , section.first-page{
     flow: front;
   }
 
@@ -180,18 +191,18 @@ bodymatter
 head { display: none; }
 
 level1,
-	frontmatter, bodymatter, rearmatter
+	frontmatter, level1[epub|type~='frontmatter'] , bodymatter ,level1[epub|type~='bodymatter'], rearmatter , level1[epub|type~='backmatter']
 	{
 		display: block;
 	}
 
-blockquote, sidebar, epigraph, note, noteref,
-	.Rammetekst,   poem , linegroup , line
+blockquote, sidebar, aside[epub|type~='sidebar'], epigraph, aside[epub|type~='epigraph'] , note, aside[epub|type~='note'] , noteref, a[epub|type~='noteref'],
+	.Rammetekst,   poem  ,section[epub|type~='z3998:poem']  ,div[epub|type~='z3998:poem'] , linegroup , section.linegroup , div.linegroup , line , p.line
 	{
 		display: block;
 	}
 
-doctitle, docauthor
+doctitle, h1[epub|type~='fulltitle'], h1[epub|type~='z3998:covertitle'] ,docauthor , h1[epub|type~='z3998:author']
 	{
 		display: none;
 	}
@@ -200,7 +211,7 @@ doctitle, docauthor
 /*                Frontmatter                        						  */
 /* -------------------------------------------------------------------------- */
 
-frontmatter
+frontmatter , level1[epub|type~='frontmatter'] 
 	{
 		margin-left: 3;
 		margin-right: 3;
@@ -327,7 +338,7 @@ blockquote
 		text-align: left;
 	}
 	
-sidebar
+sidebar , aside[epub|type~='sidebar']
 	{
 		margin-top: 1;
 		margin-bottom: 1;
@@ -336,12 +347,12 @@ sidebar
 		text-align: left;
 	}
 
-sidebar::before
+sidebar::before , aside[epub|type~='sidebar']::before
 	{
 		content: "Margtekst:";
 	}
 	
-epigraph
+epigraph , aside[epub|type~='epigraph'] 
 	{
 		margin-top: 1;
 		margin-bottom: 1;
@@ -350,22 +361,37 @@ epigraph
 		text-align: left;
 	}
 	
-prodnote::before
+prodnote::before , aside[epub|type~='z3998:production']::before 
 	{
 		content: "⠷";
 	}
 	
-prodnote::after
+prodnote::after ,aside[epub|type~='z3998:production']::after
 	{
 		content: "⠾";
 	}
-note , noteref
+note , aside[epub|type~='note'] , noteref , a[epub|type~='noteref']
 	{
 		text-indent: 2;
 		text-align: left;
 	}
 
-imggroup
+/*	
+	book {
+    counter-reset: note-counter;
+}
+
+
+
+note:before {
+    counter-increment: note-counter;
+    content:  counter(note-counter) ". ";
+}
+*/
+	
+	
+
+imggroup , figure
 	{
 		display:  block;
 	}
@@ -384,18 +410,18 @@ caption
 		
 	}
 	
-poem
+poem , section[epub|type~='z3998:poem']  ,div[epub|type~='z3998:poem'] 
 	{
 	text-indent: 2;
 	text-align: left;
 	}
 	
-linegroup
+linegroup , section.linegroup , div.linegroup
 	{
 		margin-bottom: 1;
 		text-indent: -2;
 	}
-line
+line , p.line
 	{
 		margin-left: 2;
 	   text-indent: -2;
@@ -436,6 +462,23 @@ list[type=ol]
 /* -------------------------------------------------------------------------- */
 /*                Note and endnote                    					      */
 /* -------------------------------------------------------------------------- */
+@page 
+	{
+		@footnotes 
+			{
+				content: flow(footnotes);
+				-obfl-fallback-flow: endnotes;
+			}
+	} 
+
+@page 
+	{
+		@footnotes 
+			{
+				max-height: 15;
+			}
+	}
+	
 @volume
 	{
 	  @end
@@ -444,12 +487,12 @@ list[type=ol]
 		}
 	}
 
-noteref::before
+noteref::before , a[epub|type~='noteref']::before
 	{
 		content: '⠠';
 	}
 
-noteref::alternate
+noteref::alternate , a[epub|type~='noteref']::alternate
 	{
 		flow: endnotes;
 		display: block;
@@ -461,12 +504,12 @@ level1.footnotes
 		display: none;
 	}
 
-note p::before
+note p::before , aside[epub|type~='note'] p::before
 	{
 		content: '⠠';
 	}
 	
-note p
+note p , aside[epub|type~='note'] p::before
 	{
 		margin-left: 4;
 		text-indent: -2;
