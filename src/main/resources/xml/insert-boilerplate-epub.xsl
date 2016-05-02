@@ -5,13 +5,6 @@
     xmlns="http://www.w3.org/1999/xhtml"  xmlns:f="http://www.daisy.org/ns/pipeline/internal-functions"
     xmlns:epub="http://www.idpf.org/2007/ops" >
     
-    <xsl:template match="/*">
-        <!-- for testing when everything else is commented out -->
-        <xsl:copy-of select="."/>
-    </xsl:template>
-    
-    <!--
-
     <xsl:output indent="yes"/>
 
     <xsl:param name="braille-standard" select="'(dots:6)(grade:0)'"/>
@@ -147,7 +140,5 @@
         <xsl:param name="element" as="element()"/>
         <xsl:sequence select="tokenize($element/@class,'\s+')"/>
     </xsl:function>
-
- -->
 
 </xsl:stylesheet>
