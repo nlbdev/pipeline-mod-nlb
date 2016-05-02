@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import static java.util.Arrays.copyOfRange;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -17,6 +18,14 @@ import com.google.common.collect.ImmutableMap;
 import static com.google.common.collect.Iterables.size;
 import static com.google.common.collect.Lists.newArrayList;
 
+import cz.vutbr.web.css.CSSProperty;
+import cz.vutbr.web.css.Term;
+import cz.vutbr.web.css.TermIdent;
+import cz.vutbr.web.css.TermList;
+
+import org.daisy.braille.css.BrailleCSSProperty.TextTransform;
+import org.daisy.braille.css.SimpleInlineStyle;
+
 import org.daisy.pipeline.braille.common.AbstractBrailleTranslator;
 import org.daisy.pipeline.braille.common.AbstractTransformProvider;
 import org.daisy.pipeline.braille.common.AbstractTransformProvider.util.Function;
@@ -27,7 +36,9 @@ import static org.daisy.pipeline.braille.common.AbstractTransformProvider.util.l
 import static org.daisy.pipeline.braille.common.AbstractTransformProvider.util.logSelect;
 import org.daisy.pipeline.braille.common.BrailleTranslator;
 import org.daisy.pipeline.braille.common.BrailleTranslatorProvider;
+import org.daisy.pipeline.braille.common.CSSStyledText;
 import org.daisy.pipeline.braille.common.Hyphenator;
+import org.daisy.pipeline.braille.common.HyphenatorProvider;
 import org.daisy.pipeline.braille.common.Query;
 import org.daisy.pipeline.braille.common.Query.Feature;
 import org.daisy.pipeline.braille.common.Query.MutableQuery;
@@ -172,10 +183,6 @@ public interface NLBTranslator {
 		private final static String OPEN_COMPUTER = "\u2823"; // dots 126 (<)
 		private final static String CLOSE_COMPUTER = "\u281C"; // dots 345 (>)
 		
-		private final static Splitter.MapSplitter CSS_PARSER
-		= Splitter.on(';').omitEmptyStrings().withKeyValueSeparator(Splitter.on(':').limit(2).trimResults());
-		private final static Splitter TEXT_TRANSFORM_PARSER = Splitter.on(' ').omitEmptyStrings().trimResults();
-		
 		private class TransformImpl extends AbstractBrailleTranslator {
 			
 			private final XProc xproc;
@@ -208,7 +215,7 @@ public interface NLBTranslator {
 				public java.lang.Iterable<String> transform(java.lang.Iterable<CSSStyledText> styledText) {
 					int size = size(styledText);
 					String[] text = new String[size];
-					String[] style = new String[size];
+					SimpleInlineStyle[] style = new SimpleInlineStyle[size];
 					int i = 0;
 					for (CSSStyledText t : styledText) {
 						text[i] = t.getText();
@@ -218,47 +225,53 @@ public interface NLBTranslator {
 				}
 			};
 			
-			private String[] transform(String[] text, String[] cssStyle, boolean[] uncontracted) {
+			private String[] transform(String[] text, SimpleInlineStyle[] cssStyle, boolean[] uncontracted) {
 				if (text.length == 0)
 					return new String[]{};
 				String[] result = new String[text.length];
 				boolean uncont = false;
 				int j = 0;
-				List<String> uncontStyle = null;
+				List<SimpleInlineStyle> uncontStyle = null;
 				for (int i = 0; i < text.length; i++) {
-					Map<String,String> style = new HashMap<String,String>(CSS_PARSER.split(cssStyle[i]));
-					List<String> textTransform = null; {
-						String t = style.remove("text-transform");
-						if (t != null)
-							textTransform = newArrayList(TEXT_TRANSFORM_PARSER.split(t)); }
-					if ((textTransform != null && textTransform.remove("uncontracted"))
-					    || uncontracted[i]) {
+					SimpleInlineStyle style = cssStyle[i];
+					boolean thisUncont; {
+						thisUncont = uncontracted[i];
+						if (style != null) {
+							CSSProperty val = style.getProperty("text-transform");
+							if (val != null) {
+								if (val == TextTransform.list_values) {
+									TermList values = style.getValue(TermList.class, "text-transform");
+									Iterator<Term<?>> it = values.iterator();
+									while (it.hasNext()) {
+										String tt = ((TermIdent)it.next()).getValue();
+										if (tt.equals("uncontracted")) {
+											thisUncont = true;
+											it.remove();
+											break; }}
+									if (values.isEmpty())
+										style.removeProperty("text-transform"); }}}}
+					if (thisUncont) {
 						if (i > 0 && !uncont)
 							for (String s : transformArray(translator,
 							                               copyOfRange(text, j, i),
 							                               copyOfRange(cssStyle, j, i)))
 								result[j++] = s;
 						if (uncontStyle == null)
-							uncontStyle = new ArrayList<String>();
-						String newStyle = "";
-						for (Map.Entry<String,String> kv : style.entrySet())
-							newStyle += (kv.getKey() + ": " + kv.getValue() + ";");
-						if (textTransform != null && textTransform.size() > 0)
-							newStyle += ("text-transform: " + join(textTransform, " ") + ";");
-						uncontStyle.add(newStyle);
+							uncontStyle = new ArrayList<SimpleInlineStyle>();
+						uncontStyle.add(style);
 						uncont = true; }
 					else {
 						if (i > 0 && uncont) {
 							for (String s : transformArray(grade0Translator,
 							                               copyOfRange(text, j, i),
-							                               uncontStyle.toArray(new String[i - j])))
+							                               uncontStyle.toArray(new SimpleInlineStyle[i - j])))
 								result[j++] = s;
 							uncontStyle = null; }
 						uncont = false; }}
 				if (uncont)
 					for (String s : transformArray(grade0Translator,
 					                               copyOfRange(text, j, text.length),
-					                               uncontStyle.toArray(new String[text.length - j])))
+					                               uncontStyle.toArray(new SimpleInlineStyle[text.length - j])))
 						result[j++] = s;
 				else
 					for (String s : transformArray(translator,
@@ -268,7 +281,7 @@ public interface NLBTranslator {
 				return result;
 			}
 			
-			private String[] transform(String[] text, String[] cssStyle) {
+			private String[] transform(String[] text, SimpleInlineStyle[] cssStyle) {
 				String[] segments;
 				// which segments are an url or e-mail address
 				boolean[] computer;
@@ -313,7 +326,7 @@ public interface NLBTranslator {
 						computer[i] = l2.get(i);
 						mapping[i] = l3.get(i); }}
 				String[] brailleSegments;
-				String[] segmentsStyle = new String[segments.length];
+				SimpleInlineStyle[] segmentsStyle = new SimpleInlineStyle[segments.length];
 				for (int i = 0; i < segments.length; i++)
 					segmentsStyle[i] = cssStyle[mapping[i]];
 				brailleSegments = transform(segments, segmentsStyle, computer);
@@ -328,7 +341,7 @@ public interface NLBTranslator {
 				return braille;
 			}
 			
-			private String[] transformArray(FromStyledTextToBraille translator, String[] text, String[] style) {
+			private String[] transformArray(FromStyledTextToBraille translator, String[] text, SimpleInlineStyle[] style) {
 				List<CSSStyledText> styledText = new ArrayList<CSSStyledText>();
 				for (int i = 0; i < text.length; i++)
 					styledText.add(new CSSStyledText(text[i], style[i]));
@@ -372,18 +385,18 @@ public interface NLBTranslator {
 		@Reference(
 			name = "HyphenatorProvider",
 			unbind = "unbindHyphenatorProvider",
-			service = Hyphenator.Provider.class,
+			service = HyphenatorProvider.class,
 			cardinality = ReferenceCardinality.MULTIPLE,
 			policy = ReferencePolicy.DYNAMIC
 		)
 		@SuppressWarnings(
 			"unchecked" // safe cast to TransformProvider<Hyphenator>
 		)
-		protected void bindHyphenatorProvider(Hyphenator.Provider<?> provider) {
+		protected void bindHyphenatorProvider(HyphenatorProvider<?> provider) {
 			hyphenatorProviders.add((TransformProvider<Hyphenator>)provider);
 		}
 	
-		protected void unbindHyphenatorProvider(Hyphenator.Provider<?> provider) {
+		protected void unbindHyphenatorProvider(HyphenatorProvider<?> provider) {
 			hyphenatorProviders.remove(provider);
 			hyphenatorProvider.invalidateCache();
 		}
