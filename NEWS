@@ -1,3 +1,16 @@
+pipeline-mod-nlb v1.8.0
+=======================
+
+Includes
+--------
+- Improved EPUB support (https://github.com/snaekobbi/pipeline-mod-nlb/issues/35)
+- Alternate text on odd and even pages when line spacing is double
+  (https://github.com/snaekobbi/pipeline-mod-nlb/issues/31)
+- Automatic numbering of notes (https://github.com/snaekobbi/pipeline-mod-nlb/issues/33)
+- Mentioning of contraction grade on title page
+  (https://github.com/snaekobbi/pipeline-mod-nlb/issues/32)
+- Fixes to Liblouis table (https://github.com/snaekobbi/pipeline-mod-nlb/issues/36)
+
 pipeline-mod-nlb v1.7.0
 =======================
 
