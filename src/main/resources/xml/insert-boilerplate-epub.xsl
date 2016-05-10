@@ -11,12 +11,14 @@
     <xsl:variable name="contraction-grade"
         select="replace($braille-standard, '.*\(grade:(.*)\).*', '$1')"/>
 
+
     <xsl:template match="body[not(preceding::body)]">
+        <xsl:call-template name="add-information-based-from-metadata"/>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
         </xsl:copy>
-        <xsl:call-template name="add-information-based-from-metadata"/>
+        
     </xsl:template>
 
     <xsl:template match="a[f:types(.)='noteref'][normalize-space(.) eq '*']">       
