@@ -193,7 +193,7 @@
                 <artifactItem>
                   <groupId>org.daisy.libs</groupId>
                   <artifactId>hyphen</artifactId>
-                  <classifier>x86_64-MacOSX-gpp-executable</classifier>
+                  <classifier>amd64-Linux-gpp-executable</classifier>
                   <version>2.6.0</version>
                   <type>nar</type>
                 </artifactItem>
@@ -240,7 +240,7 @@
                   </filelist>
                 </concat>
                 <exec executable="perl" failonerror="yes">
-                  <arg value="target/dependency/bin/x86_64-MacOSX-gpp/substrings.pl"/>
+                  <arg value="target/dependency/bin/amd64-Linux-gpp/substrings.pl"/>
                   <arg value="target/generated-resources/hyph/hyph_nb_NO.pat"/>
                   <arg value="target/generated-resources/hyph/hyph_nb_NO.dic"/>
                   <arg value="ISO8859-1"/>
