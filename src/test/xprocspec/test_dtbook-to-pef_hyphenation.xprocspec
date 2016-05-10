@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.daisy.org/ns/xprocspec"
+               xmlns:nlb="http://www.nlb.no/ns/pipeline/xproc"
+               xmlns:pef="http://www.daisy.org/ns/2008/pef"
+               script="http://www.nlb.no/pipeline/modules/braille/dtbook-to-pef.xpl">
+  
+  <x:scenario label="non-standard hyphenation">
+    <x:call step="nlb:dtbook-to-pef">
+      <x:input port="source">
+        <x:document type="inline">
+          <dtbook version="2005-3" xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no">
+            <book>
+              <bodymatter>
+                <level1>
+                  <p>Busstopp busstopp busstopp busstopp busstopp busstopp busstopp busstopp</p>
+                </level1>
+              </bodymatter>
+            </book>
+          </dtbook>
+        </x:document>
+      </x:input>
+      <x:option name="page-width" select="28"/>
+      <x:option name="show-print-page-numbers" select="false()"/>
+      <x:option name="pef-output-dir" select="resolve-uri('non-standard-hyphenation/output-dir',$temp-dir)"/>
+      <x:option name="preview-output-dir" select="resolve-uri('non-standard-hyphenation/output-dir',$temp-dir)"/>
+      <x:option name="temp-dir" select="resolve-uri('non-standard-hyphenation/temp-dir',$temp-dir)"/>
+    </x:call>
+    <x:context label="result">
+      <x:document type="file" base-uri="temp-dir" href="non-standard-hyphenation/output-dir/test_dtbook-to-pef_hyphenation.pef" />
+    </x:context>
+    <x:expect label="result" type="custom" href="http://www.daisy.org/pipeline/modules/braille/pef-utils/library.xpl" step="x:pef-compare">
+      <x:document type="inline">
+        <pef xmlns="http://www.daisy.org/ns/2008/pef" xml:lang="no" version="2008-1">
+          <head>
+            <meta xmlns:dc="http://purl.org/dc/elements/1.1/">
+              <dc:format>application/x-pef+xml</dc:format>
+            </meta>
+          </head>
+          <body>
+            <volume cols="28" rows="28" rowgap="0" duplex="true">
+              <section>
+                <page>
+                  <row>⠀⠀⠀⠀⠠⠃⠥⠎⠎⠞⠕⠏⠏⠀⠃⠥⠎⠎⠞⠕⠏⠏⠀</row>
+                  <row>⠀⠀⠃⠥⠎⠎⠞⠕⠏⠏⠀⠃⠥⠎⠎⠞⠕⠏⠏⠀⠃⠥⠎⠎⠤</row>
+                  <row>⠀⠀⠎⠞⠕⠏⠏⠀⠃⠥⠎⠎⠞⠕⠏⠏⠀⠃⠥⠎⠎⠞⠕⠏⠏⠀</row>
+                  <row>⠀⠀⠃⠥⠎⠎⠞⠕⠏⠏</row>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row/>
+                  <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠚⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                </page>
+              </section>
+            </volume>
+          </body>
+        </pef>
+      </x:document>
+    </x:expect>
+  </x:scenario>
+  
+</x:description>

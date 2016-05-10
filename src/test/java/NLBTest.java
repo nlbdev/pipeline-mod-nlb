@@ -1,8 +1,9 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javax.inject.Inject;
 
 import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
@@ -10,6 +11,9 @@ import org.daisy.maven.xproc.xprocspec.XProcSpecRunner;
 import org.daisy.pipeline.braille.common.BrailleTranslator;
 import org.daisy.pipeline.braille.common.BrailleTranslatorProvider;
 import org.daisy.pipeline.braille.common.CSSStyledText;
+import org.daisy.pipeline.braille.common.Hyphenator;
+import org.daisy.pipeline.braille.common.HyphenatorProvider;
+import org.daisy.pipeline.braille.common.TransformProvider;
 import static org.daisy.pipeline.braille.common.TransformProvider.util.dispatch;
 import static org.daisy.pipeline.braille.common.Query.util.query;
 import org.daisy.pipeline.datatypes.DatatypeRegistry;
@@ -52,12 +56,33 @@ public class NLBTest {
 	@Inject
 	private BundleContext context;
 	
+	private TransformProvider<BrailleTranslator> translatorProvider() {
+		try {
+			List<BrailleTranslatorProvider<BrailleTranslator>> providers
+				= new ArrayList<BrailleTranslatorProvider<BrailleTranslator>>();
+			for (ServiceReference<? extends BrailleTranslatorProvider> ref :
+				     context.getServiceReferences(BrailleTranslatorProvider.class, null))
+				providers.add(context.getService(ref));
+			return dispatch(providers); }
+		catch (Exception e) {
+			throw new RuntimeException(e); }
+	}
+	
+	private TransformProvider<Hyphenator> hyphenatorProvider() {
+		try {
+			List<HyphenatorProvider<Hyphenator>> providers
+				= new ArrayList<HyphenatorProvider<Hyphenator>>();
+			for (ServiceReference<? extends HyphenatorProvider> ref :
+				     context.getServiceReferences(HyphenatorProvider.class, null))
+				providers.add(context.getService(ref));
+			return dispatch(providers); }
+		catch (Exception e) {
+			throw new RuntimeException(e); }
+	}
+	
 	@Test
 	public void testEmail() throws Exception {
-		List<BrailleTranslatorProvider<BrailleTranslator>> providers = new ArrayList<BrailleTranslatorProvider<BrailleTranslator>>();
-		for (ServiceReference<? extends BrailleTranslatorProvider> ref : context.getServiceReferences(BrailleTranslatorProvider.class, null))
-			providers.add(context.getService(ref));
-		BrailleTranslator translator = dispatch(providers).get(query("(translator:nlb)(grade:1)")).iterator().next();
+		BrailleTranslator translator = translatorProvider().get(query("(translator:nlb)(grade:1)")).iterator().next();
 		assertEquals(
 			braille("⠋⠕⠕ ⠣⠋⠕⠕⠃⠁⠗⠈⠝⠇⠃⠄⠝⠕⠜ ⠃⠼"),
 			translator.fromStyledTextToBraille()
@@ -66,15 +91,24 @@ public class NLBTest {
 	
 	@Test
 	public void testBrailleTranslatorUncontracted() throws Exception {
-		List<BrailleTranslatorProvider<BrailleTranslator>> providers = new ArrayList<BrailleTranslatorProvider<BrailleTranslator>>();
-		for (ServiceReference<? extends BrailleTranslatorProvider> ref : context.getServiceReferences(BrailleTranslatorProvider.class, null))
-			providers.add(context.getService(ref));
-		BrailleTranslator translator = dispatch(providers).get(query("(translator:nlb)(grade:1)")).iterator().next();
+		BrailleTranslator translator = translatorProvider().get(query("(translator:nlb)(grade:1)")).iterator().next();
 		assertEquals(
 			braille("⠋⠕⠕⠃⠼ ","⠋⠕⠕⠃⠁⠗"),
 			translator.fromStyledTextToBraille()
 			          .transform(styledText("foobar ", "",
 			                                "foobar",  "text-transform: uncontracted")));
+	}
+	
+	@Test
+	public void testNonStandardHyphenation() {
+		Hyphenator hyphenator = hyphenatorProvider().get(query("(table:'http://www.nlb.no/hyphen/hyph_nb_NO.dic')")).iterator().next();
+		assertEquals("buss-\n" +
+		             "stopp",
+		             fillLines(hyphenator.asLineBreaker().transform("busstopp"), 6, '-'));
+		BrailleTranslator translator = translatorProvider().get(query("(translator:nlb)(grade:1)")).iterator().next();
+		assertEquals("⠃⠥⠎⠎⠤\n" +
+		             "⠎⠞⠕⠏⠏",
+		             fillLines(translator.lineBreakingFromStyledText().transform(styledText("busstopp","hyphens:auto")), 6));
 	}
 	
 	@Inject
@@ -92,10 +126,23 @@ public class NLBTest {
 	@Test
 	public void runXProcSpec() throws Exception {
 		File baseDir = new File(PathUtils.getBaseDir());
-		boolean success = xprocspecRunner.run(new File(baseDir, "src/test/xprocspec"),
+		Map<String,File> tests = new HashMap<String,File>();
+		for (String test : new String[]{
+			"test_css_formatter",
+			"test_css_translator",
+			// "test_dtbook-to-pef",
+			"test_dtbook-to-pef_hyphenation",
+			"test_epub3-to-pef",
+			"test_html-to-pef",
+			"test_script",
+			"test_translator"
+			})
+			tests.put(test, new File(baseDir, "src/test/xprocspec/" + test + ".xprocspec"));
+		boolean success = xprocspecRunner.run(tests,
 		                                      new File(baseDir, "target/xprocspec-reports"),
 		                                      new File(baseDir, "target/surefire-reports"),
 		                                      new File(baseDir, "target/xprocspec"),
+		                                      null,
 		                                      new XProcSpecRunner.Reporter.DefaultReporter());
 		assertTrue("XProcSpec tests should run with success", success);
 	}
@@ -159,5 +206,32 @@ public class NLBTest {
 	
 	private Iterable<String> braille(String... text) {
 		return Arrays.asList(text);
+	}
+	
+	private static String fillLines(BrailleTranslator.LineIterator lines, int width) {
+		String s = "";
+		while (lines.hasNext()) {
+			s += lines.nextTranslatedRow(width, true);
+			if (lines.hasNext())
+				s += '\n'; }
+		return s;
+	}
+	
+	private static String fillLines(Hyphenator.LineIterator lines, int width, char hyphen) {
+		String s = "";
+		while (lines.hasNext()) {
+			lines.mark();
+			String line = lines.nextLine(width, true);
+			if (lines.lineHasHyphen())
+				line += hyphen;
+			if (line.length() > width) {
+				lines.reset();
+				line = lines.nextLine(width - 1, true);
+				if (lines.lineHasHyphen())
+					line += hyphen; }
+			s += line;
+			if (lines.hasNext())
+				s += '\n'; }
+		return s;
 	}
 }

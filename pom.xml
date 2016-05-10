@@ -6,7 +6,10 @@
   <parent>
     <groupId>org.daisy.pipeline.modules.braille</groupId>
     <artifactId>braille-modules-parent</artifactId>
-    <version>1.9.12</version>
+    <!--
+        depends on branch "hyphenation" + jhyphen branch "non-standard"
+    -->
+    <version>1.9.13-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -211,14 +214,14 @@
             <configuration>
               <target>
                 <mkdir dir="target/generated-resources/hyph"/>
-                <concat destfile="target/generated-resources/hyph/dictionary.txt" encoding="ISO-8859-1">
-                  <fileset dir="src/main/resources/hyph/dictionary"/>
+                <concat destfile="target/generated-resources/hyph/hyph_nb_NO_standard_dictionary.txt" encoding="ISO-8859-1">
+                  <fileset dir="src/main/resources/hyph/hyph_nb_NO_standard_dictionary"/>
                 </concat>
                 <exec executable="bash" failonerror="yes">
                   <arg value="patgen.sh"/>
-                  <arg value="target/generated-resources/hyph/dictionary.txt"/>
-                  <arg value="src/main/resources/hyph/hyph_nb_NO.pat"/>
-                  <arg value="target/generated-resources/hyph/hyph_nb_NO.pat"/>
+                  <arg value="target/generated-resources/hyph/hyph_nb_NO_standard_dictionary.txt"/>
+                  <arg value="src/main/resources/hyph/hyph_nb_NO_standard_base.pat"/>
+                  <arg value="target/generated-resources/hyph/hyph_nb_NO_standard.pat"/>
                   <arg value="src/main/resources/hyph/alphabet"/>
                   <arg value="1"/>   <!-- LEFT_HYPHEN_MIN -->
                   <arg value="1"/>   <!-- RIGHT_HYPHEN_MIN -->
@@ -230,6 +233,12 @@
                   <arg value="1"/>   <!-- THRESHOLD -->
                   <redirector output="target/patgen.log" />
                 </exec>
+                <concat destfile="target/generated-resources/hyph/hyph_nb_NO.pat" encoding="ISO-8859-1">
+                  <filelist>
+                    <file name="target/generated-resources/hyph/hyph_nb_NO_standard.pat"/>
+                    <file name="src/main/resources/hyph/hyph_nb_NO_nonstandard.pat"/>
+                  </filelist>
+                </concat>
                 <exec executable="perl" failonerror="yes">
                   <arg value="target/dependency/bin/x86_64-MacOSX-gpp/substrings.pl"/>
                   <arg value="target/generated-resources/hyph/hyph_nb_NO.pat"/>

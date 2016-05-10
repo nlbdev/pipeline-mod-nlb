@@ -12,7 +12,8 @@
       <p:import href="http://www.daisy.org/pipeline/modules/braille/css-utils/library.xpl"/>
       <css:inline default-stylesheet="http://www.nlb.no/pipeline/modules/braille/default.scss"/>
       <px:transform query="(input:css)(input:html)(output:css)(translator:nlb)(locale:no)(grade:1)(dots:6)"/>
-      <p:delete match="@style"/>
+      <p:delete match="@style|@css:*"/>
+      <p:unwrap match="/_"/>
     </p:declare-step>
   </x:script>
 
