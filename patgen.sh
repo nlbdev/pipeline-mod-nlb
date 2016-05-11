@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 if ! which patgen >/dev/null; then
     echo "patgen is required but not installed"
     exit 1
@@ -23,7 +23,7 @@ cd $(dirname "$0")
 FIFO=tmp
 rm -f $FIFO
 mkfifo $FIFO
-$(which timeout || which gtimeout) 3 patgen $DICTIONARY_FILE $PATTERN_FILE $PATOUT_FILE $TRANSLATE_FILE <$FIFO &
+$(which timeout || which gtimeout) 300 patgen $DICTIONARY_FILE $PATTERN_FILE $PATOUT_FILE $TRANSLATE_FILE <$FIFO &
 echo $LEFT_HYPHEN_MIN $RIGHT_HYPHEN_MIN >$FIFO
 echo $HYPH_LEVEL $HYPH_LEVEL >$FIFO
 echo $PAT_START $PAT_FINISH >$FIFO
