@@ -242,7 +242,7 @@
     
     <!-- test for page number -->
     
-    <x:scenario   label="test with epub file" >
+   <!-- <x:scenario   label="test with epub file" >
         <x:call step="nlb:epub3-to-pef">
             <x:option name="epub" select="resolve-uri('../resources/EPUB_1/package.opf')"/>
                <x:option name="stylesheet" select="resolve-uri('../resources/test3.css')"/>
@@ -429,6 +429,6 @@
         
         
     </x:scenario>
-    
+    -->
     
 </x:description>

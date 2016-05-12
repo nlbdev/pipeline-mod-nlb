@@ -46,23 +46,32 @@ pagenum , span[epub|type~='pagebreak'] ,  div[epub|type~='pagebreak']
 
 @if $show-print-page-numbers
 	{
-	bodymatter pagenum , level1[epub|type~='bodymatter'] span[epub|type~='pagebreak'] , level1[epub|type~='bodymatter'] div[epub|type~='pagebreak']
+	bodymatter pagenum , *[epub|type~='bodymatter'] *[epub|type~='pagebreak'] 
 		{
 			display: none;
 			-obfl-marker: pagenum;
 			string-set: print-page '⠿'content();
 		}
 	}
-	
+
+
 @if $line-spacing == double 
 	{
-		@page:left 
+		:root 	
+			{
+				line-height: 1; /* to cancel out generic rule*/
+			}   
+		bodymatter, level1[epub|type~='bodymatter'] 
+			{
+				line-height: 2;
+			}
+		@page body:left  
 			{
 				margin-top: 1; 
-			}	  
+			}      
 	}
 
-bodymatter , level1[epub|type~='bodymatter']
+bodymatter , *[epub|type~='bodymatter']
 	{
 		page: body;
 		counter-set: page;
@@ -191,7 +200,7 @@ bodymatter , level1[epub|type~='bodymatter']
 head { display: none; }
 
 level1,
-	frontmatter, level1[epub|type~='frontmatter'] , bodymatter ,level1[epub|type~='bodymatter'], rearmatter , level1[epub|type~='backmatter']
+	frontmatter, *[epub|type~='frontmatter'] , bodymatter ,*[epub|type~='bodymatter'], rearmatter , *[epub|type~='backmatter']
 	{
 		display: block;
 	}
