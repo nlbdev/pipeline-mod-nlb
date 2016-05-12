@@ -181,28 +181,6 @@
     </resources>
     <plugins>
       <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.daisy.libs</groupId>
-                  <artifactId>hyphen</artifactId>
-                  <classifier>amd64-Linux-gpp-executable</classifier>
-                  <version>2.6.0</version>
-                  <type>nar</type>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
         <version>1.8</version>
         <executions>
@@ -217,7 +195,7 @@
                 <ac:if xmlns:ac="antlib:net.sf.antcontrib">
                   <available file="target/generated-resources/hyph/hyph_nb_NO.dic"/>
                   <ac:then>
-                    <echo message="Won't recompile hyph_nb_NO.dic. Use `mvn clean` first if you need to regenerate it."/>
+                    <echo message="Won't recompile hyph_nb_NO.dic. Use `mvn clean` first if you need to recompile it."/>
                   </ac:then>
                   <ac:else>
                     <echo message="Will compile hyph_nb_NO.dic. This may take a few minutes..."/>
@@ -241,21 +219,17 @@
                       <arg value="1"/>   <!-- THRESHOLD -->
                       <redirector output="target/patgen.log" />
                     </exec>
-                    <concat destfile="target/generated-resources/hyph/hyph_nb_NO.pat" encoding="ISO-8859-1">
+                    <concat destfile="target/generated-resources/hyph/hyph_nb_NO.dic" encoding="ISO-8859-1">
+                      <header trimleading="yes">
+                        ISO8859-1
+                        LEFTHYPHENMIN 1
+                        RIGHTHYPHENMIN 1${line.separator}
+                      </header>
                       <filelist>
                         <file name="target/generated-resources/hyph/hyph_nb_NO_standard.pat"/>
                         <file name="src/main/resources/hyph/hyph_nb_NO_nonstandard.pat"/>
                       </filelist>
                     </concat>
-                    <exec executable="perl" failonerror="yes">
-                      <arg value="target/dependency/bin/amd64-Linux-gpp/substrings.pl"/>
-                      <arg value="target/generated-resources/hyph/hyph_nb_NO.pat"/>
-                      <arg value="target/generated-resources/hyph/hyph_nb_NO.dic"/>
-                      <arg value="ISO8859-1"/>
-                      <arg value="1"/> <!-- LEFT_HYPHEN_MIN -->
-                      <arg value="1"/> <!-- RIGHT_HYPHEN_MIN -->
-                      <redirector output="target/substrings.log" />
-                    </exec>
                   </ac:else>
                 </ac:if>
               </target>
