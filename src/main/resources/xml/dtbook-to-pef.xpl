@@ -43,26 +43,18 @@
     <p:option name="stylesheet"/>
     <p:option name="page-width"/>
     <p:option name="page-height"/>
-    <p:option name="left-margin"/>
     <p:option name="duplex"/>
     <p:option name="include-obfl"/>
     <p:option name="include-captions"/>
     <p:option name="include-images"/>
-    <p:option name="include-image-groups"/>
     <p:option name="include-line-groups"/>
-    <p:option name="text-level-formatting"/>
     <p:option name="include-note-references"/>
     <p:option name="include-production-notes"/>
     <p:option name="show-braille-page-numbers"/>
     <p:option name="show-print-page-numbers"/>
     <p:option name="toc-depth"/>
     <p:option name="choice-of-colophon"/>
-    <p:option name="footnotes-placement"/>
-    <p:option name="colophon-metadata-placement"/>
-    <p:option name="rear-cover-placement"/>
-    <p:option name="number-of-sheets"/>
     <p:option name="maximum-number-of-sheets"/>
-    <p:option name="minimum-number-of-sheets"/>
     <p:option name="pef-output-dir"/>
     <p:option name="preview-output-dir"/>
     <p:option name="temp-dir"/>
@@ -90,28 +82,20 @@
         <p:with-option name="include-obfl" select="$include-obfl"/>
         <p:with-option name="page-width" select="$page-width"/>
         <p:with-option name="page-height" select="$page-height"/>
-        <p:with-option name="left-margin" select="$left-margin"/>
         <p:with-option name="duplex" select="$duplex"/>
         <p:with-option name="hyphenation" select="$hyphenation"/>
         <p:with-option name="line-spacing" select="$line-spacing"/>
         <p:with-option name="capital-letters" select="$capital-letters"/>
         <p:with-option name="include-captions" select="$include-captions"/>
         <p:with-option name="include-images" select="$include-images"/>
-        <p:with-option name="include-image-groups" select="$include-image-groups"/>
         <p:with-option name="include-line-groups" select="$include-line-groups"/>
-        <p:with-option name="text-level-formatting" select="$text-level-formatting"/>
         <p:with-option name="include-note-references" select="$include-note-references"/>
         <p:with-option name="include-production-notes" select="$include-production-notes"/>
         <p:with-option name="show-braille-page-numbers" select="$show-braille-page-numbers"/>
         <p:with-option name="show-print-page-numbers" select="$show-print-page-numbers"/>
         <p:with-option name="toc-depth" select="$toc-depth"/>
         <p:with-option name="choice-of-colophon" select="$choice-of-colophon"/>
-        <p:with-option name="footnotes-placement" select="$footnotes-placement"/>
-        <p:with-option name="colophon-metadata-placement" select="$colophon-metadata-placement"/>
-        <p:with-option name="rear-cover-placement" select="$rear-cover-placement"/>
-        <p:with-option name="number-of-sheets" select="$number-of-sheets"/>
         <p:with-option name="maximum-number-of-sheets" select="$maximum-number-of-sheets"/>
-        <p:with-option name="minimum-number-of-sheets" select="$minimum-number-of-sheets"/>
         <p:with-option name="pef-output-dir" select="$pef-output-dir"/>
         <p:with-option name="preview-output-dir" select="$preview-output-dir"/>
         <p:with-option name="temp-dir" select="$temp-dir"/>

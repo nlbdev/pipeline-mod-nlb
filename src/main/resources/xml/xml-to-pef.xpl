@@ -78,11 +78,11 @@
             <h2 px:role="name">Layout: Sidehøyde</h2>
         </p:documentation>
     </p:option>
-    <p:option name="left-margin" select="'0'">
+    <!--<p:option name="left-margin" select="'0'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Layout: Venstre marg</h2>
         </p:documentation>
-    </p:option>
+    </p:option>-->
     <p:option name="duplex" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Layout: Tosidig trykk</h2>
@@ -110,11 +110,11 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
             <h2 px:role="name">Blokkelementer: Inkluder alternativ tekst for bilder</h2>
         </p:documentation>
     </p:option>
-    <p:option name="include-image-groups" select="'true'">
+    <!--<p:option name="include-image-groups" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Blokkelementer: Inkluder bildegrupper</h2>
         </p:documentation>
-    </p:option>
+    </p:option>-->
     <p:option name="include-line-groups" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Blokkelementer: Vis linjer i linjegrupper som avsnitt</h2>
@@ -125,11 +125,11 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
     <!-- =============== -->
     <!-- Tekst-elementer -->
     <!-- =============== -->
-    <p:option name="text-level-formatting" select="'true'">
+    <!--<p:option name="text-level-formatting" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Tekstelementer: Marker uthevet tekst (fet/kursiv)</h2>
         </p:documentation>
-    </p:option>
+    </p:option>-->
     <p:option name="include-note-references" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Tekstelementer: Inkluder notereferanser</h2>
@@ -172,40 +172,40 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
     <!-- ===================== -->
     <!-- Plassering av innhold -->
     <!-- ===================== -->
-    <p:option name="footnotes-placement" select="''">
+    <!--<p:option name="footnotes-placement" select="''">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Plassering av innhold: Plassering av fotnoter</h2>
         </p:documentation>
-    </p:option>
-    <p:option name="colophon-metadata-placement" select="''">
+    </p:option>-->
+    <!--<p:option name="colophon-metadata-placement" select="''">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Plassering av innhold: Plassering av kolofon/metadata</h2>
         </p:documentation>
-    </p:option>
-    <p:option name="rear-cover-placement" select="''">
+    </p:option>-->
+    <!--<p:option name="rear-cover-placement" select="''">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Plassering av innhold: Plassering av baksidetekst</h2>
         </p:documentation>
-    </p:option>
+    </p:option>-->
     
     <!-- ====== -->
     <!-- Hefter -->
     <!-- ====== -->
-    <p:option name="number-of-sheets" select="'50'">
+    <!--<p:option name="number-of-sheets" select="'50'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Hefter: Antall sider</h2>
         </p:documentation>
-    </p:option>
+    </p:option>-->
     <p:option name="maximum-number-of-sheets" select="'70'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Hefter: Største antall sider</h2>
         </p:documentation>
     </p:option>
-    <p:option name="minimum-number-of-sheets" select="'30'">
+    <!--<p:option name="minimum-number-of-sheets" select="'30'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Hefter: Minste antall sider</h2>
         </p:documentation>
-    </p:option>
+    </p:option>-->
     
     
     <!-- ====== -->
