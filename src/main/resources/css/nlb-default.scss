@@ -440,7 +440,7 @@ line , p.line
 /*                Lists                             					      */
 /* -------------------------------------------------------------------------- */
 
-list
+list , ul , ol
 	{
 		margin-left: 2;
 		text-indent: -2;
@@ -452,17 +452,17 @@ li
 		text-align: left;
 		display: list-item;
 	}
-list 
+list , ul , ol
 	{
 		counter-reset: list-item;
 	}
 	
-list[type=ul] 
+list[type=ul]  , ul
 	{
 		list-style-type: '⠤';
 	}
 	
-list[type=ol] 
+list[type=ol]  , ol
 	{
 		list-style-type: decimal;
 	}

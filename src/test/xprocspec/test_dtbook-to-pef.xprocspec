@@ -1026,6 +1026,7 @@
                                 <level1>                                    
                                     <h1>aaa</h1>
                                     <p>lll</p>
+                                    <!-- sami s and short and long  dashes-->
                                     <p>Ṥ ṥ á</p> 
                                     <p>kort-  lang—</p> 
                                 </level1>
@@ -1033,11 +1034,7 @@
                                 <level1>                                    
                                     <h1>bbb</h1>
                                     <p>lll</p>                                                            
-                                </level1>
-                                
-                               
-                                
-                              
+                                </level1> 
                             </bodymatter>
                         </book>
                     </dtbook>
@@ -2006,13 +2003,6 @@
         </x:expect>
         
     </x:scenario>
-    
-    
-    
-    
-    
-    
-    
     
     
 </x:description>
