@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<x:description xmlns:x="http://www.daisy.org/ns/xprocspec" xmlns:p="http://www.w3.org/ns/xproc"
-  xmlns:px="http://www.daisy.org/ns/pipeline/xproc" xmlns:html="http://www.w3.org/1999/xhtml"
-  xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal"
-  xmlns:css="http://www.daisy.org/ns/pipeline/braille-css">
-
+<x:description xmlns:x="http://www.daisy.org/ns/xprocspec"
+               xmlns:p="http://www.w3.org/ns/xproc"
+               xmlns:px="http://www.daisy.org/ns/pipeline/xproc"
+               xmlns:html="http://www.w3.org/1999/xhtml"
+               xmlns:pxi="http://www.daisy.org/ns/pipeline/xproc/internal"
+               xmlns:css="http://www.daisy.org/ns/pipeline/braille-css">
+  
   <x:script>
     <p:declare-step type="pxi:transform" version="1.0">
       <p:input port="source"/>
@@ -34,12 +36,16 @@
       <x:call>
         <x:option name="grade" select="'0'"/>
       </x:call>
-      <x:context label="pef">
-        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
+      <x:context label="result">
+        <x:document type="port" port="result"/>
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠁⠗</p>
+          <_ style="text-transform: none">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
+            <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠁⠗</p>
+          </div>
+          </_>
         </x:document>
       </x:expect>
     </x:scenario>
@@ -48,12 +54,16 @@
       <x:call>
         <x:option name="grade" select="'1'"/>
       </x:call>
-      <x:context label="pef">
-        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
+      <x:context label="result">
+        <x:document type="port" port="result"/>
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
+          <_ style="text-transform: none">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
+            <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
+          </div>
+          </_>
         </x:document>
       </x:expect>
     </x:scenario>
@@ -62,12 +72,16 @@
       <x:call>
         <x:option name="grade" select="'2'"/>
       </x:call>
-      <x:context label="pef">
-        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
+      <x:context label="result">
+        <x:document type="port" port="result"/>
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
+          <_ style="text-transform: none">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
+            <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
+          </div>
+          </_>
         </x:document>
       </x:expect>
     </x:scenario>
@@ -76,12 +90,16 @@
       <x:call>
         <x:option name="grade" select="'3'"/>
       </x:call>
-      <x:context label="pef">
-        <x:document type="port" port="result" select="/*/*[local-name()='p']"/>
+      <x:context label="result">
+        <x:document type="port" port="result"/>
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
+          <_ style="text-transform: none">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
+            <p xmlns="http://www.w3.org/1999/xhtml">⠋⠕⠕­⠃⠼</p>
+          </div>
+          </_>
         </x:document>
       </x:expect>
     </x:scenario>
@@ -107,9 +125,11 @@
       </x:context>
       <x:expect label="result" type="compare">
         <x:document type="inline">
-          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml" style="hyphens: manual; text-transform: none">
+          <_ style="text-transform: none">
+          <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
             <p>⠋⠕⠕­⠃⠁⠗</p>
           </div>
+          </_>
         </x:document>
       </x:expect>
     </x:scenario>
@@ -161,7 +181,8 @@
     </x:context>
     <x:expect label="result" type="compare" >
       <x:document type="inline">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="text-transform: none">
+        <_ style="text-transform: none">
+        <div xmlns="http://www.w3.org/1999/xhtml">
           <p>
             ⠓⠥⠝⠙
             ⠓⠥⠝⠙<strong>⠠⠄⠑⠝⠠⠄</strong>
@@ -202,6 +223,7 @@
             <em>⠆⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞⠰ </em>⠼⠚⠋⠄⠚⠋⠄⠚⠛
           </p>
         </div>
+        </_>
       </x:document>
     </x:expect>
   </x:scenario>
@@ -222,8 +244,10 @@
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="text-transform: none"> ⠋⠕⠕⠃⠼ <div style="text-transform: none"> ⠋⠕⠕⠃⠁⠗ </div>
+        <_ style="text-transform: none">
+        <div xmlns="http://www.w3.org/1999/xhtml"> ⠋⠕⠕⠃⠼ <div> ⠋⠕⠕⠃⠁⠗ </div>
         </div>
+        </_>
       </x:document>
     </x:expect>
   </x:scenario>
@@ -268,7 +292,8 @@
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml" style="text-transform: none">
+        <_ style="text-transform: none">
+        <div xml:lang="no" xmlns="http://www.w3.org/1999/xhtml">
           <level1>
             <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
             <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p>
@@ -280,6 +305,7 @@
             <p>⠁⠁ <b>⠠⠄⠃⠃⠠⠄</b> ⠉⠉ </p>
           </level1>
         </div>
+        </_>
       </x:document>
     </x:expect>
   </x:scenario>
@@ -313,7 +339,8 @@
     </x:context>
     <x:expect label="result" type="compare">
       <x:document type="inline">
-        <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/" style="text-transform: none">
+        <_ style="text-transform: none">
+        <div xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
           <level1>
             <h1>⠁⠁ ⠇⠇ ⠃⠃ ⠉⠉</h1>
             <p>⠁⠁ <em>⠆⠃⠃⠰</em> ⠉⠉</p>
@@ -325,6 +352,7 @@
             <p>⠁⠁ <b>⠠⠄⠃⠃⠠⠄</b> ⠉⠉ </p>
           </level1>
         </div>
+        </_>
       </x:document>
     </x:expect>
   </x:scenario>
