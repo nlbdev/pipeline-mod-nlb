@@ -117,8 +117,8 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
     </p:option>-->
     <p:option name="include-line-groups" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Blokkelementer: Vis linjer i linjegrupper som avsnitt</h2>
-            <p px:role="desc" inherit="append">Linjegrupper er typisk et vers i et dikt.</p>
+            <h2 px:role="name">Blokkelementer: Mellomrom før og etter `&lt;linegroup&gt;`</h2>
+            <p px:role="desc" inherit="append">`&lt;linegroup&gt;` brukes for eksempel for hvert vers i et dikt.</p>
         </p:documentation>
     </p:option>
     
@@ -158,16 +158,16 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
     <!-- ================ -->
     <!-- Generert innhold -->
     <!-- ================ -->
-    <p:option name="toc-depth" select="'0'">
+    <p:option name="toc-depth" select="'2'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Generert innhold: Dybde på innholdsfortegnelse</h2>
         </p:documentation>
     </p:option>
-    <p:option name="choice-of-colophon" select="''">
+    <!--<p:option name="choice-of-colophon" select="''">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Generert innhold: Valg av kolofon</h2>
         </p:documentation>
-    </p:option>
+    </p:option>-->
     
     <!-- ===================== -->
     <!-- Plassering av innhold -->
@@ -177,11 +177,11 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
             <h2 px:role="name">Plassering av innhold: Plassering av fotnoter</h2>
         </p:documentation>
     </p:option>-->
-    <!--<p:option name="colophon-metadata-placement" select="''">
+    <p:option name="colophon-metadata-placement" select="''">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Plassering av innhold: Plassering av kolofon/metadata</h2>
         </p:documentation>
-    </p:option>-->
+    </p:option>
     <!--<p:option name="rear-cover-placement" select="''">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Plassering av innhold: Plassering av baksidetekst</h2>
