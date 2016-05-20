@@ -53,7 +53,7 @@
     <p:option name="show-braille-page-numbers"/>
     <p:option name="show-print-page-numbers"/>
     <p:option name="toc-depth"/>
-    <p:option name="choice-of-colophon"/>
+    <p:option name="colophon-metadata-placement"/>
     <p:option name="maximum-number-of-sheets"/>
     <p:option name="pef-output-dir"/>
     <p:option name="preview-output-dir"/>
@@ -94,7 +94,7 @@
         <p:with-option name="show-braille-page-numbers" select="$show-braille-page-numbers"/>
         <p:with-option name="show-print-page-numbers" select="$show-print-page-numbers"/>
         <p:with-option name="toc-depth" select="$toc-depth"/>
-        <p:with-option name="choice-of-colophon" select="$choice-of-colophon"/>
+        <p:with-option name="colophon-metadata-placement" select="$colophon-metadata-placement"/>
         <p:with-option name="maximum-number-of-sheets" select="$maximum-number-of-sheets"/>
         <p:with-option name="pef-output-dir" select="$pef-output-dir"/>
         <p:with-option name="preview-output-dir" select="$preview-output-dir"/>

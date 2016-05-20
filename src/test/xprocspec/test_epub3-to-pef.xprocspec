@@ -5,8 +5,13 @@
     xmlns:nlb="http://www.nlb.no/ns/pipeline/xproc"
     script="http://www.nlb.no/pipeline/modules/braille/epub3-to-pef.xpl">
     
+  <x:scenario label="_">
+    <x:call step="nlb:epub3-to-pef">
+      <x:option name="toc-depth" select="0"/>
+    </x:call>
+    
     <x:scenario label="basic test">
-        <x:call step="nlb:epub3-to-pef">
+        <x:call>
             <x:option name="epub" select="resolve-uri('../resources/EPUB/package.opf')"/>
             <x:option name="pef-output-dir" select="resolve-uri('1/pef-output-dir',$temp-dir)"/>
             <x:option name="preview-output-dir" select="resolve-uri('1/preview-output-dir',$temp-dir)"/>
@@ -22,7 +27,7 @@
     <!-- test for generated content -->
     
     <x:scenario   label="test with epub file" >
-        <x:call step="nlb:epub3-to-pef">
+        <x:call>
             <x:option name="epub" select="resolve-uri('../resources/EPUB/package.opf')"/>
             <!--       <x:option name="stylesheet" select="resolve-uri('../resources/test1.css')"/> -->
             <x:option name="pef-output-dir" select="resolve-uri('2/pef-output-dir',$temp-dir)"/>
@@ -213,7 +218,7 @@
     <!-- test for page number -->
     
     <x:scenario   label="test with epub file" >
-        <x:call step="nlb:epub3-to-pef">
+        <x:call>
             <x:option name="epub" select="resolve-uri('../resources/EPUB_1/package.opf')"/>
                <x:option name="stylesheet" select="resolve-uri('../resources/test3.css')"/>
             <x:option name="pef-output-dir" select="resolve-uri('3/pef-output-dir',$temp-dir)"/>
@@ -398,7 +403,7 @@
     <!-- test for page list -->
     
     <x:scenario   label="test with epub file" >
-        <x:call step="nlb:epub3-to-pef">
+        <x:call>
             <x:option name="epub" select="resolve-uri('../resources/EPUB_2/package.opf')"/>
             <x:option name="stylesheet" select="resolve-uri('../resources/test3.css')"/>
             <x:option name="pef-output-dir" select="resolve-uri('4/pef-output-dir',$temp-dir)"/>
@@ -578,7 +583,6 @@
         </x:expect>
     </x:scenario>
     
-    
-    
-    
+  </x:scenario>
+  
 </x:description>

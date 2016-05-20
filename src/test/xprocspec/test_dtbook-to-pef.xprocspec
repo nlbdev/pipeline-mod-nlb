@@ -6,8 +6,13 @@
     xmlns:pef="http://www.daisy.org/ns/2008/pef"
     script="http://www.nlb.no/pipeline/modules/braille/dtbook-to-pef.xpl">
     
+  <x:scenario label="_">
+    <x:call step="nlb:dtbook-to-pef">
+      <x:option name="toc-depth" select="0"/>
+    </x:call>
+    
     <x:scenario label="basic test">
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="file" href="../resources/DTBook/book.xml"/>
             </x:input>
@@ -23,7 +28,7 @@
     </x:scenario>
     
     <x:scenario label="ability to override css rules - with a link element">
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="file" href="../resources/DTBook-override-css/book-with-link.xml"/>
             </x:input>
@@ -42,7 +47,7 @@
     </x:scenario>
     
     <x:scenario label="ability to override css rules - by passing a css file into the script">
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="file" href="../resources/DTBook-override-css/book.xml"/>
             </x:input>
@@ -62,7 +67,7 @@
     </x:scenario>
     
     <x:scenario label="ability to convert non-norwegian books">
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
                     <dtbook version="2005-3" xml:lang="en" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
@@ -100,7 +105,7 @@
     </x:scenario>
 
     <x:scenario label="test for other languages">
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
                     <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
@@ -200,7 +205,7 @@
     </x:scenario>
     
     <x:scenario label="test for text-transform:uncontracted other languages">
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
                     <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/">
@@ -289,7 +294,7 @@
    
    
     <x:scenario label="List test" >
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
                     <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/"> 
@@ -447,7 +452,7 @@
     <!-- Test for requirements/#4.7:102"  volume x av y -->
     
     <x:scenario label="Test for requirements/#4.7:102 volume x av y" >
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
                     <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/"> 
@@ -846,7 +851,7 @@
    
 
     <x:scenario label="toc-depth" >
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline">
                     <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no" version="2005-3">
@@ -998,7 +1003,7 @@
     <!-- Test for  Automatic numbering of notes #33  -->
    
     <x:scenario label="Automatic numbering of notes" >
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline">
                     <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no" version="2005-3">
@@ -1176,7 +1181,7 @@
     
 
     <x:scenario label="contraction grade generated contentt" >
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
                     <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/"> 
@@ -1379,7 +1384,7 @@
     
          
     <x:scenario label="character" >
-        <x:call step="nlb:dtbook-to-pef">
+        <x:call>
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
                     <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/"> 
@@ -1438,7 +1443,6 @@
         
     </x:scenario>
     
-    
-    
-    
+  </x:scenario>
+  
 </x:description>
