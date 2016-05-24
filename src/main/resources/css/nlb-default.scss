@@ -5,7 +5,10 @@ last updated 27.04.2016 KL: 14:00
 
 /* Declare parameters. Values are passed in from nlb:dtbook-to-pef. */
 $show-print-page-numbers: false !default;
+$show-braille-page-numbers: false !default;
 $line-spacing: false !default;
+$include-note-references: true !default;
+$choice-of-colophon: true !default;
 
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
@@ -32,12 +35,14 @@ $line-spacing: false !default;
 					content: -obfl-marker-indicator(pagenum, '⠿');
 				}
 			}
-			
-		@bottom-center
-			{
-				content: counter(page);
+		@if $show-braille-page-numbers 
+			{	
+				@bottom-center
+					{
+						content: counter(page);
+					}
 			}
-}
+	}
 	
 pagenum , span[epub|type~='pagebreak'] ,  div[epub|type~='pagebreak']
 	{
@@ -94,11 +99,21 @@ bodymatter , *[epub|type~='bodymatter']
     flow: front;
   }
 
-.titlepage, .colophon
+.titlepage
 	{
 		display: block;
 		page-break-before: always;
 		flow: titlepage;
+	}
+	
+@if $choice-of-colophon
+	{
+		.colophon 
+		{
+			display: block;
+			page-break-before: always;
+			flow: titlepage;
+		}
 	}
 
 #generated-volume-toc
@@ -205,10 +220,15 @@ level1,
 		display: block;
 	}
 
-blockquote, sidebar, aside[epub|type~='sidebar'], epigraph, aside[epub|type~='epigraph'] , note, aside[epub|type~='note'] , noteref, a[epub|type~='noteref'],
+blockquote, sidebar, aside[epub|type~='sidebar'], epigraph, aside[epub|type~='epigraph'] ,  noteref, a[epub|type~='noteref'],
 	.Rammetekst,   poem  ,section[epub|type~='z3998:poem']  ,div[epub|type~='z3998:poem'] , linegroup , section.linegroup , div.linegroup , line , p.line
 	{
 		display: block;
+	}
+	
+note, aside[epub|type~='note'] 
+	{
+		display: if($include-note-references, block, none);
 	}
 
 doctitle, h1[epub|type~='fulltitle'], h1[epub|type~='z3998:covertitle'] ,docauthor , h1[epub|type~='z3998:author']

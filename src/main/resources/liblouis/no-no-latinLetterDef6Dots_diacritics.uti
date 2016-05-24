@@ -69,7 +69,6 @@ uplow Ľľ 4-123        # Latin Letter L with Caron
 uplow Ňň 4-1345       # Latin Letter N with Caron
 uplow Ǒǒ 4-135        # Latin Letter O with Caron
 uplow Řř 4-1235       # Latin Letter R with Caron
-uplow Šš 4-234        # Latin Letter S with Caron
 uplow Ťť 4-2345       # Latin Letter T with Caron
 uplow Ǔǔ 4-136        # Latin Letter U with Caron
 sign  ǅ  4-1356       # Latin Capital Letter D with Small Letter Z with Caron

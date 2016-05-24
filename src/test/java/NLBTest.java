@@ -130,7 +130,7 @@ public class NLBTest {
 		for (String test : new String[]{
 			"test_css_formatter",
 			"test_css_translator",
-			// "test_dtbook-to-pef",
+			"test_dtbook-to-pef",
 			"test_dtbook-to-pef_hyphenation",
 			"test_epub3-to-pef",
 			"test_html-to-pef",

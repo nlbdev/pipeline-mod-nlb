@@ -416,7 +416,7 @@
                                 <row>⠀⠀⠀⠀⠃⠃</row>
                                 <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠤⠀</row>
+                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
                                 <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
                                 <row/>
                                 <row/>
@@ -483,9 +483,9 @@
                                 <row>⠀⠀⠀⠀⠀⠀⠀⠠⠁⠝⠞⠁⠇⠇⠀⠠⠎⠊⠙⠑⠗⠒</row>
                                 <row>⠀⠀⠀⠀⠀⠀⠀⠠⠃⠕⠅⠁⠀⠎⠅⠁⠇⠀⠊⠅⠅⠑⠀</row>
                                 <row>⠀⠀⠀⠀⠀⠗⠑⠞⠥⠗⠝⠑⠗⠑⠎⠄</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀⠍⠁⠝⠛⠤</row>
-                                <row>⠀⠀⠀⠀⠀⠇⠑⠗⠀⠅⠁⠝⠀⠍⠑⠇⠙⠑⠎⠀⠞⠊⠇⠀</row>
-                                <row>⠀⠀⠀⠀⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀</row>
+                                <row>⠀⠀⠀⠀⠀⠍⠁⠝⠛⠇⠑⠗⠀⠅⠁⠝⠀⠍⠑⠇⠙⠑⠎⠀</row>
+                                <row>⠀⠀⠀⠀⠀⠞⠊⠇⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
                                 <row/>
                                 <row/>
                                 <row/>
@@ -562,7 +562,7 @@
                                 <row/>
                                 <row/>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠼⠙</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠼⠉</row>
                             </page>
                         </section>
                         <section>
@@ -793,135 +793,136 @@
         <x:expect label="result" type="compare">
             <x:document type="inline" >
                 <body xmlns="http://www.daisy.org/ns/2008/pef">
-                    <volume cols="30" rows="28" rowgap="0" duplex="true">
-                        <section>
-                            <page>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠁⠁⠀⠇⠇</row>
-                                <row>⠀⠀⠀⠀⠃⠃</row>
-                                <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠤⠀</row>
-                                <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠠⠕⠧⠑⠗⠎⠁⠞⠞⠀⠁⠧</row>
-                                <row>⠀⠀⠀⠀⠇⠇</row>
-                                <row>⠀⠀⠀⠀⠉⠉</row>
-                                <row>⠀⠀⠀⠀⠼⠃⠀⠋⠇⠑⠗⠑</row>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠠⠠⠝⠇⠃</row>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠠⠝⠕⠗⠛⠑⠀⠼⠃⠚⠁⠋</row>
-                                <row>⠀⠀⠀⠀⠼⠁⠀⠁⠧⠀⠼⠁</row>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
-                            </page>
-                        </section>
-                        <section>
-                            <page>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠕⠍⠀⠃⠕⠅⠁</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠥⠇⠇⠎⠅⠗⠊⠋⠞</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠁⠝⠞⠁⠇⠇⠀⠠⠎⠊⠙⠑⠗⠒</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠃⠕⠅⠁⠀⠎⠅⠁⠇⠀⠊⠅⠅⠑⠀</row>
-                                <row>⠀⠀⠀⠀⠀⠗⠑⠞⠥⠗⠝⠑⠗⠑⠎⠄</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀⠍⠁⠝⠛⠤</row>
-                                <row>⠀⠀⠀⠀⠀⠇⠑⠗⠀⠅⠁⠝⠀⠍⠑⠇⠙⠑⠎⠀⠞⠊⠇⠀</row>
-                                <row>⠀⠀⠀⠀⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
-                            </page>
-                            <page>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
-                            </page>
-                        </section>
-                        <section>
-                           <page>
-                                <row>⠀⠀⠀⠀⠁⠁⠁⠄</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠤⠀⠁⠁⠁⠀⠁⠁⠁</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠤⠀⠃⠃⠃⠀⠃⠃⠃</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠤⠀⠇⠇⠇⠀⠇⠇⠇</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠤⠀⠗⠗⠗⠀⠗⠗⠗</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠤⠀⠁⠁⠁⠀⠁⠁⠁</row>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠤⠀⠉⠉⠉⠀⠉⠉⠉</row>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠃⠃⠃</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠼⠁⠀⠁⠁⠁⠀⠁⠁⠁</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠼⠃⠀⠃⠃⠃⠀⠃⠃⠃</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠇⠇⠇⠀⠇⠇⠇</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠗⠗⠗⠀⠗⠗⠗</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉⠀⠁⠁⠁⠀⠁⠁⠁</row>
-                                <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠼⠉⠀⠉⠉⠉⠀⠉⠉⠉</row>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                                <row/>
-                               <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠚⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
-                            </page>
-                        </section>
-                    </volume>
-                </body>
+                <volume cols="30" rows="28" rowgap="0" duplex="true">
+                    <section>
+                        <page>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠁⠁⠀⠇⠇</row>
+                            <row>⠀⠀⠀⠀⠃⠃</row>
+                            <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
+                            <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠠⠕⠧⠑⠗⠎⠁⠞⠞⠀⠁⠧</row>
+                            <row>⠀⠀⠀⠀⠇⠇</row>
+                            <row>⠀⠀⠀⠀⠉⠉</row>
+                            <row>⠀⠀⠀⠀⠼⠃⠀⠋⠇⠑⠗⠑</row>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠠⠠⠝⠇⠃</row>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠠⠝⠕⠗⠛⠑⠀⠼⠃⠚⠁⠋</row>
+                            <row>⠀⠀⠀⠀⠼⠁⠀⠁⠧⠀⠼⠁</row>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                        </page>
+                    </section>
+                    <section>
+                        <page>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠕⠍⠀⠃⠕⠅⠁</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠥⠇⠇⠎⠅⠗⠊⠋⠞</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠁⠝⠞⠁⠇⠇⠀⠠⠎⠊⠙⠑⠗⠒</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠃⠕⠅⠁⠀⠎⠅⠁⠇⠀⠊⠅⠅⠑⠀</row>
+                            <row>⠀⠀⠀⠀⠀⠗⠑⠞⠥⠗⠝⠑⠗⠑⠎⠄</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀</row>
+                            <row>⠀⠀⠀⠀⠀⠍⠁⠝⠛⠇⠑⠗⠀⠅⠁⠝⠀⠍⠑⠇⠙⠑⠎⠀</row>
+                            <row>⠀⠀⠀⠀⠀⠞⠊⠇⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                        </page>
+                        <page>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                        </page>
+                    </section>
+                    <section>
+                        <page>
+                            <row>⠀⠀⠀⠀⠁⠁⠁⠄</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠤⠀⠁⠁⠁⠀⠁⠁⠁</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠤⠀⠃⠃⠃⠀⠃⠃⠃</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠤⠀⠇⠇⠇⠀⠇⠇⠇</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠤⠀⠗⠗⠗⠀⠗⠗⠗</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠤⠀⠁⠁⠁⠀⠁⠁⠁</row>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠤⠀⠉⠉⠉⠀⠉⠉⠉</row>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠃⠃⠃</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠼⠁⠀⠁⠁⠁⠀⠁⠁⠁</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠼⠃⠀⠃⠃⠃⠀⠃⠃⠃</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠇⠇⠇⠀⠇⠇⠇</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠗⠗⠗⠀⠗⠗⠗</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉⠀⠁⠁⠁⠀⠁⠁⠁</row>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠼⠉⠀⠉⠉⠉⠀⠉⠉⠉</row>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row/>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠚⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                        </page>
+                    </section>
+                </volume>
+            </body>ocument type="inline" >
+                
                 
             </x:document>
         </x:expect>
@@ -1066,7 +1067,7 @@
                                 <row>⠀⠀⠀⠀⠃⠃</row>
                                 <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠤⠀</row>
+                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
                                 <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
                                 <row/>
                                 <row/>
@@ -1101,9 +1102,9 @@
                                 <row>⠀⠀⠀⠀⠀⠀⠀⠠⠁⠝⠞⠁⠇⠇⠀⠠⠎⠊⠙⠑⠗⠒</row>
                                 <row>⠀⠀⠀⠀⠀⠀⠀⠠⠃⠕⠅⠁⠀⠎⠅⠁⠇⠀⠊⠅⠅⠑⠀</row>
                                 <row>⠀⠀⠀⠀⠀⠗⠑⠞⠥⠗⠝⠑⠗⠑⠎⠄</row>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀⠍⠁⠝⠛⠤</row>
-                                <row>⠀⠀⠀⠀⠀⠇⠑⠗⠀⠅⠁⠝⠀⠍⠑⠇⠙⠑⠎⠀⠞⠊⠇⠀</row>
-                                <row>⠀⠀⠀⠀⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀</row>
+                                <row>⠀⠀⠀⠀⠀⠍⠁⠝⠛⠇⠑⠗⠀⠅⠁⠝⠀⠍⠑⠇⠙⠑⠎⠀</row>
+                                <row>⠀⠀⠀⠀⠀⠞⠊⠇⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
                                 <row/>
                                 <row/>
                                 <row/>
@@ -1162,7 +1163,7 @@
                                 <row>⠀⠀⠀⠀⠃⠃</row>
                                 <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠤⠀</row>
+                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
                                 <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
                                 <row/>
                                 <row/>
@@ -1228,7 +1229,7 @@
                                 <row>⠀⠀⠀⠀⠃⠃</row>
                                 <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠤⠀</row>
+                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
                                 <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
                                 <row/>
                                 <row/>
@@ -1751,7 +1752,7 @@
                                 <row>⠀⠀⠀⠀⠃⠃</row>
                                 <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠣⠀⠠⠠⠞⠁⠇⠀⠤⠤⠀</row>
+                                <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠣⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
                                 <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
                                 <row/>
                                 <row/>
@@ -1897,7 +1898,7 @@
                                 <row/>
                                 <row/>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠼⠙</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠼⠉</row>
                             </page>
                         </section>
                         <section>
@@ -2003,6 +2004,76 @@
         </x:expect>
         
     </x:scenario>
+    
+    
+    
+    
+    <!-- test for character -->
+    
+       <!-- Test for requirements/#4.7:102"  volume x av y -->
+    
+    
+    <x:scenario label="List test" >
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline" xml:base="file:/tmp/book.xml">
+                    <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/"> 
+                        <head> 
+                            <style type="text/css" media="embossed">
+                                @page 
+                                { size: 30 8;   }
+                                
+                            </style>
+                            <meta name="dtb:uid" content="557901"/>                            
+                        </head>
+                        <book>                           
+                            <body>                               
+                                <level1>  
+                                    <p>á Š š </p> 
+                                    <p>kort-  lang—</p>  <!-- short and long dash after word -->
+                                    <p>-kort  —lang</p>  <!-- short and long dash before word -->
+                                    <p>aa-bb  aa—bb</p>  <!-- short and long dash between word -->
+                                    <p>aa — bb</p>  <!--  long dash alone -->
+                                    <p>aa - bb</p>  <!--  short dash alone -->
+                                </level1> 
+                            </body>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="braille-standard" select="'(dots:6)(grade:0)'"/>
+            <x:option name="show-print-page-numbers" select="'true'"/>
+            <x:option name="pef-output-dir" select="resolve-uri('15/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('15/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('15/temp-dir',$temp-dir)"/>
+        </x:call>  
+        <x:context label="result">
+            <x:document type="file" base-uri="temp-dir" href="15/pef-output-dir/book.pef"  select="/*/*[local-name()='body']"  />
+        </x:context>
+        <x:expect label="result" type="compare">
+            <x:document type="inline" >
+                <body xmlns="http://www.daisy.org/ns/2008/pef">
+                    <volume cols="30" rows="8" rowgap="0" duplex="true">
+                        <section>
+                            <page>
+                                <row>⠀⠀⠀⠀⠷⠀⠠⠱⠀⠱</row>
+                                <row>⠀⠀⠀⠀⠅⠕⠗⠞⠤⠀⠇⠁⠝⠛⠤⠤</row>
+                                <row>⠀⠀⠀⠀⠤⠅⠕⠗⠞⠀⠤⠤⠇⠁⠝⠛</row>
+                                <row>⠀⠀⠀⠀⠁⠁⠤⠃⠃⠀⠁⠁⠤⠤⠃⠃</row>
+                                <row>⠀⠀⠀⠀⠁⠁⠀⠤⠤⠀⠃⠃</row>
+                                <row>⠀⠀⠀⠀⠁⠁⠀⠤⠀⠃⠃</row>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                            </page>
+                        </section>
+                    </volume>
+                </body>
+            </x:document>
+        </x:expect>
+        
+    </x:scenario>
+    
+    
     
     
 </x:description>

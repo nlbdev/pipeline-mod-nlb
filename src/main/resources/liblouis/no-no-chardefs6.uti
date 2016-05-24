@@ -146,10 +146,11 @@ uplow \x01EA\x01EB 23456     # o with ogonek
 uplow Đđ 1456                # d with stroke
 uplow Ðð 156                 # Eth
 uplow Ŋŋ 1246                # Eng
-uplow Þþ 35-2345                # Thorn
+uplow Þþ 35-2345             # Thorn
 uplow Üü 1245                # u with diaeresis
 uplow Ŧŧ 1256                # t with stroke
-uplow Ṥṥ  156                  # Latin Letter S with Acute and Dot Above
+uplow Ṥṥ  156                 # Latin Letter S with Acute and Dot Above
+uplow Šš 156         		 # Latin Letter S with Caron
 
 math + 235                   # plus x002B
 math / 34 solidus            # x002F
