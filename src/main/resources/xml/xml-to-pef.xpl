@@ -130,9 +130,9 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
             <h2 px:role="name">Tekstelementer: Marker uthevet tekst (fet/kursiv)</h2>
         </p:documentation>
     </p:option>-->
-    <p:option name="include-note-references" select="'true'">
+    <p:option name="include-notes" select="'true'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
-            <h2 px:role="name">Tekstelementer: Inkluder notereferanser</h2>
+            <h2 px:role="name">Tekstelementer: Inkluder noter</h2>
         </p:documentation>
     </p:option>
     <p:option name="include-production-notes" select="'false'">

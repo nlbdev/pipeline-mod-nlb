@@ -87,7 +87,6 @@ bodymatter , *[epub|type~='bodymatter']
 /* -------------------------------------------------------------------------- */
 @volume
 	{
-		max-length: 75;
 		@begin
 		{
 			content: flow(front) flow(volume-toc);

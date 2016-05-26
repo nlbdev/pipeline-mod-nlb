@@ -44,11 +44,10 @@
     <p:option name="page-width"/>
     <p:option name="page-height"/>
     <p:option name="duplex"/>
-    <p:option name="include-obfl"/>
     <p:option name="include-captions"/>
     <p:option name="include-images"/>
     <p:option name="include-line-groups"/>
-    <p:option name="include-note-references"/>
+    <p:option name="include-notes"/>
     <p:option name="include-production-notes"/>
     <p:option name="show-braille-page-numbers"/>
     <p:option name="show-print-page-numbers"/>
@@ -79,7 +78,6 @@
         <p:with-option name="main-document-language" select="'no'"/>
         <p:with-option name="include-symbols-list" select="'false'"/>
         <p:with-option name="include-preview" select="'true'"/>
-        <p:with-option name="include-obfl" select="$include-obfl"/>
         <p:with-option name="page-width" select="$page-width"/>
         <p:with-option name="page-height" select="$page-height"/>
         <p:with-option name="duplex" select="$duplex"/>
@@ -89,7 +87,7 @@
         <p:with-option name="include-captions" select="$include-captions"/>
         <p:with-option name="include-images" select="$include-images"/>
         <p:with-option name="include-line-groups" select="$include-line-groups"/>
-        <p:with-option name="include-note-references" select="$include-note-references"/>
+        <p:with-option name="include-note-references" select="$include-notes"/>
         <p:with-option name="include-production-notes" select="$include-production-notes"/>
         <p:with-option name="show-braille-page-numbers" select="$show-braille-page-numbers"/>
         <p:with-option name="show-print-page-numbers" select="$show-print-page-numbers"/>
