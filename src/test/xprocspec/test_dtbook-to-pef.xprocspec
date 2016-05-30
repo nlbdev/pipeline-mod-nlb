@@ -283,10 +283,10 @@
     
     
     <!--  new testes for css -->
-    <!--  test for generated content -->
-   
     
-    <x:scenario label="generated-content" >
+   
+   
+    <!--<x:scenario label="generated-content" >
         <x:call step="nlb:dtbook-to-pef">
             <x:input port="source">
                 <x:document type="inline" xml:base="file:/tmp/book.xml">
@@ -667,7 +667,7 @@
             </x:document>
         </x:expect>
         
-    </x:scenario>
+    </x:scenario>-->
     
    
    <!-- Test for list -->
@@ -732,14 +732,8 @@
                             <meta name="dcterms:modified" content="2015-11-09T09:06:58+00:00"/>
                         </head>
                         <book>
-                            <frontmatter>
-                                <doctitle>aaa</doctitle>
-                                <docauthor>bbb</docauthor>
-                                <level1  class="titlepage">
-                                    <p class="docauthor author">Tor </p>
-                                </level1>
-                            </frontmatter>
-                            <bodymatter>
+                           
+                            <body>
                                 <level1>
                                     <p>aaa.</p>
                                     
@@ -769,10 +763,9 @@
                                         <li>ccc ccc</li>
                                     </list>
                                     
-                                </level1>
-                                
+                                </level1>                                
                                
-                            </bodymatter>
+                            </body>
                         </book>
                     </dtbook>
                 </x:document>
@@ -793,101 +786,7 @@
         <x:expect label="result" type="compare">
             <x:document type="inline" >
                 <body xmlns="http://www.daisy.org/ns/2008/pef">
-                <volume cols="30" rows="28" rowgap="0" duplex="true">
-                    <section>
-                        <page>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠁⠁⠀⠇⠇</row>
-                            <row>⠀⠀⠀⠀⠃⠃</row>
-                            <row>⠀⠀⠀⠀⠼⠉⠀⠋⠇⠑⠗⠑</row>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
-                            <row>⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠠⠕⠧⠑⠗⠎⠁⠞⠞⠀⠁⠧</row>
-                            <row>⠀⠀⠀⠀⠇⠇</row>
-                            <row>⠀⠀⠀⠀⠉⠉</row>
-                            <row>⠀⠀⠀⠀⠼⠃⠀⠋⠇⠑⠗⠑</row>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠠⠠⠝⠇⠃</row>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠠⠝⠕⠗⠛⠑⠀⠼⠃⠚⠁⠋</row>
-                            <row>⠀⠀⠀⠀⠼⠁⠀⠁⠧⠀⠼⠁</row>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
-                        </page>
-                    </section>
-                    <section>
-                        <page>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠕⠍⠀⠃⠕⠅⠁</row>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠥⠇⠇⠎⠅⠗⠊⠋⠞</row>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠁⠝⠞⠁⠇⠇⠀⠠⠎⠊⠙⠑⠗⠒</row>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠃⠕⠅⠁⠀⠎⠅⠁⠇⠀⠊⠅⠅⠑⠀</row>
-                            <row>⠀⠀⠀⠀⠀⠗⠑⠞⠥⠗⠝⠑⠗⠑⠎⠄</row>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀</row>
-                            <row>⠀⠀⠀⠀⠀⠍⠁⠝⠛⠇⠑⠗⠀⠅⠁⠝⠀⠍⠑⠇⠙⠑⠎⠀</row>
-                            <row>⠀⠀⠀⠀⠀⠞⠊⠇⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
-                        </page>
-                        <page>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row/>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
-                        </page>
-                    </section>
+                <volume cols="30" rows="28" rowgap="0" duplex="true">                    
                     <section>
                         <page>
                             <row>⠀⠀⠀⠀⠁⠁⠁⠄</row>
@@ -917,7 +816,7 @@
                             <row/>
                             <row/>
                             <row/>
-                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠚⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                            <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
                         </page>
                     </section>
                 </volume>

@@ -167,15 +167,7 @@ bodymatter , *[epub|type~='bodymatter']
 	{
 		margin-top: 2;
 	}
-/*
-.bind
-	{
-		display: block; 
-		page-break-after: always;
-		content:  -obfl-evaluate('(round $volume)') " av " -obfl-evaluate('(round $volumes)') ;	
-		
-	}
-*/	
+
 
 .bind::before
 	{
@@ -195,6 +187,21 @@ bodymatter , *[epub|type~='bodymatter']
 		page-break-after: always;
 	}                    
 
+/* ****************              volumes   **************      */
+
+
+.volume
+	{
+		display: inline; 		
+	}
+	
+.volume::after
+	{
+		display: inline;                                
+		content:    -obfl-evaluate('(round $sheets-in-document)')  ;   
+		
+	}   
+	              
 
 .second-page h1 , third-page h1
 	{

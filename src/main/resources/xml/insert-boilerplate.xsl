@@ -8,7 +8,7 @@
 
     <xsl:param name="braille-standard" select="'(dots:6)(grade:0)'"/>
     <xsl:variable name="contraction-grade"
-        select="replace($braille-standard, '.*\(grade:(.*)\).*', '$1')"/>
+        select="replace($braille-standard, '.*\(grade:(.*)\).*', '$1')"/>  
 
     <xsl:template match="frontmatter/docauthor">
         <xsl:copy>
@@ -121,7 +121,9 @@
                     <xsl:when test="$contraction-grade = '3'">Kortskrift nivå 3</xsl:when>
                 </xsl:choose>
             </p>
+            
             <p class="pages">Antall Sider: </p>
+            <p class="volume"></p>
             <p class="return">Boka skal ikke returneres.</p>
             <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
 
