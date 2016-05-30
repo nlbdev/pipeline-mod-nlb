@@ -253,4 +253,34 @@
 		</xsl:call-template>
 	</xsl:template>
 	
+	<!--
+	    FIXME: because of bug in block-translator-template.xsl (fixed in next version)
+	-->
+	<xsl:template mode="translate-style" match="css:string[@value]|css:attr" as="element()?">
+		<xsl:param name="context" as="element()" tunnel="yes"/>
+		<xsl:param name="source-style" as="element()*" tunnel="yes"/> <!-- css:property* -->
+		<xsl:param name="result-style" as="element()*" tunnel="yes"/> <!-- css:property* -->
+		<xsl:param name="mode" as="xs:string" tunnel="yes"/> <!-- before|after -->
+		<xsl:choose>
+			<xsl:when test="$mode=('before','after')">
+				<xsl:next-match/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="evaluated-string" as="xs:string">
+					<xsl:apply-templates mode="css:eval" select=".">
+						<xsl:with-param name="context" select="$context"/>
+					</xsl:apply-templates>
+				</xsl:variable>
+				<css:string value="{$evaluated-string}"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<!--
+	    FIXME: because of bug in block-translator-template.xsl (fixed in next version)
+	-->
+	<xsl:template match="css:string[@name][not(@target)]" mode="css:serialize" as="xs:string">
+		<xsl:sequence select="concat('string(',@name,if (@scope) then concat(', ', @scope) else '',')')"/>
+	</xsl:template>
+	
 </xsl:stylesheet>

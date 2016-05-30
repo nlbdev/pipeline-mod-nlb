@@ -6,10 +6,7 @@
   <parent>
     <groupId>org.daisy.pipeline.modules.braille</groupId>
     <artifactId>braille-modules-parent</artifactId>
-    <!--
-        depends on branch "hyphenation" + jhyphen branch "non-standard"
-    -->
-    <version>1.9.13-SNAPSHOT</version>
+    <version>1.9.13</version>
     <relativePath />
   </parent>
 
