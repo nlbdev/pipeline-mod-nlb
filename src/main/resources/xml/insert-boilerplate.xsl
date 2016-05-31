@@ -120,10 +120,8 @@
                 <xsl:choose>
                     <xsl:when test="$contraction-grade = '3'">Kortskrift nivå 3</xsl:when>
                 </xsl:choose>
-            </p>
-            
-            <p class="pages">Antall Sider: </p>
-            <p class="volume"></p>
+            </p>            
+            <p class="pages">Antall Sider: </p>           
             <p class="return">Boka skal ikke returneres.</p>
             <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
 

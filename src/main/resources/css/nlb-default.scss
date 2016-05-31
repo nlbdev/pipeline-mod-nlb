@@ -138,11 +138,12 @@ bodymatter , *[epub|type~='bodymatter']
 /* -------------------------------------------------------------------------- */
 /*                        Generated content CSS                               */
 /* -------------------------------------------------------------------------- */
-.first-page
+.first-page 
 	{
 		flow: front; 		
-	}
-.first-page p , .third-page  p
+	} 
+	
+.first-page p , .second-page  p , .third-page  p
 	{
 		display: block; 		
 	}
@@ -187,22 +188,6 @@ bodymatter , *[epub|type~='bodymatter']
 		page-break-after: always;
 	}                    
 
-/* ****************              volumes   **************      */
-
-
-.volume
-	{
-		display: inline; 		
-	}
-	
-.volume::after
-	{
-		display: inline;                                
-		content:    -obfl-evaluate('(round $sheets-in-document)')  ;   
-		
-	}   
-	              
-
 .second-page h1 , third-page h1
 	{
 		display: block; 
@@ -216,6 +201,28 @@ bodymatter , *[epub|type~='bodymatter']
 	{
 		page-break-after: always;
 	}
+	
+/* ****************     Pages in document  **************      */
+
+.second-page , .third-page
+	{
+		flow: front; 		
+	} 
+
+.pages
+	{
+		display: inline; 		
+	}
+	
+.pages::after
+	{
+		display: inline;                                
+		content:    -obfl-evaluate('(round $sheets-in-document)')  ;   
+		
+	}   
+	              
+
+	
 /* -------------------------------------------------------------------------- */
 /*                                  general                                   */
 /* -------------------------------------------------------------------------- */
