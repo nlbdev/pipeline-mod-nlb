@@ -13,7 +13,6 @@ $choice-of-colophon: true !default;
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
 /* -------------------------------------------------------------------------- */
-
 @page
 	{
 		margin-top: 0;
@@ -140,8 +139,14 @@ bodymatter , *[epub|type~='bodymatter']
 /* -------------------------------------------------------------------------- */
 .first-page 
 	{
-		flow: front; 		
-	} 
+		flow: front; 
+			
+	} 	
+	
+.first-page p 
+	{
+		text-align: center;			
+	}	
 	
 .first-page p , .second-page  p , .third-page  p
 	{
@@ -166,7 +171,7 @@ bodymatter , *[epub|type~='bodymatter']
 	}
 .year
 	{
-		margin-top: 2;
+		
 	}
 
 
@@ -178,6 +183,7 @@ bodymatter , *[epub|type~='bodymatter']
 	
 .bind
 	{
+	margin-top: 3;
 		display: inline; 
 	}
 	
@@ -203,26 +209,28 @@ bodymatter , *[epub|type~='bodymatter']
 	}
 	
 /* ****************     Pages in document  **************      */
-
-.second-page , .third-page
+.second-page , .third-page 
 	{
-		flow: front; 		
-	} 
+	   flow: front-first;
+	}
+@volume:first 
+	{
+	   @begin 
+		   {
+			  content:  flow(front) flow(volume-toc) flow(front-first)
+		   }
+	}
 
 .pages
 	{
 		display: inline; 		
-	}
-	
+	}			
 .pages::after
 	{
 		display: inline;                                
-		content:    -obfl-evaluate('(round $sheets-in-document)')  ;   
-		
-	}   
-	              
+		content:    -obfl-evaluate('(round $sheets-in-document)')  ;  				
+	} 
 
-	
 /* -------------------------------------------------------------------------- */
 /*                                  general                                   */
 /* -------------------------------------------------------------------------- */
