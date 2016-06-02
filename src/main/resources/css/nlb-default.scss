@@ -518,7 +518,7 @@ list[type=ol]  , ol
 		@footnotes 
 			{
 				content: flow(footnotes);
-				-obfl-fallback-flow: endnotes;
+				-obfl-fallback-collection: endnotes;
 			}
 	} 
 

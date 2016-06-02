@@ -75,7 +75,6 @@
         <p:with-option name="stylesheet" select="concat('http://www.nlb.no/pipeline/modules/braille/insert-boilerplate.xsl http://www.nlb.no/pipeline/modules/braille/default.scss', if ($stylesheet) then concat(' ',$stylesheet) else '')"/>
         <p:with-option name="transform" select="concat('(formatter:dotify)(translator:nlb)',$braille-standard)"/>
         <p:with-option name="main-document-language" select="'no'"/>
-        <p:with-option name="include-symbols-list" select="'false'"/>
         <p:with-option name="include-preview" select="'true'"/>
         <p:with-option name="page-width" select="$page-width"/>
         <p:with-option name="page-height" select="$page-height"/>
