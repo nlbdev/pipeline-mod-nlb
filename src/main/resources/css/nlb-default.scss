@@ -178,13 +178,14 @@ bodymatter , *[epub|type~='bodymatter']
 .bind::before
 	{
 		display: inline;                                
-		content:  -obfl-evaluate('(round $volume)') ;
+		content:  'Bind '-obfl-evaluate('(round $volume)') ;
 	}
 	
 .bind
 	{
-	margin-top: 3;
-		display: inline; 
+	 display: inline;
+	-obfl-vertical-position: 25;
+		
 	}
 	
 .bind::after

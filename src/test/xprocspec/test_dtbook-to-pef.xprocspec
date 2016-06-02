@@ -113,7 +113,7 @@
                             <meta name="dc:Language" content="no"/>
                             <style media="embossed" type="text/css">
                                 @page  {
-                                    size: 35 15;
+                                    size: 35 28;
                                     margin-top: 0;
                                     margin-left: 0;
                                     
@@ -213,7 +213,7 @@
                             <meta name="dc:Language" content="no"/>
                             <style media="embossed" type="text/css">
                                 @page  {
-                                    size: 35 15;
+                                    size: 35 28;
                                     margin-top: 0;
                                     margin-left: 0;
                                     
@@ -571,13 +571,13 @@
                                 <row/>
                                 <row/>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠁⠧⠀⠼⠃</row>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠃⠊⠝⠙⠀⠼⠁⠀⠁⠧⠀⠼⠃</row>
                                 <row/>
                                 <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
                             </page>
@@ -761,13 +761,13 @@
                                 <row/>
                                 <row/>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠁⠧⠀⠼⠃</row>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠃⠊⠝⠙⠀⠼⠃⠀⠁⠧⠀⠼⠃</row>
                                 <row/>
                                 <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
                             </page>
@@ -1260,12 +1260,12 @@
                                 <row/>
                                 <row/>
                                 <row/>
-                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠁⠧⠀⠼⠁</row>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
                                 <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠃⠊⠝⠙⠀⠼⠁⠀⠁⠧⠀⠼⠁</row>
                                 <row/>
                                 <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
                             </page>
