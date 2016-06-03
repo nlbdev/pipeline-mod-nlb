@@ -154,7 +154,13 @@
       <resource>
         <directory>src/main/resources</directory>
         <excludes>
+          <!--
           <exclude>hyph/**/*</exclude>
+          -->
+          <exclude>hyph/alphabet</exclude>
+          <exclude>hyph/hyph_nb_NO_nonstandard.pat</exclude>
+          <exclude>hyph/hyph_nb_NO_standard_base.pat</exclude>
+          <exclude>hyph/hyph_nb_NO_standard_dictionary/*</exclude>
           <!--
               braille-modules-parent
           -->
@@ -164,7 +170,9 @@
       <resource>
         <directory>${project.build.directory}/generated-resources</directory>
         <includes>
+          <!--
           <include>hyph/hyph_nb_NO.dic</include>
+          -->
           <!--
               braille-modules-parent
           -->
@@ -177,6 +185,7 @@
       </resource>
     </resources>
     <plugins>
+      <!--
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
         <version>1.8</version>
@@ -206,14 +215,14 @@
                       <arg value="src/main/resources/hyph/hyph_nb_NO_standard_base.pat"/>
                       <arg value="target/generated-resources/hyph/hyph_nb_NO_standard.pat"/>
                       <arg value="src/main/resources/hyph/alphabet"/>
-                      <arg value="1"/>   <!-- LEFT_HYPHEN_MIN -->
-                      <arg value="1"/>   <!-- RIGHT_HYPHEN_MIN -->
-                      <arg value="1"/>   <!-- HYPH_LEVEL -->
-                      <arg value="1"/>   <!-- PAT_START -->
-                      <arg value="15"/>  <!-- PAT_FINISH -->
-                      <arg value="1"/>   <!-- GOOD_WEIGHT -->
-                      <arg value="100"/> <!-- BAD_WEIGHT -->
-                      <arg value="1"/>   <!-- THRESHOLD -->
+                      <arg value="1"/>   <!- - LEFT_HYPHEN_MIN - ->
+                      <arg value="1"/>   <!- - RIGHT_HYPHEN_MIN - ->
+                      <arg value="1"/>   <!- - HYPH_LEVEL - ->
+                      <arg value="1"/>   <!- - PAT_START - ->
+                      <arg value="15"/>  <!- - PAT_FINISH - ->
+                      <arg value="1"/>   <!- - GOOD_WEIGHT - ->
+                      <arg value="100"/> <!- - BAD_WEIGHT - ->
+                      <arg value="1"/>   <!- - THRESHOLD - ->
                       <redirector output="target/patgen.log" />
                     </exec>
                     <concat destfile="target/generated-resources/hyph/hyph_nb_NO.dic" encoding="ISO-8859-1">
@@ -252,6 +261,7 @@
           </dependency>
         </dependencies>
       </plugin>
+      -->
       <plugin>
         <groupId>org.ops4j.pax.exam</groupId>
         <artifactId>maven-paxexam-plugin</artifactId>
