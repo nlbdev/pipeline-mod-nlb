@@ -1443,6 +1443,294 @@
         
     </x:scenario>
     
-  </x:scenario>
   
+
+<!--  test for foot note -->
+    
+
+    
+    <x:scenario label="Test for requirements/#4.7:102 volume x av y" >
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline" xml:base="file:/tmp/book.xml">
+                    <dtbook version="2005-3" xml:lang="no" xmlns="http://www.daisy.org/z3986/2005/dtbook/"> 
+                        <head>
+                            <style type="text/css" media="embossed">
+                                @page 
+                                { size: 30 28;
+                                margin-bottom: 1;
+                                margin-left: 2;
+                                margin-right: 2;
+                                
+                                @bottom-right 
+                                {
+                                content:  string(print-page , last);
+                                }	
+                                @bottom-center 
+                                {
+                                content: counter(page);
+                                }
+                                
+                                @left 
+                                {
+                                content: -obfl-marker-indicator(pagenum, '⠿');
+                                }
+                                } 
+                                
+                                pagenum 
+                                {
+                                display: none;
+                                -obfl-marker: pagenum;
+                                string-set: print-page '⠿'content();
+                                }
+                                doctitle , docauthor , level1.colophon , head{ display: none } 
+                                
+                                @volume
+                                {
+                                max-length: 5;
+                                }
+                                
+                               
+                            </style>
+                            <meta name="dtb:uid" content="557901"/>
+                            <meta name="dc:Title" content="ULVEGUTTEN TAL - BOK 1"/>
+                            <meta name="dc:Identifier" content="557901"/>                           
+                            <meta name="dc:Creator" content="aa ll"/>
+                          
+                        </head>
+                        <book>
+                            <frontmatter>
+                                <doctitle>aaa</doctitle>
+                                <docauthor>bbb</docauthor>
+                                <level1  class="titlepage">
+                                    <p class="docauthor author">Tor </p>
+                                </level1>
+                                <level1  class="colophon">
+                                    <p >aaa bbb ccc </p>
+                                    <p >lll lll lll </p>
+                                </level1>
+                                
+                            </frontmatter>
+                            <bodymatter>
+                                <level1>                                    
+                                    <h1>1</h1>
+                                    <p>1</p>                                                            
+                                </level1> 
+                                <level1>                                    
+                                    <h1>2</h1>
+                                    <p>2</p>                                   
+                                </level1>  
+                                
+                                <level1> 
+                                <p >
+                                    ⠤⠤⠤
+                                    <noteref ref="note_1" style="::alternate { flow:footnotes; display:block; content:target-content(attr(ref)) }">
+                                        ⠶
+                                    </noteref>
+                                    ⠤⠤⠤
+                                    <noteref ref="note_2" style="::alternate { flow:footnotes; display:block; content:target-content(attr(ref)) }">
+                                        ⠶⠶
+                                    </noteref>
+                                    ⠤⠤⠤
+                                </p>
+                                <note id="note_1" style="display:none">
+                                    ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤
+                                </note>
+                                <note id="note_2" style="display:none">
+                                    ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤
+                                    ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤ ⠤⠤⠤⠤⠤⠤                                     
+                                </note>
+                                
+                                </level1>
+                                
+                            </bodymatter>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="braille-standard" select="'(dots:6)(grade:0)'"/>
+            <x:option name="show-print-page-numbers" select="'true'"/>
+            <x:option name="pef-output-dir" select="resolve-uri('17/pef-output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('17/preview-output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('17/temp-dir',$temp-dir)"/>
+        </x:call>
+        
+        
+        
+        
+        <x:context label="result">
+            <x:document type="file" base-uri="temp-dir" href="17/pef-output-dir/book.pef"  select="/*/*[local-name()='body']"  />
+        </x:context>
+        <x:expect label="result" type="compare">
+            <x:document type="inline" >
+                <body xmlns="http://www.daisy.org/ns/2008/pef">
+                    <volume cols="30" rows="28" rowgap="0" duplex="true">
+                        <section>
+                            <page>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠁⠀⠇⠇</row>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠠⠠⠥⠇⠧⠑⠛⠥⠞⠞⠑⠝⠀⠠⠠⠞⠁⠇⠀⠤⠀</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠠⠃⠕⠅⠀⠼⠁</row>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠕⠧⠑⠗⠎⠁⠞⠞⠀⠁⠧</row>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠠⠝⠇⠃</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠝⠕⠗⠛⠑⠀⠼⠃⠚⠁⠋</row>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠃⠊⠝⠙⠀⠼⠁⠀⠁⠧⠀⠼⠁</row>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                            </page>
+                            <page>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠉⠕⠇⠕⠏⠓⠕⠝</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠁⠁⠁⠀⠃⠃⠃⠀⠉⠉⠉</row>
+                                <row>⠀⠀⠀⠀⠇⠇⠇⠀⠇⠇⠇⠀⠇⠇⠇</row>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                            </page>
+                        </section>
+                        <section>
+                            <page>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠕⠍⠀⠃⠕⠅⠁</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠠⠋⠥⠇⠇⠎⠅⠗⠊⠋⠞</row>
+                                <row>⠀⠀⠀⠀⠠⠁⠝⠞⠁⠇⠇⠀⠠⠎⠊⠙⠑⠗⠒⠀⠼⠙</row>
+                                <row>⠀⠀⠀⠀⠠⠃⠕⠅⠁⠀⠎⠅⠁⠇⠀⠊⠅⠅⠑⠀⠗⠑⠤</row>
+                                <row>⠀⠀⠞⠥⠗⠝⠑⠗⠑⠎⠄</row>
+                                <row>⠀⠀⠀⠀⠠⠋⠑⠊⠇⠀⠑⠇⠇⠑⠗⠀⠍⠁⠝⠛⠇⠑⠗⠀⠅⠁⠝⠀</row>
+                                <row>⠀⠀⠍⠑⠇⠙⠑⠎⠀⠞⠊⠇⠀⠣⠏⠥⠝⠅⠞⠈⠝⠇⠃⠄⠝⠕⠄⠜</row>
+                                <row>⠀⠀⠀⠀⠠⠝⠕⠞⠑⠗⠀⠑⠗⠀⠏⠇⠁⠎⠎⠑⠗⠞⠀⠎⠕⠍⠀</row>
+                                <row>⠀⠀⠋⠕⠞⠝⠕⠞⠑⠗⠀⠏⠡⠀⠃⠥⠝⠝⠑⠝⠀⠁⠧⠀</row>
+                                <row>⠀⠀⠎⠊⠙⠑⠝⠄</row>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                            </page>
+                        </section>
+                        <section>
+                            <page>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠼⠁</row>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                            </page>
+                        </section>
+                        <section>
+                            <page>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠃</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉</row>
+                                <row/>
+                                <row>⠀⠀⠀⠀⠼⠃</row>
+                                <row>⠀⠀⠀⠀⠤⠤⠤</row>
+                                <row>⠀⠀⠀⠀⠠⠀⠶</row>
+                                <row>⠀⠀⠤⠤⠤</row>
+                                <row>⠀⠀⠀⠀⠠⠀⠶⠶</row>
+                                <row>⠀⠀⠤⠤⠤</row>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row/>
+                                <row>⠀⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤</row>
+                                <row>⠀⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀</row>
+                                <row>⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀</row>
+                                <row>⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀</row>
+                                <row>⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤⠀</row>
+                                <row>⠤⠤⠤⠤⠤⠤⠀⠤⠤⠤⠤⠤⠤</row>
+                                <row>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠼⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</row>
+                            </page>
+                        </section>
+                    </volume>                    
+                </body>
+                
+            </x:document>
+        </x:expect>
+        
+    </x:scenario>
+    
+  
+
 </x:description>
