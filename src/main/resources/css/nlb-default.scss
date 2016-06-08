@@ -93,9 +93,10 @@ bodymatter , *[epub|type~='bodymatter']
 		}
 	}
 	
- level1.first-page  , section.first-page{
-    flow: front;
-  }
+ level1.first-page  , section.first-page
+	{
+		flow: front;
+	}
 
 .titlepage
 	{
@@ -203,6 +204,7 @@ bodymatter , *[epub|type~='bodymatter']
 	{
 		margin-top: 1;
 	}
+
 .contact
 	{
 		page-break-after: always;
@@ -213,11 +215,13 @@ bodymatter , *[epub|type~='bodymatter']
 	{
 	   flow: front-first;
 	}
+
+
 @volume:first 
 	{
 	   @begin 
 		   {
-			  content:  flow(front) flow(volume-toc) flow(front-first)
+			  content:  flow(front) flow(volume-toc) flow(front-first)  ;
 		   }
 	}
 
@@ -513,6 +517,7 @@ list[type=ol]  , ol
 /* -------------------------------------------------------------------------- */
 /*                Note and endnote                    					      */
 /* -------------------------------------------------------------------------- */
+
 @page 
 	{
 		@footnotes 
@@ -529,14 +534,17 @@ list[type=ol]  , ol
 				max-height: 15;
 			}
 	}
-	
+
+
+
 @volume
 	{
 	  @end
 		{
-			content: flow(endnotes, volume);
+			content: flow(endnotes, volume);  
 		}
 	}
+
 
 noteref::before , a[epub|type~='noteref']::before
 	{
@@ -565,4 +573,5 @@ note p , aside[epub|type~='note'] p::before
 		margin-left: 4;
 		text-indent: -2;
 	}
+
 
