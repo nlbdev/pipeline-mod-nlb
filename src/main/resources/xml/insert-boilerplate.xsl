@@ -132,18 +132,18 @@
             
           <!--  normal code that should work but not working-->
             
-            <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
+           <!-- <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
             <p class="footnote-info" style="display: block;  flow: front-first; -obfl-use-when-collection-not-empty: footnotes">
                 Noter er plassert som fotnoter på bunnen av siden.
             </p>
             <p  class="endnote-info" style="display: block;  flow: front-first; -obfl-use-when-collection-not-empty: endnotes">
                 Noter er plassert som sluttnoter sist i hvert bind.
-            </p>    
+            </p> -->   
             
             
             <!--code that works with little turn around-->
             
-            <!--<xsl:choose>
+            <xsl:choose>
                 <xsl:when test="//bodymatter/level1/descendant::noteref">
                     <p class="contact-1">Feil eller mangler kan meldes til punkt@nlb.no.</p>
                     <p class="footnote-info" style="display: block;  flow: front-first; -obfl-use-when-collection-not-empty: footnotes">
@@ -156,7 +156,7 @@
                 <xsl:otherwise>                    
                     <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
                 </xsl:otherwise>
-            </xsl:choose>-->
+            </xsl:choose> 
 
         </level1>
     </xsl:template>
