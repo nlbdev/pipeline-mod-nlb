@@ -299,5 +299,61 @@
             </x:document>
         </x:expect>
     </x:scenario>
+    
+    <x:scenario label="issue 51 - First half of word is deleted when non-standard hyphenation break point is at page width">
+        <x:call step="nlb:dtbook-to-pef">
+            <x:input port="source">
+                <x:document type="inline" xml:base="file:/tmp/book.xml">
+                    <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" xml:lang="no" version="2005-3">
+                        <head>
+                            <style media="embossed" type="text/css">
+                                frontmatter, rearmatter, level1 {
+                                    display: none;
+                                }
+                                dtbook, book, bodymatter, level1, p {
+                                    margin-left: 0;
+                                    padding-left: 0;
+                                    margin-right: 0;
+                                    padding-right: 0;
+                                    text-indent: 0;
+                                }
+                                level1.hyphentest {
+                                    display: block;
+                                }
+                                .hyphentest p {
+                                    display: block;
+                                }
+                            </style>
+                        </head>
+                        <book>
+                            <bodymatter>
+                                <level1 class="hyphentest">
+                                    <p>volleyballederen volleyballederen volleyballederen volleyballederen volleyballederen volleyballederen</p>
+                                </level1>
+                            </bodymatter>
+                        </book>
+                    </dtbook>
+                </x:document>
+            </x:input>
+            <x:option name="pef-output-dir" select="resolve-uri('issue-51/output-dir',$temp-dir)"/>
+            <x:option name="preview-output-dir" select="resolve-uri('issue-51/output-dir',$temp-dir)"/>
+            <x:option name="temp-dir" select="resolve-uri('issue-51/temp-dir',$temp-dir)"/>
+        </x:call>
+        <x:context label="result">
+            <x:document type="file" base-uri="temp-dir" href="issue-51/output-dir/book.pef" select="//pef:row[text() and following-sibling::*]"/>
+        </x:context>
+        <x:expect label="result" type="compare">
+            <x:document type="inline" select="//pef:row">
+                <page xmlns="http://www.daisy.org/ns/2008/pef">
+                    <row>⠀⠀⠧⠕⠇⠇⠑⠽⠃⠁⠇⠇⠑⠙⠑⠗⠑⠝⠀</row>
+                    <row>⠀⠀⠧⠕⠇⠇⠑⠽⠃⠁⠇⠇⠑⠙⠑⠗⠑⠝⠀</row>
+                    <row>⠀⠀⠧⠕⠇⠇⠑⠽⠃⠁⠇⠇⠑⠙⠑⠗⠑⠝⠀</row>
+                    <row>⠀⠀⠧⠕⠇⠇⠑⠽⠃⠁⠇⠇⠑⠙⠑⠗⠑⠝⠀</row>
+                    <row>⠀⠀⠧⠕⠇⠇⠑⠽⠃⠁⠇⠇⠑⠙⠑⠗⠑⠝⠀</row>
+                    <row>⠀⠀⠧⠕⠇⠇⠑⠽⠃⠁⠇⠇⠑⠙⠑⠗⠑⠝⠀</row>
+                </page>
+            </x:document>
+        </x:expect>
+    </x:scenario>
   
 </x:description>
