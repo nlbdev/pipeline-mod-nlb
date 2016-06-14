@@ -8,7 +8,7 @@ $show-print-page-numbers: false !default;
 $show-braille-page-numbers: false !default;
 $line-spacing: false !default;
 $include-note-references: true !default;
-$choice-of-colophon: true !default;
+$colophon-metadata-placement: front !default;
 
 /* -------------------------------------------------------------------------- */
 /*                displaying Original and Braille Page                        */
@@ -105,15 +105,7 @@ bodymatter , *[epub|type~='bodymatter']
 		flow: titlepage;
 	}
 	
-@if $choice-of-colophon
-	{
-		.colophon 
-		{
-			display: block;
-			page-break-before: always;
-			flow: titlepage;
-		}
-	}
+
 
 #generated-volume-toc
 	{
@@ -210,8 +202,47 @@ bodymatter , *[epub|type~='bodymatter']
 		page-break-after: always;
 	}
 	
+/* -------------------------------------------------------------------------- */
+/*                        Colophon placement                               */
+/* -------------------------------------------------------------------------- */
+
+@if $colophon-metadata-placement == front 
+	{
+		.second-page 
+			{
+				flow: front-first;
+			}  
+	}
+
+@if $colophon-metadata-placement == back 
+	{	
+		.second-page 
+			{
+					flow: last-back;
+			}
+	}
+
+@if $colophon-metadata-placement == none 
+	{
+		.second-page 
+			{
+				display: none;				
+			}	
+	}	
+/*
+@if $choice-of-colophon
+	{
+		.colophon 
+			{
+				display: block;
+				page-break-before: always;
+				flow: titlepage;
+			}
+	}
+	*/
+	
 /* ****************     Pages in document  **************      */
-.second-page , .third-page 
+  .third-page 
 	{
 	   flow: front-first;
 	}
@@ -221,7 +252,7 @@ bodymatter , *[epub|type~='bodymatter']
 	{
 	   @begin 
 		   {
-			  content:  flow(front) flow(volume-toc) flow(front-first)  ;
+			  content:  flow(front) flow(volume-toc) flow(front-first)   ;
 		   }
 	}
 
@@ -231,9 +262,10 @@ bodymatter , *[epub|type~='bodymatter']
 	}			
 .pages::after
 	{
-		display: inline;                                
-		content:    -obfl-evaluate('(round $sheets-in-document)')  ;  				
+		display: inline;		
+		content:  -obfl-evaluate('(* (round $sheets-in-document) 2)');					
 	} 
+	
 
 /* -------------------------------------------------------------------------- */
 /*                                  general                                   */
@@ -246,13 +278,12 @@ level1,
 		display: block;
 	}
 
-blockquote, sidebar, aside[epub|type~='sidebar'], epigraph, aside[epub|type~='epigraph'] ,  noteref, a[epub|type~='noteref'],
-	.Rammetekst,   poem  ,section[epub|type~='z3998:poem']  ,div[epub|type~='z3998:poem'] , linegroup , section.linegroup , div.linegroup , line , p.line
+blockquote, sidebar, aside[epub|type~='sidebar'], epigraph, aside[epub|type~='epigraph'] , 	.Rammetekst,   poem  ,section[epub|type~='z3998:poem']  ,div[epub|type~='z3998:poem'] , linegroup , section.linegroup , div.linegroup , line , p.line
 	{
 		display: block;
 	}
 	
-note, aside[epub|type~='note'] 
+note, aside[epub|type~='note'] , noteref, a[epub|type~='noteref']
 	{
 		display: if($include-note-references, block, none);
 	}
@@ -541,10 +572,15 @@ list[type=ol]  , ol
 	{
 	  @end
 		{
-			content: flow(endnotes, volume);  
+			content: flow(endnotes)    flow(last-back)   flow(volume) ; 
 		}
 	}
+/*
 
+content: flow(endnotes)    flow(last-back)   flow(volume) 
+content: flow(endnotes ,last-back, volume )     
+content: flow(endnotes, volume); 
+  */ 
 
 noteref::before , a[epub|type~='noteref']::before
 	{

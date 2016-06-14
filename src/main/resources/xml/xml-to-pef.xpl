@@ -130,7 +130,7 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
             <h2 px:role="name">Tekstelementer: Marker uthevet tekst (fet/kursiv)</h2>
         </p:documentation>
     </p:option>-->
-    <p:option name="include-notes" select="'true'">
+    <p:option name="include-notes" select="'true'" px:type="boolean">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Tekstelementer: Inkluder noter</h2>
         </p:documentation>
@@ -177,7 +177,21 @@ Dette kan være nyttig for å løse problemer med formatering av PEF'en.</p>
             <h2 px:role="name">Plassering av innhold: Plassering av fotnoter</h2>
         </p:documentation>
     </p:option>-->
-    <p:option name="colophon-metadata-placement" select="''">
+    <p:option name="colophon-metadata-placement" select="'front'">
+        <p:pipeinfo>
+            <px:data-type>
+                <choice>
+                    <documentation xmlns="http://relaxng.org/ns/compatibility/annotations/1.0" xml:lang="no">
+                        <value>Foran</value>
+                        <value>Bak</value>
+                        <value>Ingen</value>
+                    </documentation>
+                    <value>front</value>
+                    <value>back</value>
+                    <value>none</value>
+                </choice>
+            </px:data-type>
+        </p:pipeinfo>
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Plassering av innhold: Plassering av kolofon/metadata</h2>
         </p:documentation>
