@@ -1,4 +1,14 @@
-pipeline-mod-nlb v1.8.0
+pipeline-mod-nlb v1.9.0
+=======================
+
+Includes
+--------
+-Added generated content for table and notes(https://github.com/snaekobbi/pipeline-mod-nlb/issues/32)
+-Changes in generated content 	
+-Generated content information for placement of footnote 
+-Useful options that don't work in GUI (https://github.com/snaekobbi/pipeline-mod-nlb/issues/48)
+
+Pipeline-mod-nlb v1.8.0
 =======================
 
 Includes
