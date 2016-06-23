@@ -101,7 +101,7 @@ public class NLBTest {
 	
 	@Test
 	public void testNonStandardHyphenation() {
-		Hyphenator hyphenator = hyphenatorProvider().get(query("(table:'http://www.nlb.no/hyphen/hyph_nb_NO.dic')")).iterator().next();
+		Hyphenator hyphenator = hyphenatorProvider().get(query("(libhyphen-table:'http://www.nlb.no/hyphen/hyph_nb_NO.dic')")).iterator().next();
 		assertEquals("buss-\n" +
 		             "stopp",
 		             fillLines(hyphenator.asLineBreaker().transform("busstopp"), 6, '-'));
@@ -147,8 +147,6 @@ public class NLBTest {
 		assertTrue("XProcSpec tests should run with success", success);
 	}
 	
-	private static boolean onWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-	
 	@Configuration
 	public Option[] config() {
 		return options(
@@ -169,7 +167,7 @@ public class NLBTest {
 				brailleModule("liblouis-native").forThisPlatform(),
 				brailleModule("libhyphen-core"),
 				brailleModule("libhyphen-libreoffice-tables"),
-				onWindows ? null : brailleModule("libhyphen-native").forThisPlatform(),
+				brailleModule("libhyphen-native").forThisPlatform(),
 				brailleModule("dotify-formatter"),
 				brailleModule("dtbook-to-pef"),
 				brailleModule("epub3-to-pef"),
