@@ -14,7 +14,7 @@
 	
 	<xsl:param name="text-transform" required="yes"/>
 	
-	<xsl:template mode="#default before after" match="css:block">
+	<xsl:template mode="#default before after" match="*[local-name()='block' and namespace-uri()='http://www.daisy.org/ns/pipeline/braille-css']">
 		<xsl:param name="context" as="element()"/>
 		<xsl:param name="result-style" as="element()*" tunnel="yes"/>
 		<xsl:variable name="text" as="text()*" select="//text()"/>
