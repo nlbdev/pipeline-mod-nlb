@@ -65,22 +65,22 @@
 
 
             <xsl:variable name="contributor" select="//meta[@name eq 'dc:Contributor']/@content"/>
-            <p class="translater">Oversatt av</p>
+            <p class="translator">Oversatt av</p>
             <xsl:for-each select="$contributor[position() &lt;= 3]">
                 <xsl:choose>
                     <xsl:when test="position() = 1">
-                        <p class="translater-1">
+                        <p class="translator-1">
                             <xsl:value-of select="."/>
                         </p>
                     </xsl:when>
                     <xsl:when test="position() = 3 and count($contributor) > 3">
-                        <p class="translater-2">
+                        <p class="translator-2">
                             <xsl:value-of select="count($contributor) - 2"/>
                             <xsl:text> flere</xsl:text>
                         </p>
                     </xsl:when>
                     <xsl:otherwise>
-                        <p class="translater-3">
+                        <p class="translator-3">
                             <xsl:value-of select="."/>
                         </p>
                     </xsl:otherwise>
@@ -121,9 +121,42 @@
                     <xsl:when test="$contraction-grade = '3'">Kortskrift nivå 3</xsl:when>
                 </xsl:choose>
             </p>
-            <p class="pages">Antall Sider: </p>           
-            <p class="return">Boka skal ikke returneres.</p>
-            <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
+            <p class="pages">Antall Sider: </p>  
+            <p class="return">Boka skal ikke returneres.</p> 
+            <xsl:choose>
+                <xsl:when test="//bodymatter/level1/descendant::table">
+                    <p class="table_info">Tabellen blir behandlet som listen</p>
+                </xsl:when>                
+            </xsl:choose>
+            
+            
+          <!--  normal code that should work but not working-->
+            
+           <!-- <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
+            <p class="footnote-info" style="display: block;  flow: front-first; -obfl-use-when-collection-not-empty: footnotes">
+                Noter er plassert som fotnoter på bunnen av siden.
+            </p>
+            <p  class="endnote-info" style="display: block;  flow: front-first; -obfl-use-when-collection-not-empty: endnotes">
+                Noter er plassert som sluttnoter sist i hvert bind.
+            </p> -->   
+            
+            
+            <!--code that works with little turn around-->
+            
+            <xsl:choose>
+                <xsl:when test="//bodymatter/level1/descendant::noteref">
+                    <p class="contact-1">Feil eller mangler kan meldes til punkt@nlb.no.</p>
+                    <p class="footnote-info" style="display: block;  flow: front-first; -obfl-use-when-collection-not-empty: footnotes">
+                        Noter er plassert som fotnoter på bunnen av siden.
+                    </p>
+                    <p  class="endnote-info" style="display: block;  flow: front-first; -obfl-use-when-collection-not-empty: endnotes">
+                        Noter er plassert som sluttnoter sist i hvert bind.
+                    </p>                    
+                </xsl:when>
+                <xsl:otherwise>                    
+                    <p class="contact">Feil eller mangler kan meldes til punkt@nlb.no.</p>
+                </xsl:otherwise>
+            </xsl:choose> 
 
         </level1>
     </xsl:template>

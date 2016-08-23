@@ -1,3 +1,48 @@
+pipeline-mod-nlb v1.10.0
+========================
+
+Includes
+--------
+- Added generated content for table and notes (https://github.com/snaekobbi/pipeline-mod-nlb/issues/32)
+- Useful options that don't work in GUI (https://github.com/snaekobbi/pipeline-mod-nlb/issues/48)
+    - Option "colophon-metadata-placement" fixed
+    - Option "choice-of-colophon" fixed
+    - Option "include-notes" fixed and set to true by default
+- Fixed displayed number of pages in generated content (sheets divided by 2)
+- Removed namespace warning message
+- Various other CSS updates
+
+pipeline-mod-nlb v1.9.0
+=======================
+
+Includes
+--------
+- Removed hardcoded `max-length` CSS property; it will be declared in the CSS inherited from mod-braille instead
+- Option "include-note-references" renamed from "include-note-references" to "include-notes"
+- Option "show-braille-page-numbers" implemented
+- Option "include-note-references" implemented and renamed nicename from "Inkluder notereferanser" to "Inkluder noter"
+- Option "colophon-metadata-placement" implemented
+- Liblouis table: Latin Letter S with Caron (Šš) should translate to 156 and not 4-234
+- Liblouis table: Don't show two hyphens when hyphen is surrounded by whitespace
+- Added volume info to generated content
+- Added total number of pages to generated content
+
+pipeline-mod-nlb v1.8.1
+=======================
+
+Includes
+--------
+- Non-standard hyphenation
+- Removed unimplemented options:
+    - left-margin
+    - include-image-groups
+    - text-level-formatting
+    - footnotes-placement
+    - colophon-metadata-placement
+    - rear-cover-placement
+    - number-of-sheets
+    - minimum-number-of-sheets
+
 pipeline-mod-nlb v1.8.0
 =======================
 
